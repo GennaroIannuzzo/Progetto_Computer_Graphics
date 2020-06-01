@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Keyboard_Manager.h" />
     <ClInclude Include="Pallina.h" />
     <ClInclude Include="Piattaforma.h" />
     <ClInclude Include="Platforms.h" />
     <ClInclude Include="Punto.h" />
+    <ClInclude Include="Window_Manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -150,6 +152,7 @@
     <ClCompile Include="Piattaforma.cpp" />
     <ClCompile Include="Platforms.cpp" />
     <ClCompile Include="Punto.cpp" />
+    <ClCompile Include="Window_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

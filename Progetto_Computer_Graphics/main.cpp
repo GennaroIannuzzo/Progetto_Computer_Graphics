@@ -1,7 +1,7 @@
 ///////////////////////////////////
-// square.cpp
+// Progetto.cpp
 //
-// OpenGL program to draw a square.
+// Progetto Esame Computer Graphics.
 // 
 ///////////////////////////////////
 
@@ -13,10 +13,11 @@
 #include <time.h>
 #include "Platforms.h"
 #include "Pallina.h"
+#include "Keyboard_Manager.h"
+#include "Window_Manager.h"
 
 using namespace std;
 
-int interval = 1000 / 60;
 int eseguo = 0;
 Platforms p = Platforms();
 Pallina ball = Pallina(1);
@@ -134,7 +135,7 @@ void drawScene(void)
     // glTranslatef(0.0, 20.0, 0.0);
     // glutSolidSphere(2, (int)2* 6, (int)2 * 6);
 
-    // ballMovement();
+    ballMovement();
 
     ball.drawPallina();
 
@@ -146,69 +147,6 @@ void drawScene(void)
     glutSwapBuffers();
 }
 
-// Initialization routine.
-void setup(void)
-{
-    glClearColor(1.0, 1.0, 1.0, 0.0);
-    glEnable(GL_DEPTH_TEST);
-}
-
-// OpenGL window reshape routine.
-void resize(int w, int h)
-{
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(100, (GLfloat)w / h, 5.0, 100.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
-
-// Keyboard input processing routine.
-void keyInput(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-        exit(0);
-        break;
-    case 'k':
-        p.triggerPlatform();
-        cout << "\n\n\nHo premuto k" << endl;
-        glutPostRedisplay();
-        break;
-    default:
-        break;
-    }
-}
-
-void keyboard() {
-
-    // Ball movement 
-    if (GetAsyncKeyState(VK_LEFT)) {
-        ball.moveLeft();
-        glutPostRedisplay();
-    }
-        
-    if (GetAsyncKeyState(VK_RIGHT)) {
-        ball.moveRight();
-        glutPostRedisplay();
-    }
-
-}
-
-void update(int value) {
-
-    // input handling
-    keyboard();
-
-    // Call update() again in 'interval' milliseconds
-    glutTimerFunc(interval, update, 0);
-
-    // Redisplay frame
-    glutPostRedisplay();
-
-}
 
 // Main routine.
 int main(int argc, char** argv)
@@ -224,14 +162,14 @@ int main(int argc, char** argv)
     glutCreateWindow("Progetto.cpp");
     
     glutDisplayFunc(drawScene);
-    glutReshapeFunc(resize);
+    glutReshapeFunc(Window_Manager::resize);
     
-    glutTimerFunc(interval, update, 0);
-    glutKeyboardFunc(keyInput);
+    glutTimerFunc(Window_Manager::getInterval(), Window_Manager::update, 0);
+    glutKeyboardFunc(Keyboard_Manager::keyInput);
     glewExperimental = GL_TRUE;
     glewInit();
 
-    setup();
+    Window_Manager::setup();
 
     glutMainLoop();
 }
