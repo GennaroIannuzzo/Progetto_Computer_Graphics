@@ -140,6 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Keyboard_Manager.h" />
+    <ClInclude Include="Monete.h" />
+    <ClInclude Include="Oggetto.h" />
+    <ClInclude Include="Ostacolo.h" />
     <ClInclude Include="Pallina.h" />
     <ClInclude Include="Piattaforma.h" />
     <ClInclude Include="Platforms.h" />
@@ -148,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monete.cpp" />
+    <ClCompile Include="Oggetto.cpp" />
+    <ClCompile Include="Ostacolo.cpp" />
     <ClCompile Include="Pallina.cpp" />
     <ClCompile Include="Piattaforma.cpp" />
     <ClCompile Include="Platforms.cpp" />

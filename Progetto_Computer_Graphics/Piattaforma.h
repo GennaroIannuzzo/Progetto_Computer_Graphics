@@ -1,18 +1,10 @@
 #pragma once
-#include "Punto.h"
+#include "Oggetto.h"
+// #include "Punto.h"
 #include <iostream>
 #include <cstdlib>
 
-class Piattaforma {
-private:
-
-	// Attributi
-	Punto punto;
-
-	static GLfloat dim;
-	static GLfloat R;
-	static GLfloat G;
-	static GLfloat B;
+class Piattaforma : public Oggetto {
 
 public:
 
@@ -20,12 +12,8 @@ public:
 	Piattaforma();
 	Piattaforma(Punto valPunto);
 
-	// Getter
-	Punto getPunto();
-	static GLfloat getDim();
-
 	// Metodi
-	void drawPiattaforma(void);
+	void drawObject(void) override;
 
 	// Distruttore
 	~Piattaforma();
