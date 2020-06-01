@@ -43,7 +43,7 @@ void Ball_Manager::cadutaPallina(void)
     GLfloat x_Piattaforma_0 = Platforms::getInstance()->getLastPoint().getX();
     GLfloat z_Piattaforma_0 = Platforms::getInstance()->getLastPoint().getZ();
 
-    Punto puntoApp = Platforms::getInstance()->getLastPoint() + Platforms::getInstance()->getPlatforms()[1].getPunto();
+    Punto puntoApp = Platforms::getInstance()->getLastPoint() + Platforms::getInstance()->getPlatforms()[1].getPosizione();
 
     // cout << "lastPoint -> " << endl;
     // p.getLastPoint().printPoint();

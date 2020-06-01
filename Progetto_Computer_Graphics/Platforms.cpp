@@ -33,10 +33,10 @@ vector<Piattaforma>& Platforms::getPlatforms(void) { return platforms; }
 Punto Platforms::getLastPoint(void) {
 	Punto app = Punto(lastPoint.getX(), lastPoint.getY(), lastPoint.getZ());
 
-	if (platforms[0].getPunto().getX() == 0.0 && platforms[0].getPunto().getY() == 0.0 && platforms[0].getPunto().getZ() == 0.0)
+	if (platforms[0].getPosizione().getX() == 0.0 && platforms[0].getPosizione().getY() == 0.0 && platforms[0].getPosizione().getZ() == 0.0)
 		return lastPoint;
 	else
-		app = app + platforms[0].getPunto();
+		app = app + platforms[0].getPosizione();
 
 	return app;
 }
@@ -51,13 +51,15 @@ void Platforms::setFallenPlatforms(GLint valFallenPlatforms) { fallenPlatforms =
 // Metodi
 void Platforms::generaNuovaPiattaforma(void)
 {
+	GLfloat dimension = platforms[0].getDim();
+
 	// In alto
 	if (rand() % 2 == 0) {
-		platforms.push_back(Piattaforma(Punto(Piattaforma::getDim(), 0.0, 0.0)));
+		platforms.push_back(Piattaforma(Punto(dimension, 0.0, 0.0)));
 	}
 
 	else {
-		platforms.push_back(Piattaforma(Punto(0.0, 0.0, -Piattaforma::getDim())));
+		platforms.push_back(Piattaforma(Punto(0.0, 0.0, -dimension)));
 	}
 	
 	// platforms.push_back(Piattaforma(Punto(0.0, 0.0, -Piattaforma::getDim())));
@@ -67,7 +69,7 @@ void Platforms::triggerPlatform(void)
 {
 	// platforms.front().animazione();
 	generaNuovaPiattaforma();
-	lastPoint = lastPoint + platforms.front().getPunto();
+	lastPoint = lastPoint + platforms.front().getPosizione();
 	// Simula Caduta
 	platforms.erase(platforms.begin());
 	fallenPlatforms++;
@@ -85,7 +87,7 @@ void Platforms::drawPlatforms(void)
 			glColor3f(0.0, 255.0, 0.0);
 		else
 			glColor3f(255.0, 0.0, 0.0);
-		it->drawPiattaforma();
+		it->drawObject();
 	}
 }
 
