@@ -2,25 +2,24 @@
 
 using namespace std;
 
-// Attributi Statici
-GLfloat Piattaforma::dim = 30;
-GLfloat Piattaforma::R = 255.0;
-GLfloat Piattaforma::G = 0.0;
-GLfloat Piattaforma::B = 0.0;
-
 // Costruttori
-Piattaforma::Piattaforma(){}
-Piattaforma::Piattaforma(Punto valPunto) { punto = valPunto; }
-
-// Getter
-Punto Piattaforma::getPunto() { return punto; }
-GLfloat Piattaforma::getDim() { return dim; }
+Piattaforma::Piattaforma()
+{
+	this->R = 255.0;
+	this->G = 0.0;
+	this->B = 0.0;
+	this->dim = 30;
+}
+Piattaforma::Piattaforma(Punto valPunto) : Piattaforma()
+{ 
+	posizione = valPunto; 
+}
 
 // Metodi
-void Piattaforma::drawPiattaforma(void)
+void Piattaforma::drawObject(void)
 {
 	// glColor3f(R, G, B);
-	glTranslatef(punto.getX(), punto.getY(), punto.getZ());
+	glTranslatef(posizione.getX(), posizione.getY(), posizione.getZ());
 	glutSolidCube(dim);
 }
 
