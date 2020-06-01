@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Ball_Manager.h" />
     <ClInclude Include="Keyboard_Manager.h" />
     <ClInclude Include="Pallina.h" />
     <ClInclude Include="Piattaforma.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Window_Manager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ball_Manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pallina.cpp" />
     <ClCompile Include="Piattaforma.cpp" />

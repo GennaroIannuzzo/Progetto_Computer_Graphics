@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <iostream>
-#include "Pallina.h"
+#include "Ball_Manager.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ public:
         }
     }
 
-    static void keyboard(Pallina ball) {
+    static void keyboard(Pallina& ball) {
 
         // Ball movement 
         if (GetAsyncKeyState(VK_LEFT)) {

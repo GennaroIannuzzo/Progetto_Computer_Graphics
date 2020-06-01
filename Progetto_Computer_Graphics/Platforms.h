@@ -10,18 +10,21 @@ class Platforms
 {
 private:
 
-	// Attributi
-	vector<Piattaforma> platforms;
-	static Punto lastPoint;
-	static GLint fallenPlatforms;
-
-public:
+	static Platforms* instance;
 
 	// Costruttori
 	Platforms();
 
+	// Attributi
+	vector<Piattaforma> platforms;
+	Punto lastPoint;
+	GLint fallenPlatforms;
+
+public:
+
 	// Getter
-	vector<Piattaforma> getPlatforms(void);
+	static Platforms* getInstance();
+	vector<Piattaforma>& getPlatforms(void);
 	Punto getLastPoint(void);
 	GLint getFallenPlatforms(void);
 	

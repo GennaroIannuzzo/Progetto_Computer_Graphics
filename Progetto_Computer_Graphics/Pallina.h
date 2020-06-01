@@ -19,6 +19,7 @@ private:
 public:
 
 	// Costruttori
+	Pallina();
 	Pallina(int difficolta);
 
 	// Getter

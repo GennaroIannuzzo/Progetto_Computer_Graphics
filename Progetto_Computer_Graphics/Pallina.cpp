@@ -9,6 +9,8 @@ GLfloat Pallina::G = 0.0;
 GLfloat Pallina::B = 255.0;
 
 // Costruttore
+Pallina::Pallina() {}
+
 Pallina::Pallina(int valDifficolta) {
 	posizione = Punto(0.0, 20.0, 0.0);
 	speed = 0.1;
@@ -45,7 +47,7 @@ void Pallina::moveRight(void) {
 
 void Pallina::incrementSpeed() {
 	if(speed < 1.2)
-		speed += 0.0;
+		speed += 0.1;
 
 	cout << "speed -> " << speed << endl;
 }

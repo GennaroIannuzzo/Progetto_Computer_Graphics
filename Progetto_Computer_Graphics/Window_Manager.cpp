@@ -23,7 +23,7 @@ void Window_Manager::resize(int w, int h)
 void Window_Manager::update(int value) {
 
     // input handling (Richiamare il ball_Manager per ottenere la pallina)
-    Keyboard_Manager::keyboard();
+    Keyboard_Manager::keyboard(Ball_Manager::getInstance()->getBall());
 
     // Call update() again in 'interval' milliseconds
     glutTimerFunc(interval, update, 0);

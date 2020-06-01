@@ -2,25 +2,33 @@
 
 using namespace std;
 
-// Attributi
-Punto Platforms::lastPoint = Punto(0.0, 0.0, 0.0);
-GLint Platforms::fallenPlatforms = 0;
+Platforms* Platforms::instance = 0;
 
 // Costruttori
 Platforms::Platforms()
 {
+	// Attributi
+	lastPoint = Punto(0.0, 0.0, 0.0);
+	fallenPlatforms = 0;
+
 	platforms.push_back(Piattaforma(Punto(0.0, 0.0, 0.0)));
 	srand((unsigned)time(NULL));
 
-	for (int i = 1; i < 3; i++) {
+	for (int i = 1; i < 10; i++) {
 		generaNuovaPiattaforma();
 	}
 }
 
 // Getter
-vector<Piattaforma> Platforms::getPlatforms(void) {
-	return platforms;
+Platforms* Platforms::getInstance()
+{
+	if (instance == 0)
+		instance = new Platforms();
+
+	return instance;
 }
+
+vector<Piattaforma>& Platforms::getPlatforms(void) { return platforms; }
 
 Punto Platforms::getLastPoint(void) {
 	Punto app = Punto(lastPoint.getX(), lastPoint.getY(), lastPoint.getZ());
