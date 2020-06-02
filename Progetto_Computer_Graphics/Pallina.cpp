@@ -11,6 +11,7 @@ Pallina::Pallina()
 	B = 255.0;
 	posizione = Punto(0.0, 20.0, 0.0);
 	movimento = 0;
+	punteggio = 0;
 }
 
 Pallina::Pallina(int valDifficolta) : Pallina() 
@@ -32,7 +33,9 @@ void Pallina::moveLeft(void) { movimento = 0; }
 
 void Pallina::moveRight(void) { movimento = 1; }
 
-void Pallina::incrementSpeed() { if(speed < 1.2) speed += 0.1; }
+void Pallina::incrementSpeed(void) { if(speed < 1.2) speed += 0.1; }
+
+void Pallina::incrementaPunteggio(void) { this->punteggio++; }
 
 void Pallina::drawObject(void) {
 	glColor3f(R, G, B);

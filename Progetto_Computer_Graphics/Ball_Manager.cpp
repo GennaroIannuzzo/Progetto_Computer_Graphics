@@ -29,12 +29,33 @@ void Ball_Manager::incrementaVelocità(void)
     }
 }
 
+void Ball_Manager::triggerObject(Pallina& ball, Piattaforma& p)
+{
+    int tipo = p.getTipo();     // Recupero il tipo di oggetto dalla piattaforma
+    GLfloat bounding_box = p.getOggetto()->getDim()/2; // Bounding box per l'oggetto
+
+    // Continua se l'oggetto è stato instanziato
+    if (tipo <= 1) {
+        
+        GLfloat x_ball = ball.getPosizione().getX();
+        GLfloat z_ball = ball.getPosizione().getZ();
+        GLfloat x_obj = p.getOggetto()->getPosizione().getX();
+        GLfloat z_obj = p.getOggetto()->getPosizione().getZ();
+        
+        // Controlla se la pallina tocca il bounding_box dell'oggetto
+        if (x_ball >= (x_obj - bounding_box) &&
+            x_ball <= (x_obj + bounding_box) &&
+            z_ball >= (z_obj - bounding_box) &&
+            z_ball <= (z_obj + bounding_box))
+        {
+            // Scatta il trigger dell'oggetto
+            p.getOggetto()->Trigger();
+        }
+    }
+}
+
 void Ball_Manager::cadutaPallina(void)
 {
-    // cout << "Coordinate Pallina" << endl;
-    // ball.getPosizione().printPoint();
-    // cout << "Coordinate piattaforma 0" << endl;
-    // p.getLastPoint().printPoint();
     int flag = 0;
 
     GLfloat posx_Pallina = ball.getPosizione().getX();
@@ -45,40 +66,32 @@ void Ball_Manager::cadutaPallina(void)
 
     Punto puntoApp = Platforms::getInstance()->getLastPoint() + Platforms::getInstance()->getPlatforms()[1].getPosizione();
 
-    // cout << "lastPoint -> " << endl;
-    // p.getLastPoint().printPoint();
-    // cout << "puntoApp -> " << endl;
-    // puntoApp.printPoint();
-
     GLfloat x_Piattaforma_1 = puntoApp.getX();
     GLfloat z_Piattaforma_1 = puntoApp.getZ();
 
     GLfloat dimDiviso2 = Platforms::getInstance()->getPlatforms()[0].getDim() / 2;
 
-    GLfloat bounding_Box = 0.0;
-
     // Controllo Piattaforma 0
-    if ((posx_Pallina + bounding_Box) >= (x_Piattaforma_0 - dimDiviso2) &&
-        (posx_Pallina + bounding_Box) <= (x_Piattaforma_0 + dimDiviso2) &&
-        (posz_Pallina - bounding_Box) >= (z_Piattaforma_0 - dimDiviso2) &&
-        (posz_Pallina - bounding_Box) <= (z_Piattaforma_0 + dimDiviso2)) {
-        // cout << "Stai dentro" << endl;
+    if ((posx_Pallina) >= (x_Piattaforma_0 - dimDiviso2) &&
+        (posx_Pallina) <= (x_Piattaforma_0 + dimDiviso2) &&
+        (posz_Pallina) >= (z_Piattaforma_0 - dimDiviso2) &&
+        (posz_Pallina) <= (z_Piattaforma_0 + dimDiviso2)) {
         flag = 1;
+
+        // Controlla Collisione oggetto
+        triggerObject(ball, Platforms::getInstance()->getPlatforms()[0]);
+    
     }
     if (flag == 0)
     {
-        if ((posx_Pallina + bounding_Box) >= (x_Piattaforma_1 - dimDiviso2) &&
-            (posx_Pallina + bounding_Box) <= (x_Piattaforma_1 + dimDiviso2) &&
-            (posz_Pallina - bounding_Box) >= (z_Piattaforma_1 - dimDiviso2) &&
-            (posz_Pallina - bounding_Box) <= (z_Piattaforma_1 + dimDiviso2)) {
+        if ((posx_Pallina) >= (x_Piattaforma_1 - dimDiviso2) &&
+            (posx_Pallina) <= (x_Piattaforma_1 + dimDiviso2) &&
+            (posz_Pallina) >= (z_Piattaforma_1 - dimDiviso2) &&
+            (posz_Pallina) <= (z_Piattaforma_1 + dimDiviso2)) {
 
             Platforms::getInstance()->triggerPlatform();
-            //exit(2);
         }
-        else {
-            // cout << "Hai perso" << endl;
-            exit(1);
-        }
+        else { exit(1); }
     }
 
 }

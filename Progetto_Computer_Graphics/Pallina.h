@@ -11,6 +11,7 @@ private:
 	GLfloat speed;
 	int movimento;
 	int difficolta;
+	int punteggio;
 	
 public:
 
@@ -24,4 +25,6 @@ public:
 	void incrementSpeed(void);
 	void moveBall(void);
 	void drawObject(void) override;
+	void incrementaPunteggio(void);
+
 };

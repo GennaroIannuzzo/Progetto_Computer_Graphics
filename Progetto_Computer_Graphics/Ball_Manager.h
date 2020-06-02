@@ -26,5 +26,5 @@ public:
 	void cadutaPallina(void);
 	void initialMovement(void);
 	void ballMovement(void);
+	void triggerObject(Pallina& ball, Piattaforma& p);
 };
-
