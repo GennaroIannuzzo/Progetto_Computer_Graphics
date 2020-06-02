@@ -1,16 +1,16 @@
 #include "Ostacolo.h"
 
-Ostacolo::Ostacolo() {};
-
-Ostacolo::Ostacolo(GLfloat R, GLfloat G, GLfloat B, GLint dim)
+Ostacolo::Ostacolo() 
 {
-	this->R = R;
-	this->G = G;
-	this->B = B;
-	this->dim = dim;
+	this->R = 0.0;
+	this->G = 255.0;
+	this->B = 255.0;
+	this->dim = 2.0;
 }
 
 void Ostacolo::drawObject(void)
 {
+	glColor3f(R, G, B);
+	glutSolidCube(dim);
 	cout << "drawObject Ostacolo" << endl;
 }
