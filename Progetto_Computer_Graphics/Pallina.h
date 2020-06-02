@@ -26,5 +26,5 @@ public:
 	void moveBall(void);
 	void drawObject(void) override;
 	void incrementaPunteggio(void);
-
+	int salvaPunteggio(void);
 };

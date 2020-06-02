@@ -29,19 +29,37 @@ void Ball_Manager::incrementaVelocità(void)
     }
 }
 
-void Ball_Manager::triggerObject(Pallina& ball, Piattaforma& p)
+void Ball_Manager::triggerObject(Piattaforma& p)
 {
     int tipo = p.getTipo();     // Recupero il tipo di oggetto dalla piattaforma
-    GLfloat bounding_box = p.getOggetto()->getDim()/2; // Bounding box per l'oggetto
-
+    
     // Continua se l'oggetto è stato instanziato
     if (tipo <= 1) {
-        
+        GLfloat bounding_box = p.getOggetto()->getDim() / 2; // Bounding box per l'oggetto        
         GLfloat x_ball = ball.getPosizione().getX();
         GLfloat z_ball = ball.getPosizione().getZ();
         GLfloat x_obj = p.getOggetto()->getPosizione().getX();
         GLfloat z_obj = p.getOggetto()->getPosizione().getZ();
+        /*
+
+        GLfloat dim_mezzi = p.getOggetto()->getDim() / 2;
+
+        GLfloat posizione_x_min = -dim_mezzi + dimensione_oggetto;
+        GLfloat posizione_x_max = dim_mezzi - dimensione_oggetto;
+
+        GLfloat posizione_z_max = dim_mezzi - dimensione_oggetto;
+        GLfloat posizione_z_min = -dim_mezzi + dimensione_oggetto;
+
         
+            
+        */
+
+        cout << "Last_Point x-> " << Platforms::getInstance()->getLastPoint().getX() << endl;
+        cout << "Last_Point z-> " << Platforms::getInstance()->getLastPoint().getZ() << endl;
+
+        x_obj += Platforms::getInstance()->getLastPoint().getX();
+        z_obj += Platforms::getInstance()->getLastPoint().getZ();
+
         // Controlla se la pallina tocca il bounding_box dell'oggetto
         if (x_ball >= (x_obj - bounding_box) &&
             x_ball <= (x_obj + bounding_box) &&
@@ -49,10 +67,21 @@ void Ball_Manager::triggerObject(Pallina& ball, Piattaforma& p)
             z_ball <= (z_obj + bounding_box))
         {
             // Scatta il trigger dell'oggetto
-            p.getOggetto()->Trigger();
+            // p.getOggetto()->Trigger();
+            exit(10);
+        }
+        else
+        {
+            cout << "Palla: ";
+            ball.getPosizione().printPoint();
+            cout << endl;
+
+            cout << "Oggetto: x-> " << x_obj << " z -> " << z_obj;
+            cout << endl;
         }
     }
 }
+
 
 void Ball_Manager::cadutaPallina(void)
 {
@@ -79,7 +108,7 @@ void Ball_Manager::cadutaPallina(void)
         flag = 1;
 
         // Controlla Collisione oggetto
-        triggerObject(ball, Platforms::getInstance()->getPlatforms()[0]);
+        triggerObject(Platforms::getInstance()->getPlatforms()[0]);
     
     }
     if (flag == 0)
@@ -91,7 +120,10 @@ void Ball_Manager::cadutaPallina(void)
 
             Platforms::getInstance()->triggerPlatform();
         }
-        else { exit(1); }
+        else { 
+            cout << "Sono fuori, il tuo punteggio -> " << ball.salvaPunteggio() << endl;
+            exit(1);
+        }
     }
 
 }

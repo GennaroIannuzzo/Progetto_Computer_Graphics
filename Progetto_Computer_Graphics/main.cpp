@@ -61,7 +61,7 @@ void drawScene(void)
 
 // Main routine.
 int main(int argc, char** argv)
-{
+{   
     glutInit(&argc, argv);
 
     glutInitContextVersion(4, 3);

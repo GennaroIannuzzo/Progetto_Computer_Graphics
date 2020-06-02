@@ -8,10 +8,15 @@ Monete::Monete()
 	this->dim = 2.0;
 };
 
-
 void Monete::drawObject(void)
 {
 	glColor3f(R, G, B);
 	glutSolidCube(dim);
-	cout << "drawObject Monete" << endl;
+	// cout << "drawObject Monete" << endl;
+}
+
+void Monete::Trigger(void)
+{
+	// Ball_Manager::getInstance()->getBall().incrementaPunteggio();
+	cout << "Ho incrementato il punteggio" << endl;
 }

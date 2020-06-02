@@ -13,3 +13,5 @@ void Oggetto::setPosizione(Punto punto)
 {
 	posizione = punto;
 }
+
+void Oggetto::Trigger(void) {};

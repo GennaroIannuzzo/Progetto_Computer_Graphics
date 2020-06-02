@@ -28,5 +28,6 @@ public:
 
 	// metodo di drawing virtual 
 	virtual void drawObject(void) = 0;
+	virtual void Trigger(void);
 };
 
