@@ -23,6 +23,9 @@ public:
 
 	Punto getPosizione(void);
 
+	// metodo setter
+	void setPosizione(Punto punto);
+
 	// metodo di drawing virtual 
 	virtual void drawObject(void) = 0;
 };
