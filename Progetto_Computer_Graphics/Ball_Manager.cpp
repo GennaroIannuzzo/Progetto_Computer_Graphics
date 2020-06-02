@@ -23,7 +23,7 @@ Pallina& Ball_Manager::getBall(void) { return ball; }
 
 void Ball_Manager::incrementaVelocità(void)
 {
-    if (Platforms::getInstance()->getFallenPlatforms() > 5) {
+    if (Platforms::getInstance()->getFallenPlatforms() > 2) {
         ball.incrementSpeed();
         Platforms::getInstance()->setFallenPlatforms(0);
     }
@@ -105,5 +105,5 @@ void Ball_Manager::ballMovement(void) {
 
     ball.moveBall();
 
-    glutPostRedisplay();
+    // glutPostRedisplay();
 }

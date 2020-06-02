@@ -2,57 +2,39 @@
 
 using namespace std;
 
-// Attributi Statici
-GLfloat Pallina::dim = 2;
-GLfloat Pallina::R = 0.0;
-GLfloat Pallina::G = 0.0;
-GLfloat Pallina::B = 255.0;
-
 // Costruttore
-Pallina::Pallina() {}
-
-Pallina::Pallina(int valDifficolta) {
+Pallina::Pallina()
+{
+	dim = 2;
+	R = 0.0;
+	G = 0.0;
+	B = 255.0;
 	posizione = Punto(0.0, 20.0, 0.0);
-	speed = 0.1;
-	difficolta = valDifficolta;
 	movimento = 0;
 }
 
-// Getter
-Punto Pallina::getPosizione(void) {
-	return posizione;
+Pallina::Pallina(int valDifficolta) : Pallina() 
+{
+	speed = 0.1;
+	difficolta = valDifficolta;
 }
 
 // Metodi
-void Pallina::moveBall(void) {
+void Pallina::moveBall(void)
+{
 	if (movimento == 0)
 		posizione.setZ(posizione.getZ() - speed);
 	else
 		posizione.setX(posizione.getX() + speed);
-
-	glutPostRedisplay();
 }
 
-void Pallina::moveLeft(void) {
-	posizione.setZ(posizione.getZ() - speed);
-	movimento = 0;
-	glutPostRedisplay();
-}
+void Pallina::moveLeft(void) { movimento = 0; }
 
-void Pallina::moveRight(void) {
-	posizione.setX(posizione.getX() + speed);
-	movimento = 1;
-	glutPostRedisplay();
-}
+void Pallina::moveRight(void) { movimento = 1; }
 
-void Pallina::incrementSpeed() {
-	if(speed < 1.2)
-		speed += 0.1;
+void Pallina::incrementSpeed() { if(speed < 1.2) speed += 0.1; }
 
-	cout << "speed -> " << speed << endl;
-}
-
-void Pallina::drawPallina(void) {
+void Pallina::drawObject(void) {
 	glColor3f(R, G, B);
 	glTranslatef(posizione.getX(), posizione.getY(), posizione.getZ());
 	glutSolidSphere(dim, (int)dim*6, (int)dim*6);

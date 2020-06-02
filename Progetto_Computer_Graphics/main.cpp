@@ -46,12 +46,12 @@ void drawScene(void)
     // glTranslatef(0.0, 20.0, 0.0);
     // glutSolidSphere(2, (int)2* 6, (int)2 * 6);
 
-    Ball_Manager::getInstance()->ballMovement();
+    // Ball_Manager::getInstance()->ballMovement();
 
-    Ball_Manager::getInstance()->getBall().drawPallina();
+    Ball_Manager::getInstance()->getBall().drawObject();
 
     // Controlli Pallina
-    // Ball_Manager::getInstance()->cadutaPallina();
+    Ball_Manager::getInstance()->cadutaPallina();
 
     Ball_Manager::getInstance()->incrementaVelocità();
 

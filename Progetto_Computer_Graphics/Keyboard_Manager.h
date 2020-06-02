@@ -28,12 +28,12 @@ public:
         // Ball movement 
         if (GetAsyncKeyState(VK_LEFT)) {
             ball.moveLeft();
-            glutPostRedisplay();
+            // glutPostRedisplay();
         }
 
         if (GetAsyncKeyState(VK_RIGHT)) {
             ball.moveRight();
-            glutPostRedisplay();
+            // glutPostRedisplay();
         }
 
     }

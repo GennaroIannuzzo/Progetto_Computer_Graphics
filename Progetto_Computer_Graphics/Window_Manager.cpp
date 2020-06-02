@@ -1,6 +1,6 @@
 #include "Window_Manager.h"
 
-int Window_Manager::interval = 1000 / 30;
+int Window_Manager::interval = 1000 / 60;
 
 // Initialization routine.
 void Window_Manager::setup(void)
@@ -24,6 +24,8 @@ void Window_Manager::update(int value) {
 
     // input handling (Richiamare il ball_Manager per ottenere la pallina)
     Keyboard_Manager::keyboard(Ball_Manager::getInstance()->getBall());
+
+    Ball_Manager::getInstance()->ballMovement();
 
     // Call update() again in 'interval' milliseconds
     glutTimerFunc(interval, update, 0);
