@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Ball_Manager">
+    <Position X="7.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>IQAAgAAAAAAAgAAAAAAAAAQAAABAAAQAEAQAIAAAAAQ=</HashCode>
+      <FileName>Ball_Manager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Keyboard_Manager">
+    <Position X="10.75" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Keyboard_Manager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Monete">
+    <Position X="3" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAiAAAAAAAAAAA=</HashCode>
+      <FileName>Monete.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Oggetto">
+    <Position X="3.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ASAAAAAAhCgAABAAAAAAAAAAAACAAAACAAAACAEAAQg=</HashCode>
+      <FileName>Oggetto.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ostacolo">
+    <Position X="0.5" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAgAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Ostacolo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pallina">
+    <Position X="5.75" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAACAAAIAAAAAAAAAAAQACgEAgCEAEBAA=</HashCode>
+      <FileName>Pallina.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Piattaforma">
+    <Position X="8.5" Y="6" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAABQAAAAQAAAQAAAAAAAAAAAAAAAAKAAAABAAAEAA=</HashCode>
+      <FileName>Piattaforma.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Platforms">
+    <Position X="13" Y="6" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAghAAAAAEAAAAAAAAAAANAAAUICAAAAAgAgAA=</HashCode>
+      <FileName>Platforms.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Punto">
+    <Position X="16.5" Y="6" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAWAAAAAAAAAAAAAABgAWBBAAA=</HashCode>
+      <FileName>Punto.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Window_Manager">
+    <Position X="14.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAgAAAACAAAAAAAAAAQAAAAAEAAA=</HashCode>
+      <FileName>Window_Manager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

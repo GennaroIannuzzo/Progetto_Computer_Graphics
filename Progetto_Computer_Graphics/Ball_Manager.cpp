@@ -54,8 +54,8 @@ void Ball_Manager::triggerObject(Piattaforma& p)
             
         */
 
-        cout << "Last_Point x-> " << Platforms::getInstance()->getLastPoint().getX() << endl;
-        cout << "Last_Point z-> " << Platforms::getInstance()->getLastPoint().getZ() << endl;
+        // cout << "Last_Point x-> " << Platforms::getInstance()->getLastPoint().getX() << endl;
+        // cout << "Last_Point z-> " << Platforms::getInstance()->getLastPoint().getZ() << endl;
 
         x_obj += Platforms::getInstance()->getLastPoint().getX();
         z_obj += Platforms::getInstance()->getLastPoint().getZ();
@@ -67,9 +67,10 @@ void Ball_Manager::triggerObject(Piattaforma& p)
             z_ball <= (z_obj + bounding_box))
         {
             // Scatta il trigger dell'oggetto
-            // p.getOggetto()->Trigger();
-            exit(10);
+            p.getOggetto()->Trigger();
+            p.dropOggetto();
         }
+        /*
         else
         {
             cout << "Palla: ";
@@ -79,6 +80,7 @@ void Ball_Manager::triggerObject(Piattaforma& p)
             cout << "Oggetto: x-> " << x_obj << " z -> " << z_obj;
             cout << endl;
         }
+        */
     }
 }
 
@@ -121,7 +123,8 @@ void Ball_Manager::cadutaPallina(void)
             Platforms::getInstance()->triggerPlatform();
         }
         else { 
-            cout << "Sono fuori, il tuo punteggio -> " << ball.salvaPunteggio() << endl;
+            // cout << "Sono fuori, il tuo punteggio -> " << ball.salvaPunteggio() << endl;
+            Utente::getInstance()->salvaFile();
             exit(1);
         }
     }

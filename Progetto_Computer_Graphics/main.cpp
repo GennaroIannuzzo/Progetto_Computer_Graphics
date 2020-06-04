@@ -16,6 +16,7 @@
 #include "Platforms.h"
 #include "Pallina.h"
 #include "Ball_Manager.h"
+#include "Utente.h"
 
 using namespace std;
 
@@ -35,7 +36,14 @@ void drawScene(void)
         0.0, 
         Ball_Manager::getInstance()->getBall().getPosizione().getZ(),
         1.0, 0.0, -1.0);
-    
+
+    float punteggio = Utente::getInstance()->incrementaPunteggio();
+
+    Window_Manager::drawText(Ball_Manager::getInstance()->getBall().getPosizione().getX() + 50,
+        Ball_Manager::getInstance()->getBall().getPosizione().getY(),
+        Ball_Manager::getInstance()->getBall().getPosizione().getZ() - 30,
+        punteggio);
+
     glPushMatrix();
 
         Platforms::getInstance()->drawPlatforms();

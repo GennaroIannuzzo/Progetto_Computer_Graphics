@@ -21,6 +21,7 @@ public:
 
 	// Metodi
 	void drawObject(void) override;
+	void dropOggetto(void);
 
 	// Distruttore
 	~Piattaforma();

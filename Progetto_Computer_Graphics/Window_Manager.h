@@ -21,6 +21,9 @@ public:
     // Update routine for glutTimerFunc
     static void update(int value);
 
+    // Update score
+    static void drawText(float x, float y, float z, float text);
+
     // Getter
     static int& getInterval(void);
 };

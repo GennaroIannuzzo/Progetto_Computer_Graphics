@@ -35,9 +35,10 @@ void Pallina::moveRight(void) { movimento = 1; }
 
 void Pallina::incrementSpeed(void) { if(speed < 1.2) speed += 0.1; }
 
-void Pallina::incrementaPunteggio(void) { punteggio++; }
-
-int Pallina::salvaPunteggio(void) { return punteggio; }
+void Pallina::setTexture(string texture)
+{
+	cout << "la texture scelta e' " << texture << endl;
+}
 
 void Pallina::drawObject(void) {
 	glColor3f(R, G, B);

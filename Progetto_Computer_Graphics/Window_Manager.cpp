@@ -35,5 +35,13 @@ void Window_Manager::update(int value) {
 
 }
 
+void Window_Manager::drawText(float x, float y, float z, float text) {
+    glColor3f(0.0, 0.0, 0.0); 
+    glRasterPos3f(x, y, z);
+    char sl[20];
+    sprintf_s(sl, "%f", text);
+    glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char*)sl);
+}
+
 // Getter
 int& Window_Manager::getInterval(void) { return interval; }

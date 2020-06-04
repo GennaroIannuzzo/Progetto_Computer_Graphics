@@ -148,6 +148,7 @@
     <ClInclude Include="Piattaforma.h" />
     <ClInclude Include="Platforms.h" />
     <ClInclude Include="Punto.h" />
+    <ClInclude Include="Utente.h" />
     <ClInclude Include="Window_Manager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,7 @@
     <ClCompile Include="Piattaforma.cpp" />
     <ClCompile Include="Platforms.cpp" />
     <ClCompile Include="Punto.cpp" />
+    <ClCompile Include="Utente.cpp" />
     <ClCompile Include="Window_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>

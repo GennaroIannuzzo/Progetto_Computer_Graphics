@@ -25,6 +25,5 @@ public:
 	void incrementSpeed(void);
 	void moveBall(void);
 	void drawObject(void) override;
-	void incrementaPunteggio(void);
-	int salvaPunteggio(void);
+	void setTexture(string texture);
 };

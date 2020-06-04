@@ -1,5 +1,7 @@
 #pragma once
 #include "Oggetto.h"
+#include "Utente.h"
+
 // #include "Ball_Manager.h"
 
 class Monete : public Oggetto

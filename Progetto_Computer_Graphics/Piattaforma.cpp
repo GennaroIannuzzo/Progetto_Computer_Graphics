@@ -80,6 +80,8 @@ void Piattaforma::drawObject(void)
 	}
 }
 
+void Piattaforma::dropOggetto(void) { cout << "tipo " << endl;  tipo = 2; }
+
 Oggetto* Piattaforma::getOggetto(void) { return oggetto; }
 int Piattaforma::getTipo(void) { return tipo; }
 

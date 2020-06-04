@@ -17,6 +17,6 @@ void Monete::drawObject(void)
 
 void Monete::Trigger(void)
 {
-	// Ball_Manager::getInstance()->getBall().incrementaPunteggio();
-	cout << "Ho incrementato il punteggio" << endl;
+	Utente::getInstance()->incrementaMonete();
+	cout << "Ho incrementato il contatore delle monetine" << endl;
 }

@@ -45,6 +45,9 @@
     <ClInclude Include="Ostacolo.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Utente.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Piattaforma.cpp">
@@ -75,6 +78,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Ostacolo.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Utente.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

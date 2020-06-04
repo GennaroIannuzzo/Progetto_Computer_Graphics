@@ -1,5 +1,6 @@
 #include "Pallina.h"
 #include "Platforms.h"
+#include "Utente.h"
 #include <time.h>
 
 #pragma once
