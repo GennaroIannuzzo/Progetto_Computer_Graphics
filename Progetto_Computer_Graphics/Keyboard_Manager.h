@@ -23,16 +23,16 @@ public:
         }
     }
 
-    static void keyboard(Pallina& ball) {
+    static void keyboard() {
 
         // Ball movement 
         if (GetAsyncKeyState(VK_LEFT)) {
-            ball.moveLeft();
+             Pallina::getInstance()->moveLeft();
             // glutPostRedisplay();
         }
 
         if (GetAsyncKeyState(VK_RIGHT)) {
-            ball.moveRight();
+             Pallina::getInstance()->moveRight();
             // glutPostRedisplay();
         }
 

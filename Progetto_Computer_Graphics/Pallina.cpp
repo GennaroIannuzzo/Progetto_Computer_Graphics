@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Pallina* Pallina::instance = 0;
+
 // Costruttore
 Pallina::Pallina()
 {
@@ -12,12 +14,29 @@ Pallina::Pallina()
 	posizione = Punto(0.0, 20.0, 0.0);
 	movimento = 0;
 	punteggio = 0;
-}
 
+	speed = 0.1;
+	difficolta = 1;
+}
+/*
 Pallina::Pallina(int valDifficolta) : Pallina() 
 {
 	speed = 0.1;
 	difficolta = valDifficolta;
+}
+*/
+Pallina* Pallina::getInstance()
+{
+	if (instance == 0)
+		instance = new Pallina();
+
+	return instance;
+}
+
+void Pallina::setDifficolta(int diff)
+{
+	speed = 0.1;
+	difficolta = diff;
 }
 
 // Metodi
@@ -33,7 +52,7 @@ void Pallina::moveLeft(void) { movimento = 0; }
 
 void Pallina::moveRight(void) { movimento = 1; }
 
-void Pallina::incrementSpeed(void) { if(speed < 1.2) speed += 0.1; }
+void Pallina::incrementSpeed(void) { if(speed < 0.4) speed += 0.1; }
 
 void Pallina::setTexture(string texture)
 {

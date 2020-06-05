@@ -8,24 +8,13 @@ class Ball_Manager
 {
 private:
 	
-	static Ball_Manager* instance;
-
-	// Costruttori
-	Ball_Manager();
-	Ball_Manager(int difficoltà);
-
-	Pallina ball;
-	int eseguo;
-
+	static int eseguo;
+	
 public:
 
-	// Getter
-	static Ball_Manager* getInstance();
-	Pallina& getBall(void);
-	
-	void incrementaVelocità(void);
-	void cadutaPallina(void);
-	void initialMovement(void);
-	void ballMovement(void);
-	void triggerObject(Piattaforma& p);
+	static void incrementaVelocità(void);
+	static void cadutaPallina(void);
+	static void initialMovement(void);
+	static void ballMovement(void);
+	static void triggerObject(Piattaforma& p);
 };

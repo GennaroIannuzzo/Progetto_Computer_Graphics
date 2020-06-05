@@ -22,7 +22,7 @@ public:
     static void update(int value);
 
     // Update score
-    static void drawText(float x, float y, float z, float text);
+    static void drawText(float x, float y, float z, int text);
 
     // Getter
     static int& getInterval(void);

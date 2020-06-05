@@ -26,10 +26,13 @@ float Utente::incrementaPunteggio(void)
 	if (punteggio > punteggioMassimo)
 		punteggioMassimo = punteggio;
 
-	return punteggio; 
+	return (int)punteggio; 
 }
 
 float Utente::getPunteggioMassimo(void) { return punteggioMassimo; }
+
+int Utente::getMonete(void) { return monete; }
+int Utente::getVite(void) { return vite; }
 
 void Utente::caricaFile(void)
 {
@@ -60,7 +63,7 @@ void Utente::caricaFile(void)
 		exit(19);
 	}
 
-	// Ball_Manager::getInstance()->getBall().setTexture(texturePallina);
+	Pallina::getInstance()->setTexture(texturePallina);
 
 }
 
@@ -105,4 +108,40 @@ void Utente::salvaFile(string texture)
 	fileWrite << punteggioMassimo;
 
 	fileWrite.close();
+}
+
+void Utente::setDifficolta(int diff) 
+{ 
+	// vite = 5 - diff;
+	vite = 4;
+}
+
+void Utente::eliminaVita(void)
+{
+	cout << "vite rimantenti " << vite - 1 << endl;
+	vite--;
+	if (vite == 0)
+	{
+		salvaFile();
+		exit(69);
+	}
+}
+
+void Utente::drawMonete(float x, float y, float z)
+{
+	glColor3f(255.0, 255.0, 0.0);
+	glTranslatef(x, y, z);
+	glutSolidCube(1.0);
+}
+
+void Utente::drawVite(float x, float y, float z)
+{
+	glColor3f(255.0, 0.0, 255.0);
+	for (int i = 0; i < vite; i++)
+	{
+		glPushMatrix();
+			glTranslatef(x + i*2, y, z);
+			glutSolidCube(1.0);
+		glPopMatrix();
+	}
 }

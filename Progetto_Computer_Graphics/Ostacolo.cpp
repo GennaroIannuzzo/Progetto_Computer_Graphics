@@ -17,7 +17,6 @@ void Ostacolo::drawObject(void)
 
 void Ostacolo::Trigger(void)
 {
-	// cout << "Il tuo punteggio -> " << Ball_Manager::getInstance()->getBall().salvaPunteggio();
 	cout << "Ho toccato un ostacolo!" << endl;
-	exit(1);
+	Utente::getInstance()->eliminaVita();
 }

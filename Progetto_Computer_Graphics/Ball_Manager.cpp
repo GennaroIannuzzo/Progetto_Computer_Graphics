@@ -1,30 +1,11 @@
 #include "Ball_Manager.h"
 
-Ball_Manager* Ball_Manager::instance = 0;
-
-Ball_Manager* Ball_Manager::getInstance()
-{
-	if (instance == 0)
-		instance = new Ball_Manager(1);
-
-	return instance;
-}
-
-Ball_Manager::Ball_Manager() {}
-
-Ball_Manager::Ball_Manager(int difficoltà)
-{
-    eseguo = 0;
-	ball = Pallina(difficoltà);
-}
-
-// Getter
-Pallina& Ball_Manager::getBall(void) { return ball; }
+int Ball_Manager::eseguo = 0;
 
 void Ball_Manager::incrementaVelocità(void)
 {
     if (Platforms::getInstance()->getFallenPlatforms() > 2) {
-        ball.incrementSpeed();
+        Pallina::getInstance()->incrementSpeed();
         Platforms::getInstance()->setFallenPlatforms(0);
     }
 }
@@ -36,8 +17,8 @@ void Ball_Manager::triggerObject(Piattaforma& p)
     // Continua se l'oggetto è stato instanziato
     if (tipo <= 1) {
         GLfloat bounding_box = p.getOggetto()->getDim() / 2; // Bounding box per l'oggetto        
-        GLfloat x_ball = ball.getPosizione().getX();
-        GLfloat z_ball = ball.getPosizione().getZ();
+        GLfloat x_ball =  Pallina::getInstance()->getPosizione().getX();
+        GLfloat z_ball =  Pallina::getInstance()->getPosizione().getZ();
         GLfloat x_obj = p.getOggetto()->getPosizione().getX();
         GLfloat z_obj = p.getOggetto()->getPosizione().getZ();
         /*
@@ -89,8 +70,8 @@ void Ball_Manager::cadutaPallina(void)
 {
     int flag = 0;
 
-    GLfloat posx_Pallina = ball.getPosizione().getX();
-    GLfloat posz_Pallina = ball.getPosizione().getZ();
+    GLfloat posx_Pallina =  Pallina::getInstance()->getPosizione().getX();
+    GLfloat posz_Pallina =  Pallina::getInstance()->getPosizione().getZ();
 
     GLfloat x_Piattaforma_0 = Platforms::getInstance()->getLastPoint().getX();
     GLfloat z_Piattaforma_0 = Platforms::getInstance()->getLastPoint().getZ();
@@ -136,10 +117,10 @@ void Ball_Manager::initialMovement(void) {
     srand((unsigned)time(NULL));
     int scelta = rand() % 2;
     if (scelta == 0) {
-        ball.moveLeft();
+         Pallina::getInstance()->moveLeft();
     }
     else if (scelta == 1) {
-        ball.moveRight();
+         Pallina::getInstance()->moveRight();
     }
 
     // ball.moveLeft();
@@ -151,7 +132,7 @@ void Ball_Manager::ballMovement(void) {
 
     if (eseguo == 0) initialMovement();
 
-    ball.moveBall();
+     Pallina::getInstance()->moveBall();
 
     // glutPostRedisplay();
 }

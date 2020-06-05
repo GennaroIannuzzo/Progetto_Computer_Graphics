@@ -26,23 +26,42 @@ void drawScene(void)
     srand((unsigned)time(NULL));
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // glColor3f(255.0, 0.0, 0.0);
     glLoadIdentity();
+    
+    gluLookAt(Pallina::getInstance()->getPosizione().getX() - 15.0,
+              Pallina::getInstance()->getPosizione().getY() + 20.0,
+              Pallina::getInstance()->getPosizione().getZ() + 15.0,
+              Pallina::getInstance()->getPosizione().getX(),
+              0.0, 
+              Pallina::getInstance()->getPosizione().getZ(),
+              1.0, 0.0, -1.0);
 
-    gluLookAt(Ball_Manager::getInstance()->getBall().getPosizione().getX() - 15.0,
-        Ball_Manager::getInstance()->getBall().getPosizione().getY() + 20.0,
-        Ball_Manager::getInstance()->getBall().getPosizione().getZ() + 15.0,
-        Ball_Manager::getInstance()->getBall().getPosizione().getX(),
-        0.0, 
-        Ball_Manager::getInstance()->getBall().getPosizione().getZ(),
-        1.0, 0.0, -1.0);
+    int punteggio = Utente::getInstance()->incrementaPunteggio();
+    int monete = Utente::getInstance()->getMonete();
 
-    float punteggio = Utente::getInstance()->incrementaPunteggio();
 
-    Window_Manager::drawText(Ball_Manager::getInstance()->getBall().getPosizione().getX() + 50,
-        Ball_Manager::getInstance()->getBall().getPosizione().getY(),
-        Ball_Manager::getInstance()->getBall().getPosizione().getZ() - 30,
-        punteggio);
+    Window_Manager::drawText(Pallina::getInstance()->getPosizione().getX() + 50,
+                             Pallina::getInstance()->getPosizione().getY(),
+                             Pallina::getInstance()->getPosizione().getZ() - 30,
+                             punteggio);
+
+    Window_Manager::drawText(Pallina::getInstance()->getPosizione().getX() - 10,
+                             Pallina::getInstance()->getPosizione().getY(),
+                             Pallina::getInstance()->getPosizione().getZ() + 30,
+                             monete);
+    
+    glPushMatrix();
+        Utente::getInstance()->drawMonete(Pallina::getInstance()->getPosizione().getX() - 7,
+                                          Pallina::getInstance()->getPosizione().getY(),
+                                          Pallina::getInstance()->getPosizione().getZ() + 30);
+    glPopMatrix();
+    
+    glPushMatrix();
+        Utente::getInstance()->drawVite(Pallina::getInstance()->getPosizione().getX() - 30,
+                                        Pallina::getInstance()->getPosizione().getY(),
+                                        Pallina::getInstance()->getPosizione().getZ() + 9);
+    glPopMatrix();
+
 
     glPushMatrix();
 
@@ -50,18 +69,12 @@ void drawScene(void)
 
     glPopMatrix();
     
-    // glColor3f(0.0, 0.0, 255.0);
-    // glTranslatef(0.0, 20.0, 0.0);
-    // glutSolidSphere(2, (int)2* 6, (int)2 * 6);
-
-    // Ball_Manager::getInstance()->ballMovement();
-
-    Ball_Manager::getInstance()->getBall().drawObject();
+    Pallina::getInstance()->drawObject();
 
     // Controlli Pallina
-    Ball_Manager::getInstance()->cadutaPallina();
+    Ball_Manager::cadutaPallina();
 
-    Ball_Manager::getInstance()->incrementaVelocità();
+    Ball_Manager::incrementaVelocità();
 
     glutSwapBuffers();
 }
@@ -69,7 +82,10 @@ void drawScene(void)
 
 // Main routine.
 int main(int argc, char** argv)
-{   
+{
+    Utente::getInstance()->setDifficolta(1);
+    Pallina::getInstance()->setDifficolta(1);
+
     glutInit(&argc, argv);
 
     glutInitContextVersion(4, 3);
@@ -91,4 +107,5 @@ int main(int argc, char** argv)
     Window_Manager::setup();
 
     glutMainLoop();
+    
 }

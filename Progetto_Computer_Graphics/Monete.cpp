@@ -12,11 +12,9 @@ void Monete::drawObject(void)
 {
 	glColor3f(R, G, B);
 	glutSolidCube(dim);
-	// cout << "drawObject Monete" << endl;
 }
 
 void Monete::Trigger(void)
 {
 	Utente::getInstance()->incrementaMonete();
-	cout << "Ho incrementato il contatore delle monetine" << endl;
 }
