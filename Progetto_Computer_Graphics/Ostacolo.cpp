@@ -12,7 +12,6 @@ void Ostacolo::drawObject(void)
 {
 	glColor3f(R, G, B);
 	glutSolidCube(dim);
-	// cout << "drawObject Ostacolo" << endl;
 }
 
 void Ostacolo::Trigger(void)

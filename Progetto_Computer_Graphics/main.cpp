@@ -71,11 +71,6 @@ void drawScene(void)
     
     Pallina::getInstance()->drawObject();
 
-    // Controlli Pallina
-    Ball_Manager::cadutaPallina();
-
-    Ball_Manager::incrementaVelocità();
-
     glutSwapBuffers();
 }
 

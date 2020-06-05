@@ -5,8 +5,6 @@
 #include <iostream>
 #include <cstdlib>
 
-#define max_rand 3
-
 class Piattaforma : public Oggetto 
 {
 

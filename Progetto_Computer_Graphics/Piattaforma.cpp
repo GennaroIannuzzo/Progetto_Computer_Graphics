@@ -33,7 +33,7 @@ Piattaforma::Piattaforma()
 		> 1 -> nulla
 	*/
 
-	tipo = rand() % max_rand;
+	tipo = rand() % 3;
 	
 	GLfloat x, y, z;
 	
@@ -43,13 +43,11 @@ Piattaforma::Piattaforma()
 		oggetto = new Monete();
 		calcolaPosizione(x, y, z);
 		oggetto->setPosizione(Punto(x, y, z));
-		cout << " creo una moneta" << endl;
 		break;
 	case 1:
 		oggetto = new Ostacolo();
 		calcolaPosizione(x, y, z);
 		oggetto->setPosizione(Punto(x, y, z));
-		cout << " creo un ostacolo" << endl;
 		break;
 
 	default:
@@ -80,7 +78,7 @@ void Piattaforma::drawObject(void)
 	}
 }
 
-void Piattaforma::dropOggetto(void) { cout << "tipo " << endl;  tipo = 2; }
+void Piattaforma::dropOggetto(void) { tipo = 2; }
 
 Oggetto* Piattaforma::getOggetto(void) { return oggetto; }
 int Piattaforma::getTipo(void) { return tipo; }

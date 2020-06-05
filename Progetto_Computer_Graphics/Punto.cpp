@@ -21,7 +21,8 @@ void Punto::setY(GLfloat valy) { y = valy; }
 void Punto::setZ(GLfloat valz) { z = valz; }
 
 // Overload Operatori
-Punto Punto::operator+(const Punto& b) {
+Punto Punto::operator+(const Punto& b) 
+{
 	Punto p;
 
 	p.x = this->x + b.x;

@@ -36,13 +36,6 @@ int Utente::getVite(void) { return vite; }
 
 void Utente::caricaFile(void)
 {
-	/*
-	- texture pallina
-	- monete
-	- punteggioMassimo
-	
-*/
-
 	string texturePallina = "textureProva";
 
 	ifstream file("file.txt");
@@ -112,13 +105,12 @@ void Utente::salvaFile(string texture)
 
 void Utente::setDifficolta(int diff) 
 { 
-	// vite = 5 - diff;
-	vite = 4;
+	vite = 5 - diff;
+	
 }
 
 void Utente::eliminaVita(void)
 {
-	cout << "vite rimantenti " << vite - 1 << endl;
 	vite--;
 	if (vite == 0)
 	{

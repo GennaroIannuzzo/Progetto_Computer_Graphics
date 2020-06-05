@@ -30,7 +30,8 @@ Platforms* Platforms::getInstance()
 
 vector<Piattaforma>& Platforms::getPlatforms(void) { return platforms; }
 
-Punto Platforms::getLastPoint(void) {
+Punto Platforms::getLastPoint(void) 
+{
 	Punto app = Punto(lastPoint.getX(), lastPoint.getY(), lastPoint.getZ());
 
 	if (platforms[0].getPosizione().getX() == 0.0 && platforms[0].getPosizione().getY() == 0.0 && platforms[0].getPosizione().getZ() == 0.0)
@@ -41,7 +42,8 @@ Punto Platforms::getLastPoint(void) {
 	return app;
 }
 
-GLint Platforms::getFallenPlatforms(void) {
+GLint Platforms::getFallenPlatforms(void) 
+{
 	return fallenPlatforms;
 }
 
@@ -54,23 +56,19 @@ void Platforms::generaNuovaPiattaforma(void)
 	GLfloat dimension = platforms[0].getDim();
 
 	// In alto
-	if (rand() % 2 == 0) {
+	if (rand() % 2 == 0)
 		platforms.push_back(Piattaforma(Punto(dimension, 0.0, 0.0)));
-	}
-
-	else {
-		platforms.push_back(Piattaforma(Punto(0.0, 0.0, -dimension)));
-	}
 	
-	// platforms.push_back(Piattaforma(Punto(0.0, 0.0, -Piattaforma::getDim())));
+	else
+		platforms.push_back(Piattaforma(Punto(0.0, 0.0, -dimension)));
+	
 }
 
 void Platforms::triggerPlatform(void)
 {
-	// platforms.front().animazione();
 	generaNuovaPiattaforma();
 	lastPoint = lastPoint + platforms.front().getPosizione();
-	// Simula Caduta
+	
 	platforms.erase(platforms.begin());
 	fallenPlatforms++;
 }

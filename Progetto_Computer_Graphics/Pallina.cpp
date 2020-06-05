@@ -18,13 +18,7 @@ Pallina::Pallina()
 	speed = 0.1;
 	difficolta = 1;
 }
-/*
-Pallina::Pallina(int valDifficolta) : Pallina() 
-{
-	speed = 0.1;
-	difficolta = valDifficolta;
-}
-*/
+
 Pallina* Pallina::getInstance()
 {
 	if (instance == 0)
@@ -59,7 +53,8 @@ void Pallina::setTexture(string texture)
 	cout << "la texture scelta e' " << texture << endl;
 }
 
-void Pallina::drawObject(void) {
+void Pallina::drawObject(void) 
+{
 	glColor3f(R, G, B);
 	glTranslatef(posizione.getX(), posizione.getY(), posizione.getZ());
 	glutSolidSphere(dim, (int)dim*6, (int)dim*6);

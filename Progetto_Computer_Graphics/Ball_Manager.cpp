@@ -4,7 +4,8 @@ int Ball_Manager::eseguo = 0;
 
 void Ball_Manager::incrementaVelocità(void)
 {
-    if (Platforms::getInstance()->getFallenPlatforms() > 2) {
+    if (Platforms::getInstance()->getFallenPlatforms() > 2) 
+    {
         Pallina::getInstance()->incrementSpeed();
         Platforms::getInstance()->setFallenPlatforms(0);
     }
@@ -15,29 +16,14 @@ void Ball_Manager::triggerObject(Piattaforma& p)
     int tipo = p.getTipo();     // Recupero il tipo di oggetto dalla piattaforma
     
     // Continua se l'oggetto è stato instanziato
-    if (tipo <= 1) {
+    if (tipo <= 1) 
+    {
         GLfloat bounding_box = p.getOggetto()->getDim() / 2; // Bounding box per l'oggetto        
         GLfloat x_ball =  Pallina::getInstance()->getPosizione().getX();
         GLfloat z_ball =  Pallina::getInstance()->getPosizione().getZ();
         GLfloat x_obj = p.getOggetto()->getPosizione().getX();
         GLfloat z_obj = p.getOggetto()->getPosizione().getZ();
-        /*
-
-        GLfloat dim_mezzi = p.getOggetto()->getDim() / 2;
-
-        GLfloat posizione_x_min = -dim_mezzi + dimensione_oggetto;
-        GLfloat posizione_x_max = dim_mezzi - dimensione_oggetto;
-
-        GLfloat posizione_z_max = dim_mezzi - dimensione_oggetto;
-        GLfloat posizione_z_min = -dim_mezzi + dimensione_oggetto;
-
         
-            
-        */
-
-        // cout << "Last_Point x-> " << Platforms::getInstance()->getLastPoint().getX() << endl;
-        // cout << "Last_Point z-> " << Platforms::getInstance()->getLastPoint().getZ() << endl;
-
         x_obj += Platforms::getInstance()->getLastPoint().getX();
         z_obj += Platforms::getInstance()->getLastPoint().getZ();
 
@@ -51,17 +37,7 @@ void Ball_Manager::triggerObject(Piattaforma& p)
             p.getOggetto()->Trigger();
             p.dropOggetto();
         }
-        /*
-        else
-        {
-            cout << "Palla: ";
-            ball.getPosizione().printPoint();
-            cout << endl;
 
-            cout << "Oggetto: x-> " << x_obj << " z -> " << z_obj;
-            cout << endl;
-        }
-        */
     }
 }
 
@@ -87,7 +63,8 @@ void Ball_Manager::cadutaPallina(void)
     if ((posx_Pallina) >= (x_Piattaforma_0 - dimDiviso2) &&
         (posx_Pallina) <= (x_Piattaforma_0 + dimDiviso2) &&
         (posz_Pallina) >= (z_Piattaforma_0 - dimDiviso2) &&
-        (posz_Pallina) <= (z_Piattaforma_0 + dimDiviso2)) {
+        (posz_Pallina) <= (z_Piattaforma_0 + dimDiviso2)) 
+    {
         flag = 1;
 
         // Controlla Collisione oggetto
@@ -99,40 +76,44 @@ void Ball_Manager::cadutaPallina(void)
         if ((posx_Pallina) >= (x_Piattaforma_1 - dimDiviso2) &&
             (posx_Pallina) <= (x_Piattaforma_1 + dimDiviso2) &&
             (posz_Pallina) >= (z_Piattaforma_1 - dimDiviso2) &&
-            (posz_Pallina) <= (z_Piattaforma_1 + dimDiviso2)) {
+            (posz_Pallina) <= (z_Piattaforma_1 + dimDiviso2)) 
+        {
 
             Platforms::getInstance()->triggerPlatform();
         }
-        else { 
-            // cout << "Sono fuori, il tuo punteggio -> " << ball.salvaPunteggio() << endl;
+        else 
+        { 
             Utente::getInstance()->salvaFile();
-            exit(1);
+            exit(69);
         }
     }
 
 }
 
-void Ball_Manager::initialMovement(void) {
-
+void Ball_Manager::initialMovement(void) 
+{
     srand((unsigned)time(NULL));
     int scelta = rand() % 2;
-    if (scelta == 0) {
+    if (scelta == 0)
          Pallina::getInstance()->moveLeft();
-    }
-    else if (scelta == 1) {
+    
+    else if (scelta == 1)
          Pallina::getInstance()->moveRight();
-    }
-
-    // ball.moveLeft();
+    
 
     eseguo = 1;
 }
 
-void Ball_Manager::ballMovement(void) {
+void Ball_Manager::ballMovement(void) 
+{
+    if (eseguo == 0) 
+        initialMovement();
 
-    if (eseguo == 0) initialMovement();
+    // Controlli Pallina
+    cadutaPallina();
 
-     Pallina::getInstance()->moveBall();
+    incrementaVelocità();
 
-    // glutPostRedisplay();
+    Pallina::getInstance()->moveBall();
+
 }
