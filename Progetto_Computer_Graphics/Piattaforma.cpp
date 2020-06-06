@@ -21,9 +21,17 @@ void Piattaforma::calcolaPosizione(GLfloat& x, GLfloat& y, GLfloat& z)
 // Costruttori
 Piattaforma::Piattaforma()
 {
-	this->R = 255.0;
-	this->G = 0.0;
-	this->B = 0.0;
+	// this->R = 255.0;
+	// this->G = 0.0;
+	// this->B = 0.0;
+	
+	//this->R = 62.0  / 255.0;
+	//this->G = 110.0 / 255.0;
+	//this->B = 163.0 / 255.0;
+	
+	this->R = 109.0  / 255.0;
+	this->G = 187.0 / 255.0;
+	this->B = 254.0 / 255.0;
 	this->dim = 30;
 	
 	/*
@@ -65,6 +73,7 @@ Piattaforma::Piattaforma(Punto valPunto) : Piattaforma()
 // Metodi
 void Piattaforma::drawObject(void)
 {
+	glColor3f(R, G, B);
 	glTranslatef(posizione.getX(), posizione.getY(), posizione.getZ());
 	glutSolidCube(dim);
 	

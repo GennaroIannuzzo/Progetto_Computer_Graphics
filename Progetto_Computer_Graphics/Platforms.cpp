@@ -81,10 +81,12 @@ void Platforms::drawPlatforms(void)
 
 	for (auto it = platforms.begin(); it != platforms.end(); ++it)
 	{
-		if (it == platforms.begin())
-			glColor3f(0.0, 255.0, 0.0);
-		else
-			glColor3f(255.0, 0.0, 0.0);
+
+		// if (it == platforms.begin())
+		// 	glColor3f(0.0, 255.0, 0.0);
+		// else
+		// 	glColor3f(platforms.at(0).getR(), platforms.at(0).getG(), platforms.at(0).getB());
+		
 		it->drawObject();
 	}
 }

@@ -39,7 +39,8 @@ void Window_Manager::drawText(float x, float y, float z, int text)
     glRasterPos3f(x, y, z);
     char sl[20];
     sprintf_s(sl, "%d", text);
-    glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char*)sl);
+    // glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char*)sl);
+    glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
 }
 
 // Getter
