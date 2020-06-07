@@ -17,6 +17,7 @@ Pallina::Pallina()
 
 	speed = 0.1;
 	difficolta = 1;
+	angolo = 0;
 }
 
 Pallina* Pallina::getInstance()
@@ -58,20 +59,10 @@ void Pallina::drawObject(void)
 	glColor3f(R, G, B);
 	glTranslatef(posizione.getX(), posizione.getY(), posizione.getZ());
 
-
-	if (movimento == 0)
-	{
-		int angolo = (int)(posizione.getZ()) % 360;
-		cout << angolo << endl;
-		glRotatef(angolo, 0, 0, 1);
-	}
-	else
-	{
-		int angolo = (int)(posizione.getX()) % 360;
-		cout << angolo << endl;
-		glRotatef(angolo, 1, 0, 0);
-	}
-		
-	glutSolidSphere(dim, (int)dim*6, (int)dim*6);
+	angolo = (angolo + 1) % 360;
+	(movimento == 0) ? glRotatef(-angolo, 1, 0, 0) : glRotatef(-angolo, 0, 0, 1);
+	
+	//glutSolidSphere(dim, (int)dim*6, (int)dim*6);
+	glutSolidCube(dim);
 	
 }

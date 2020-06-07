@@ -13,7 +13,8 @@ private:
 	int movimento;
 	int difficolta;
 	int punteggio;
-	
+	int angolo;
+		
 	// Costruttori
 	Pallina();
 
