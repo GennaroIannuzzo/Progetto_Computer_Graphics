@@ -2,10 +2,11 @@
 #include "Oggetto.h"
 #include "Utente.h"
 
-// #include "Ball_Manager.h"
-
 class Ostacolo : public Oggetto
 {
+private:
+	void Trigger(void);
+
 public:
 
 	// costruttori
@@ -13,6 +14,6 @@ public:
 
 	// Override metodo drowing
 	void drawObject(void) override;
-	void Trigger(void);
+	
 };
 

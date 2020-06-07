@@ -11,14 +11,12 @@ protected:
 	GLfloat B;
 	GLfloat dim;
 	Punto posizione;
-
+	
 public:
 	Oggetto();
 	
 	// metodi getter 
-	GLfloat getR(void);
-	GLfloat getG(void);
-	GLfloat getB(void);
+
 	GLfloat getDim(void);
 
 	Punto getPosizione(void);
@@ -28,6 +26,7 @@ public:
 
 	// metodo di drawing virtual 
 	virtual void drawObject(void) = 0;
+	
 	virtual void Trigger(void);
 };
 

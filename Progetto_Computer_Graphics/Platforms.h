@@ -19,6 +19,8 @@ private:
 	vector<Piattaforma> platforms;
 	Punto lastPoint;
 	GLint fallenPlatforms;
+	
+	void generaNuovaPiattaforma(void);
 
 public:
 
@@ -30,9 +32,8 @@ public:
 	
 	// Setter
 	void setFallenPlatforms(GLint);
-
+	
 	// Metodi
-	void generaNuovaPiattaforma(void);
 	void drawPlatforms(void);
 	void triggerPlatform(void);
 	

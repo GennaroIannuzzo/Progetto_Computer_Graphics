@@ -16,7 +16,6 @@ private:
 	
 	// Costruttori
 	Pallina();
-	// Pallina(int difficolta);
 
 public:
 
