@@ -18,7 +18,12 @@
 #include "Ball_Manager.h"
 #include "Utente.h"
 #include "Monete.h"
+
+#include <irrKlang.h>
 using namespace std;
+
+using namespace irrklang;
+#pragma comment(lib, "irrKlang.lib")
 
 Monete* moneta = new Monete();
 // Drawing routine.
@@ -86,6 +91,9 @@ void drawScene(void)
 // Main routine.
 int main(int argc, char** argv)
 {
+    ISoundEngine* engine = createIrrKlangDevice();
+    engine->play2D("getout.ogg", true);
+
     Utente::getInstance()->setDifficolta(1);
     Pallina::getInstance()->setDifficolta(1);
 
