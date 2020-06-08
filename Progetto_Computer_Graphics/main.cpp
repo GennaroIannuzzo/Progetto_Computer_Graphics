@@ -17,9 +17,10 @@
 #include "Pallina.h"
 #include "Ball_Manager.h"
 #include "Utente.h"
-
+#include "Monete.h"
 using namespace std;
 
+Monete* moneta = new Monete();
 // Drawing routine.
 void drawScene(void)
 {
@@ -49,13 +50,20 @@ void drawScene(void)
                              Pallina::getInstance()->getPosizione().getY(),
                              Pallina::getInstance()->getPosizione().getZ() + 30,
                              monete);
-    
+    /*
     glPushMatrix();
         Utente::getInstance()->drawMonete(Pallina::getInstance()->getPosizione().getX() - 7,
                                           Pallina::getInstance()->getPosizione().getY(),
                                           Pallina::getInstance()->getPosizione().getZ() + 30);
     glPopMatrix();
-    
+    */
+
+    glPushMatrix();
+        moneta->drawObject(Pallina::getInstance()->getPosizione().getX() - 7,
+                           Pallina::getInstance()->getPosizione().getY(),
+                           Pallina::getInstance()->getPosizione().getZ() + 30);
+    glPopMatrix();
+
     glPushMatrix();
         Utente::getInstance()->drawVite(Pallina::getInstance()->getPosizione().getX() - 30,
                                         Pallina::getInstance()->getPosizione().getY(),

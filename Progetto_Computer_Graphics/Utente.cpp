@@ -118,14 +118,14 @@ void Utente::eliminaVita(void)
 		exit(69);
 	}
 }
-
+/*
 void Utente::drawMonete(float x, float y, float z)
 {
 	glColor3f(255.0, 255.0, 0.0);
 	glTranslatef(x, y, z);
 	glutSolidCube(1.0);
 }
-
+*/
 void Utente::drawVite(float x, float y, float z)
 {
 	glColor3f(255.0, 0.0, 255.0);

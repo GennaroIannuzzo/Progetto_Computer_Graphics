@@ -6,6 +6,7 @@ class Monete : public Oggetto
 {
 private:
 	void Trigger(void);
+	int angolo;
 
 public:
 	// costruttori
@@ -13,6 +14,7 @@ public:
 
 	// Override metodo drowing
 	void drawObject(void) override;
+	void drawObject(float x, float y, float z);
 	
 };
 

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstdlib>
 #include "Pallina.h"
+
  
 using namespace std;
 
@@ -35,7 +36,7 @@ public:
 	void salvaFile(void);
 	void salvaFile(string texture);	// per memorizzare la texture acquistata
 
-	void drawMonete(float x, float y, float z);
+	// void drawMonete(float x, float y, float z);
 	void drawVite(float x, float y, float z);
 };
 
