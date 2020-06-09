@@ -151,6 +151,7 @@
     <ClInclude Include="Piattaforma.h" />
     <ClInclude Include="Platforms.h" />
     <ClInclude Include="Punto.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Utente.h" />
     <ClInclude Include="Window_Manager.h" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClCompile Include="Piattaforma.cpp" />
     <ClCompile Include="Platforms.cpp" />
     <ClCompile Include="Punto.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Utente.cpp" />
     <ClCompile Include="Window_Manager.cpp" />
   </ItemGroup>

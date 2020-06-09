@@ -48,6 +48,9 @@
     <ClInclude Include="Utente.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Piattaforma.cpp">
@@ -81,6 +84,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Utente.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

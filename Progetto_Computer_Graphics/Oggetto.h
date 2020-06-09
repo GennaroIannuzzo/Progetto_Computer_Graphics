@@ -1,6 +1,7 @@
 #pragma once
-#include "Punto.h"
 #include <iostream>
+#include "Punto.h"
+#include "SoundManager.h"
 
 class Oggetto
 {
