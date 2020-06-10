@@ -3,8 +3,8 @@
 Ostacolo::Ostacolo() 
 {
 	this->R = 0.0;
-	this->G = 255.0;
-	this->B = 255.0;
+	this->G = 0.0;
+	this->B = 0.0;
 	this->dim = 2.0;
 }
 

@@ -93,12 +93,9 @@ void drawScene(void)
     glutSwapBuffers();
 }
 
-
 // Main routine.
 int main(int argc, char** argv)
 {
-    // ISoundEngine* engine = createIrrKlangDevice();
-    // engine->play2D("sound/getout.ogg", true);
 
     SoundManager::getInstance()->gameMusic();
 
