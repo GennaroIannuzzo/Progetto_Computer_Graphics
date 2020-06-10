@@ -100,12 +100,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\linod\source\repos\Progetto_Computer_Graphics\Progetto_Computer_Graphics\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\genna\source\Computer_Graphics\Progetto_Computer_Graphics\Progetto_Computer_Graphics\include;C:\Users\linod\source\repos\Progetto_Computer_Graphics\Progetto_Computer_Graphics\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\linod\source\repos\Progetto_Computer_Graphics\Progetto_Computer_Graphics\libAudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\genna\source\Computer_Graphics\Progetto_Computer_Graphics\Progetto_Computer_Graphics\libAudio;C:\Users\linod\source\repos\Progetto_Computer_Graphics\Progetto_Computer_Graphics\libAudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
