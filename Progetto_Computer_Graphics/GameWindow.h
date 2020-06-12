@@ -34,5 +34,5 @@ private:
 
 public:
     
-    static void start(void);
+    static void start(bool sound);
 };

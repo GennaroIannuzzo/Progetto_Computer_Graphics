@@ -43,6 +43,7 @@ float MenuManager::bt3_x2 = bt3_x1 + larghezza_bt_texture;
 
 int MenuManager::window = 0;
 int MenuManager::enable = 0;
+bool MenuManager::sound = true;
 
 void MenuManager::drawMenu(void)
 {
@@ -102,12 +103,16 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
 
                 glutDestroyWindow(window);
 
-                GameWindow::start();
+                GameWindow::start(sound);
 
             }
             if (checkSoundButton(x, y))
             {
-                cout << "tasto volume" << endl;
+                sound = !sound;
+                if (sound == true)
+                    cout << "volume ON " << endl;
+                else
+                    cout << "volume OFF " << endl;
             }
             if (checkOptionButton(x, y))
             {

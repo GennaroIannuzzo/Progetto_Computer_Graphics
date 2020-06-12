@@ -105,7 +105,7 @@ void GameWindow::drawScene(void)
 
 }
 
-void GameWindow::start(void)
+void GameWindow::start(bool sound)
 {
     glutInitContextVersion(4, 3);
     glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
@@ -115,7 +115,8 @@ void GameWindow::start(void)
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Progetto.cpp");
 
-    SoundManager::getInstance()->gameMusic();
+    if(sound)
+        SoundManager::getInstance()->gameMusic();
 
     Utente::getInstance()->setDifficolta(1);
     Pallina::getInstance()->setDifficolta(1);

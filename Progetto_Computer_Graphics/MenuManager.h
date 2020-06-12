@@ -55,6 +55,7 @@ static class MenuManager
 
     static int window;  // finestra da chiudere 
     static int enable;
+    static bool sound;
 
     // Initialization routine.
     static void setup(void);
