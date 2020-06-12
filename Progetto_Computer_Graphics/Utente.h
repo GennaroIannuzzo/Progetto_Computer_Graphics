@@ -37,9 +37,7 @@ public:
 	void incrementaMonete(void);
 
 	void salvaFile(void);
-	void salvaFile(string texture);	// per memorizzare la texture acquistata
 
-	// void drawMonete(float x, float y, float z);
 	void drawVite(float x, float y, float z);
 	
 	int textureAttiva(void); // ritorna quale texture è attualmente attiva

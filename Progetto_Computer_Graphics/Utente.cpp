@@ -84,31 +84,6 @@ void Utente::salvaFile(void)
 	
 }
 
-/*
-void Utente::salvaFile(string texture)
-{
-	// leggo il punteggio massimo e le monete
-	string strMonete, strPunteggioMassimo, strTexture_1, strTexture_2, strTexture_3;
-	ifstream fileRead("file.txt");
-
-	fileRead >> strTexture_1 >> strTexture_2 >> strTexture_3 >> strMonete >> strPunteggioMassimo;
-
-	fileRead.close();
-
-	// scrivo su file i dati per aggiornare la nuova texture
-	ofstream fileWrite("file.txt");
-
-	fileWrite << strTexture_1 << endl;
-	fileWrite << strTexture_2 << endl;
-	fileWrite << strTexture_3 << endl;
-
-	fileWrite << monete << endl;
-	fileWrite << punteggioMassimo;
-
-	fileWrite.close();
-}
-*/
-
 void Utente::setDifficolta(int diff) 
 { 
 	vite = 5 - diff;
@@ -190,7 +165,8 @@ bool Utente::scegliTexture(int texture)
 	if (texture == 1 && texture_1 == 1) 
 	{ 
 		texture_1 = 2; 
-		texture_2 = texture_3 = 1;
+		if (texture_2 == 2) texture_2 = 1;
+		if (texture_3 == 2) texture_3 = 1;
 		salvaFile();
 
 		return true; 
@@ -198,7 +174,8 @@ bool Utente::scegliTexture(int texture)
 	if (texture == 2 && texture_2 == 1) 
 	{ 
 		texture_2 = 2; 
-		texture_1 = texture_3 = 1;
+		if (texture_1 == 2) texture_1 = 1;
+		if (texture_3 == 2) texture_3 = 1;
 		salvaFile(); 
 		
 		return true; 
@@ -206,7 +183,8 @@ bool Utente::scegliTexture(int texture)
 	if (texture == 3 && texture_3 == 1) 
 	{ 
 		texture_3 = 2; 
-		texture_1 = texture_2 = 1;
+		if (texture_1 == 2) texture_1 = 1;
+		if (texture_2 == 2) texture_2 = 1;
 		salvaFile(); 
 		
 		return true; 
