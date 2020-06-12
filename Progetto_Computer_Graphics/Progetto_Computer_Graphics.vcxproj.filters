@@ -51,6 +51,12 @@
     <ClInclude Include="SoundManager.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="MenuManager.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWindow.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Piattaforma.cpp">
@@ -87,6 +93,12 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManager.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWindow.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

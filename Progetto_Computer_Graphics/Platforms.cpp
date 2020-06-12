@@ -32,9 +32,9 @@ vector<Piattaforma>& Platforms::getPlatforms(void) { return platforms; }
 
 Punto Platforms::getLastPoint(void) 
 {
-	Punto app = Punto(lastPoint.getX(), lastPoint.getY(), lastPoint.getZ());
+	Punto app = Punto(lastPoint.getX(), lastPoint.gety(), lastPoint.getZ());
 
-	if (platforms[0].getPosizione().getX() == 0.0 && platforms[0].getPosizione().getY() == 0.0 && platforms[0].getPosizione().getZ() == 0.0)
+	if (platforms[0].getPosizione().getX() == 0.0 && platforms[0].getPosizione().gety() == 0.0 && platforms[0].getPosizione().getZ() == 0.0)
 		return lastPoint;
 	else
 		app = app + platforms[0].getPosizione();
@@ -77,7 +77,7 @@ void Platforms::drawPlatforms(void)
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	glTranslatef(lastPoint.getX(), lastPoint.getY(), lastPoint.getZ());
+	glTranslatef(lastPoint.getX(), lastPoint.gety(), lastPoint.getZ());
 
 	for (auto it = platforms.begin(); it != platforms.end(); ++it)
 	{

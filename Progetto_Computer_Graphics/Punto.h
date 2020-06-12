@@ -21,12 +21,12 @@ public:
 
 	// Getter
 	GLfloat getX();
-	GLfloat getY();
+	GLfloat gety();
 	GLfloat getZ();
 
 	// Setter
 	void setX(GLfloat valx);
-	void setY(GLfloat valy);
+	void sety(GLfloat valy);
 	void setZ(GLfloat valz);
 
 	// Overload Operatori

@@ -6,24 +6,18 @@
 #pragma once
 static class Window_Manager
 {
-private:
+protected:
 
-    static int interval;
+    static void setup(void);
+    static void resize(int w, int h);
+    static void update(int value);
+    static void drawText(float x, float y, float z, int text);
+    static void drawScene(void);
+    
+    // Getter
+    static int& getInterval(void);
 
 public:
 
-    // Initialization routine.
-    static void setup(void);
-
-    // OpenGL window reshape routine.
-    static void resize(int w, int h);
-
-    // Update routine for glutTimerFunc
-    static void update(int value);
-
-    // Update score
-    static void drawText(float x, float y, float z, int text);
-
-    // Getter
-    static int& getInterval(void);
+    static void start(void);
 };

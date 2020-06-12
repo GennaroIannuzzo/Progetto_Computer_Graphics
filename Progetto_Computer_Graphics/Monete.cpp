@@ -26,6 +26,6 @@ void Monete::drawObject(float x, float y, float z)
 {
 	this->dim = 1.0;
 	glTranslatef(x, y, z);
-	glRotatef(45, 0, 1, 0);
+	glRotatef(45, 1, 0, 0);
 	drawObject();
 }

@@ -57,7 +57,7 @@ void Pallina::setTexture(string texture)
 void Pallina::drawObject(void) 
 {
 	glColor3f(R, G, B);
-	glTranslatef(posizione.getX(), posizione.getY(), posizione.getZ());
+	glTranslatef(posizione.getX(), posizione.gety(), posizione.getZ());
 
 	angolo = (angolo + 1) % 360;
 	(movimento == 0) ? glRotatef(-angolo, 1, 0, 0) : glRotatef(-angolo, 0, 0, 1);

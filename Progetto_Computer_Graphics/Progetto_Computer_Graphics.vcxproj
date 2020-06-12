@@ -143,7 +143,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Ball_Manager.h" />
+    <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Keyboard_Manager.h" />
+    <ClInclude Include="MenuManager.h" />
     <ClInclude Include="Monete.h" />
     <ClInclude Include="Oggetto.h" />
     <ClInclude Include="Ostacolo.h" />
@@ -157,7 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ball_Manager.cpp" />
+    <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="Monete.cpp" />
     <ClCompile Include="Oggetto.cpp" />
     <ClCompile Include="Ostacolo.cpp" />

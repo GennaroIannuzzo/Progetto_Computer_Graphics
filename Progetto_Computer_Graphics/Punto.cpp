@@ -12,12 +12,12 @@ Punto::Punto(GLfloat valx, GLfloat valy, GLfloat valz)
 
 // Getter
 GLfloat Punto::getX() { return x; }
-GLfloat Punto::getY() { return y; }
+GLfloat Punto::gety() { return y; }
 GLfloat Punto::getZ() { return z; }
 
 // Setter
 void Punto::setX(GLfloat valx) { x = valx; }
-void Punto::setY(GLfloat valy) { y = valy; }
+void Punto::sety(GLfloat valy) { y = valy; }
 void Punto::setZ(GLfloat valz) { z = valz; }
 
 // Overload Operatori

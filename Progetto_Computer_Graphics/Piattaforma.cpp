@@ -74,13 +74,13 @@ Piattaforma::Piattaforma(Punto valPunto) : Piattaforma()
 void Piattaforma::drawObject(void)
 {
 	glColor3f(R, G, B);
-	glTranslatef(posizione.getX(), posizione.getY(), posizione.getZ());
+	glTranslatef(posizione.getX(), posizione.gety(), posizione.getZ());
 	glutSolidCube(dim);
 	
 	if (tipo < 2)
 	{
 		glPushMatrix();
-			glTranslatef(oggetto->getPosizione().getX(), oggetto->getPosizione().getY(), oggetto->getPosizione().getZ());
+			glTranslatef(oggetto->getPosizione().getX(), oggetto->getPosizione().gety(), oggetto->getPosizione().getZ());
 			oggetto->drawObject();
 		glPopMatrix();
 		
