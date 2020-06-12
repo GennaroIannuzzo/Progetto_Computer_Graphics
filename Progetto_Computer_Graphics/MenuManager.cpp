@@ -128,17 +128,42 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
         {
             if (checkButtonTexture_1(x, y))
             {
-                cout << "acquista texture 1" << endl;
+                if (Utente::getInstance()->textureAttiva() == 1) cout << "la texture 1 è in uso" << endl;
+                else if(Utente::getInstance()->textureComprate(1)) cout << "la texture 1 è già acquistata" << endl;
+                else
+                {
+                    if(Utente::getInstance()->compraTexture(1))
+                        cout << "texture 1 acquistata" << endl;
+                    else
+                        cout << "sei povero! la texture 1 non te la compri!" << endl;
+                }
+
             }
 
             if (checkButtonTexture_2(x, y))
             {
-                cout << "acquista texture 2" << endl;
+                if (Utente::getInstance()->textureAttiva() == 2) cout << "la texture 2 è in uso" << endl;
+                else if (Utente::getInstance()->textureComprate(2)) cout << "la texture 2 è già acquistata" << endl;
+                else
+                {
+                    if (Utente::getInstance()->compraTexture(2))
+                        cout << "texture 2 acquistata" << endl;
+                    else
+                        cout << "sei povero! la texture 2 non te la compri!" << endl;
+                }
             }
 
             if (checkButtonTexture_3(x, y))
             {
-                cout << "acquista texture 3" << endl;
+                if (Utente::getInstance()->textureAttiva() == 3) cout << "la texture 3 è in uso" << endl;
+                else if (Utente::getInstance()->textureComprate(3)) cout << "la texture 3 è già acquistata" << endl;
+                else
+                {
+                    if (Utente::getInstance()->compraTexture(3))
+                        cout << "texture 3 acquistata" << endl;
+                    else
+                        cout << "sei povero! la texture 3 non te la compri!" << endl;
+                }
             }
 
             if (checkOptionButton(x, y))
@@ -148,6 +173,29 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
                 glutDisplayFunc(drawMenu);
 
             }
+        }
+    }
+
+    if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN && enable == 1)
+    {
+        y = height - y;
+
+        if (checkButtonTexture_1(x, y))
+        {
+            if (Utente::getInstance()->textureComprate(1) && Utente::getInstance()->scegliTexture(1))
+                cout << " texture impostata come predefinita" << endl;
+        }
+
+        if (checkButtonTexture_2(x, y))
+        {
+            if (Utente::getInstance()->textureComprate(2) && Utente::getInstance()->scegliTexture(2))
+                cout << " texture impostata come predefinita" << endl;
+        }
+
+        if (checkButtonTexture_3(x, y))
+        {
+            if (Utente::getInstance()->textureComprate(3) && Utente::getInstance()->scegliTexture(3))
+                cout << " texture impostata come predefinita" << endl;
         }
     }
     

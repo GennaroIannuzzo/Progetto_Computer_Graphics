@@ -16,6 +16,9 @@ class Utente
 
 	int monete;
 	int vite;
+	int texture_1;
+	int texture_2;
+	int texture_3;
 
 	// Costruttori
 	Utente();
@@ -38,5 +41,11 @@ public:
 
 	// void drawMonete(float x, float y, float z);
 	void drawVite(float x, float y, float z);
+	
+	int textureAttiva(void); // ritorna quale texture è attualmente attiva
+	bool textureComprate(int texture); // ritorna true se la texture è stata già acquistata
+	bool compraTexture(int texture); // setta come acquistata una texture
+	bool scegliTexture(int texture); // setta come attiva una texture
+
 };
 
