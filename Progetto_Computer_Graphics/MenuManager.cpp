@@ -81,6 +81,8 @@ void MenuManager::drawOption(void)
     glRectf(bt2_x1, bt_y1, bt2_x2, bt_y2);
     
     glRectf(bt3_x1, bt_y1, bt3_x2, bt_y2);
+    
+    glRectf(option_x1, option_y1, option_x2, option_y2);
 
     int monete = Utente::getInstance()->getMonete();
 
@@ -137,6 +139,14 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
             if (checkButtonTexture_3(x, y))
             {
                 cout << "acquista texture 3" << endl;
+            }
+
+            if (checkOptionButton(x, y))
+            {
+                cout << "tasto opzioni" << endl;
+                enable = 0;
+                glutDisplayFunc(drawMenu);
+
             }
         }
     }
