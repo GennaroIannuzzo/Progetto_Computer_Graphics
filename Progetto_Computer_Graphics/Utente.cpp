@@ -36,7 +36,8 @@ int Utente::getVite(void) { return vite; }
 
 void Utente::caricaFile(void)
 {
-	string texturePallina = "textureProva";
+	// string texturePallina = "textureProva";
+	int TexturedaAttivare;
 
 	ifstream file("file.txt");
 	if (file)
@@ -62,7 +63,8 @@ void Utente::caricaFile(void)
 	}
 
 	// apportare le dovute modifiche
-	Pallina::getInstance()->setTexture(texturePallina);
+	TexturedaAttivare = textureAttiva();
+	Pallina::getInstance()->setTexture(TexturedaAttivare);
 
 }
 
@@ -102,11 +104,16 @@ void Utente::eliminaVita(void)
 
 void Utente::drawVite(float x, float y, float z)
 {
-	glColor3f(255.0, 0.0, 255.0);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::RossoTenue);
+	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::Rosso);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Nero);
+
+	// TODO: Ruotare le vite, altrimenti non sono dritte
 	for (int i = 0; i < vite; i++)
 	{
 		glPushMatrix();
-			glTranslatef(x + i*2, y, z);
+			glTranslatef(x + i * 2, y, z + i * 2);
+			glRotatef(-20, 1, 0, 1);
 			glutSolidCube(1.0);
 		glPopMatrix();
 	}
@@ -169,6 +176,8 @@ bool Utente::scegliTexture(int texture)
 		if (texture_3 == 2) texture_3 = 1;
 		salvaFile();
 
+		Pallina::getInstance()->setTexture(textureAttiva());
+
 		return true; 
 	}
 	if (texture == 2 && texture_2 == 1) 
@@ -178,6 +187,8 @@ bool Utente::scegliTexture(int texture)
 		if (texture_3 == 2) texture_3 = 1;
 		salvaFile(); 
 		
+		Pallina::getInstance()->setTexture(textureAttiva());
+
 		return true; 
 	}
 	if (texture == 3 && texture_3 == 1) 
@@ -187,6 +198,8 @@ bool Utente::scegliTexture(int texture)
 		if (texture_2 == 2) texture_2 = 1;
 		salvaFile(); 
 		
+		Pallina::getInstance()->setTexture(textureAttiva());
+
 		return true; 
 	}
 

@@ -1,5 +1,7 @@
 #include "Punto.h"
 #include "Oggetto.h"
+#include "Colors.h"
+#include <vector>
 #include <iostream>
 
 #pragma once
@@ -8,13 +10,17 @@ class Pallina : public Oggetto
 private:
 	
 	static Pallina* instance;
+	
 	// Attributi
 	GLfloat speed;
+	vector<GLuint> ballTextures;
 	int movimento;
 	int difficolta;
 	int punteggio;
 	int angolo;
-		
+	int indiceTexture;
+	GLUquadric* sphere;
+
 	// Costruttori
 	Pallina();
 
@@ -28,6 +34,8 @@ public:
 	void incrementSpeed(void);
 	void moveBall(void);
 	void drawObject(void) override;
-	void setTexture(string texture);
+	void setTexture(int textureAttiva);
 	void setDifficolta(int diff);
+	vector<GLuint>& getBallTextures(void);
+	GLUquadric* getSphere(void);
 };

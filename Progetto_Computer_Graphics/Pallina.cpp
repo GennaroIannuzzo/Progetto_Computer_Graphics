@@ -14,10 +14,14 @@ Pallina::Pallina()
 	posizione = Punto(0.0, 20.0, 0.0);
 	movimento = 0;
 	punteggio = 0;
+	
+	indiceTexture = 0;
 
 	speed = 0.1;
 	difficolta = 1;
 	angolo = 0;
+
+	sphere = gluNewQuadric();
 }
 
 Pallina* Pallina::getInstance()
@@ -49,20 +53,34 @@ void Pallina::moveRight(void) { movimento = 1; }
 
 void Pallina::incrementSpeed(void) { if(speed < 0.4) speed += 0.1; }
 
-void Pallina::setTexture(string texture)
+void Pallina::setTexture(int textureAttiva)
 {
-	cout << "la texture scelta e' " << texture << endl;
+	indiceTexture = textureAttiva;
+	cout << "la texture scelta e' " << textureAttiva << endl;
 }
 
 void Pallina::drawObject(void) 
 {
-	glColor3f(R, G, B);
+	// glColor3f(R, G, B);
 	glTranslatef(posizione.getX(), posizione.gety(), posizione.getZ());
 
 	angolo = (angolo + 1) % 360;
 	(movimento == 0) ? glRotatef(-angolo, 1, 0, 0) : glRotatef(-angolo, 0, 0, 1);
 	
-	//glutSolidSphere(dim, (int)dim*6, (int)dim*6);
-	glutSolidCube(dim);
+	// glutSolidSphere(dim, (int)dim*6, (int)dim*6);
+	// glutSolidCube(dim);
+	glBindTexture(GL_TEXTURE_2D, ballTextures[indiceTexture]);
+
+// MATERIAL SU OGGETTO
+	glMaterialfv(GL_FRONT, GL_AMBIENT,  Colors::GrigioScuro);
+	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::GrigioChiaro);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Bianco);
+	glMaterialf(GL_FRONT, GL_SHININESS, 100.0);
+
+	gluSphere(sphere, 2.0, 32, 16);
 	
 }
+
+vector<GLuint>& Pallina::getBallTextures(void) { return this->ballTextures; }
+
+GLUquadric* Pallina::getSphere(void) { return this->sphere; }
