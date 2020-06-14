@@ -74,8 +74,10 @@ Piattaforma::Piattaforma(Punto valPunto) : Piattaforma()
 void Piattaforma::drawObject(void)
 {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::AzzurroTenue);
-	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::Azzurro);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, Colors::Azzurro);
+	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::Nero);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Bianco);
+	glMaterialf(GL_FRONT, GL_SHININESS, 100.0);
 	
 	glTranslatef(posizione.getX(), posizione.gety(), posizione.getZ());
 	glutSolidCube(dim);

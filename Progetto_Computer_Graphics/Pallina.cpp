@@ -71,7 +71,7 @@ void Pallina::drawObject(void)
 	// glutSolidCube(dim);
 	glBindTexture(GL_TEXTURE_2D, ballTextures[indiceTexture]);
 
-// MATERIAL SU OGGETTO
+	// MATERIAL SU OGGETTO
 	glMaterialfv(GL_FRONT, GL_AMBIENT,  Colors::GrigioScuro);
 	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::GrigioChiaro);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Bianco);

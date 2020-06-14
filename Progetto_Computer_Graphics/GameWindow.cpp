@@ -66,8 +66,6 @@ void GameWindow::initializeTextures(void)
 
     string dirtexture = "Textures/Palla/";
 
-    cout << "Lunghezza vettore -> " << vettore.size() << endl;
-
     string pathnamefile;
 
     for (auto it = vettore.begin(); it != vettore.end(); ++it)
@@ -112,7 +110,6 @@ void GameWindow::setup(void)
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_LIGHT1);
     glEnable(GL_NORMALIZE);
-    glEnable(GL_LIGHTING);
     initializeTextures();
     initializeDrawingObjects();
 }
@@ -130,7 +127,6 @@ void GameWindow::resize(int w, int h)
 
 void GameWindow::update(int value)
 {
-
     Keyboard_Manager::keyboard();
 
     Ball_Manager::ballMovement();
@@ -145,6 +141,7 @@ void GameWindow::drawText(float x, float y, float z, int text)
 {
     glColor3f(0.0, 0.0, 0.0);
     glRasterPos3f(x, y, z);
+
     char sl[20];
     sprintf_s(sl, "%d", text);
 
@@ -175,6 +172,8 @@ void GameWindow::drawScene(void)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    glDisable(GL_LIGHTING);
+
     glLoadIdentity();
 
     gluLookAt(Pallina::getInstance()->getPosizione().getX() - 15.0,
@@ -188,14 +187,6 @@ void GameWindow::drawScene(void)
     int punteggio = Utente::getInstance()->incrementaPunteggio();
     int monete = Utente::getInstance()->getMonete();
     
-    light1_position[0] = Pallina::getInstance()->getPosizione().getX();
-    light1_position[1] = Pallina::getInstance()->getPosizione().gety() + 30;
-    light1_position[2] = Pallina::getInstance()->getPosizione().getZ();
-
-    glPushMatrix();
-    drawLight();
-    glPopMatrix();
-
     GameWindow::drawText(Pallina::getInstance()->getPosizione().getX() + 50,
         Pallina::getInstance()->getPosizione().gety(),
         Pallina::getInstance()->getPosizione().getZ() - 30,
@@ -205,6 +196,24 @@ void GameWindow::drawScene(void)
         Pallina::getInstance()->getPosizione().gety(),
         Pallina::getInstance()->getPosizione().getZ() + 30,
         monete);
+
+    glEnable(GL_LIGHTING);
+
+    light1_position[0] = Pallina::getInstance()->getPosizione().getX();
+    light1_position[1] = Pallina::getInstance()->getPosizione().gety() + 15;
+    light1_position[2] = Pallina::getInstance()->getPosizione().getZ();
+
+    glPointSize(10);
+    glEnable(GL_POINT_SMOOTH);
+    glBegin(GL_POINTS);
+        glColor3fv(Colors::Bianco);
+        glVertex4fv(light1_position);
+    glEnd();
+    glDisable(GL_POINT_SMOOTH);
+
+    glPushMatrix();
+        drawLight();
+    glPopMatrix();
 
     glPushMatrix();
 

@@ -12,7 +12,7 @@ void Ostacolo::drawObject(void)
 {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::Nero);
 	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::Nero);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Bianco);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Nero);
 
 	glutSolidCube(dim);
 }
