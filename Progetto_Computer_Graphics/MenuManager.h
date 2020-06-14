@@ -45,13 +45,15 @@ static class MenuManager
 
     static float bt1_x1;
     static float bt1_x2;
+    static int prezzo_texture_1;
     
     static float bt2_x1;
     static float bt2_x2;
+    static int prezzo_texture_2;
 
     static float bt3_x1;
     static float bt3_x2;
-
+    static int prezzo_texture_3;
 
     static int window;  // finestra da chiudere 
     static int enable;
@@ -68,6 +70,7 @@ static class MenuManager
     static void mouseControl1(int button, int state, int x, int y);
 
     static void drawText(float x, float y, float z, int text, char message[]);
+    static void drawText(float x, float y, float z, char message[]);
 
     static bool checkPlayButton(int x, int y);
     static bool checkSoundButton(int x, int y);
