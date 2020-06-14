@@ -18,7 +18,7 @@ void Ball_Manager::triggerObject(Piattaforma& p)
     // Continua se l'oggetto è stato instanziato
     if (tipo <= 1) 
     {
-        GLfloat bounding_box = p.getOggetto()->getDim() / 2; // Bounding box per l'oggetto        
+        GLfloat bounding_box = (p.getOggetto()->getDim() / 2) + 2; // Bounding box per l'oggetto        
         GLfloat x_ball =  Pallina::getInstance()->getPosizione().getX();
         GLfloat z_ball =  Pallina::getInstance()->getPosizione().getZ();
         GLfloat x_obj = p.getOggetto()->getPosizione().getX();
