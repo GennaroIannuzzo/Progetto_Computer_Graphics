@@ -14,7 +14,18 @@ private:
     static int interval;
     static int window;  // finestra da chiudere 
 
+    // Colore della luce (ponendo tutti i valori ad 1 si ottiene una luce bianca)
+    static GLfloat light1_ambient[];
+    static GLfloat light1_diffuse[];
+    static GLfloat light1_specular[];
+
+    // Posizione della luce
+    static GLfloat light1_position[];
+    static GLfloat spot_direction[];
+
     static Monete* moneta;
+
+    static void drawLight(void);
 
     // Initialization routine.
     static void setup(void);

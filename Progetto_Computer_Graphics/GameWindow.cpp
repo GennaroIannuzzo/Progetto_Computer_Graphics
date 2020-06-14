@@ -3,6 +3,21 @@
 int GameWindow::interval = 1000 / 60;
 Monete* GameWindow::moneta = new Monete();
 
+// Colore della luce (ponendo tutti i valori ad 1 si ottiene una luce bianca)
+GLfloat GameWindow::light1_ambient[] = { 1, 1, 1, 1.0 };
+GLfloat GameWindow::light1_diffuse[] = { 1.0, 1.0, 1.0, 1 };
+GLfloat GameWindow::light1_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+
+// Posizione della luce
+GLfloat GameWindow::light1_position[] = {
+    Pallina::getInstance()->getPosizione().getX(),
+    Pallina::getInstance()->getPosizione().gety() + 2,
+    Pallina::getInstance()->getPosizione().getZ(),
+    1.0
+};
+
+GLfloat GameWindow::spot_direction[] = { 0.0, -1.0, 0.0 };
+
 // Metodo che permette di convertire da string a LPCWSTR (Formato particolare di Windows)
 wstring GameWindow::s2ws(const std::string& s)
 {
@@ -139,12 +154,27 @@ void GameWindow::drawText(float x, float y, float z, int text)
 // Getter
 int& GameWindow::getInterval(void) { return interval; }
 
+void GameWindow::drawLight(void)
+{
+    // Luce
+    glLightfv(GL_LIGHT1, GL_AMBIENT,  light1_ambient);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE,  light1_diffuse);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light1_specular);
+    glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
+
+    glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 90.0);
+    glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0.5);
+    // glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.5);
+    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
+}                                           
+
 // Drawing routine.
 void GameWindow::drawScene(void)
 {
     srand((unsigned)time(NULL));
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
     glLoadIdentity();
 
     gluLookAt(Pallina::getInstance()->getPosizione().getX() - 15.0,
@@ -157,6 +187,14 @@ void GameWindow::drawScene(void)
 
     int punteggio = Utente::getInstance()->incrementaPunteggio();
     int monete = Utente::getInstance()->getMonete();
+    
+    light1_position[0] = Pallina::getInstance()->getPosizione().getX();
+    light1_position[1] = Pallina::getInstance()->getPosizione().gety() + 30;
+    light1_position[2] = Pallina::getInstance()->getPosizione().getZ();
+
+    glPushMatrix();
+    drawLight();
+    glPopMatrix();
 
     GameWindow::drawText(Pallina::getInstance()->getPosizione().getX() + 50,
         Pallina::getInstance()->getPosizione().gety(),
