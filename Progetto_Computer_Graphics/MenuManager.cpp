@@ -45,6 +45,12 @@ int MenuManager::window = 0;
 int MenuManager::enable = 0;
 bool MenuManager::sound = true;
 
+int MenuManager::prezzo_texture_1 = 10;
+int MenuManager::prezzo_texture_2 = 20;
+int MenuManager::prezzo_texture_3 = 30;
+
+int MenuManager::acquistata = 0;
+
 void MenuManager::drawMenu(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -87,6 +93,23 @@ void MenuManager::drawOption(void)
     int monete = Utente::getInstance()->getMonete();
 
     drawText(width / 2, height - 80, 0, monete, (char*)"Monete");
+
+    drawText(bt1_x1, bt_y1 - 25, 0, (char*)"Pallina di fuoco");
+    if (!Utente::getInstance()->textureComprate(1) && Utente::getInstance()->textureAttiva() != 1)
+        drawText(bt1_x1, bt_y1 - 60, 0, prezzo_texture_1, (char*)"Costo:");
+
+    drawText(bt2_x1, bt_y1 - 25, 0, (char*)"Pallina di figa");
+    if (!Utente::getInstance()->textureComprate(2) && Utente::getInstance()->textureAttiva()!=2)
+        drawText(bt2_x1, bt_y1 - 60, 0, prezzo_texture_2, (char*)"Costo:");
+
+    drawText(bt3_x1, bt_y1 - 25, 0, (char*)"Pallina di pussy");
+    if (!Utente::getInstance()->textureComprate(3) && Utente::getInstance()->textureAttiva() != 3)
+        drawText(bt3_x1, bt_y1 - 60, 0, prezzo_texture_3, (char*)"Costo:");
+
+    if (acquistata == 1)
+        drawText(width / 2 - 20, 200, 0, (char*)"Texture acquistata!");
+    else if (acquistata == 2)
+        drawText(width / 2 - 20, 200, 0, (char*)"Spiacenti, texture troppo cara");
  
     glutSwapBuffers();
 }
@@ -128,6 +151,7 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
         {
             if (checkButtonTexture_1(x, y))
             {
+                /*
                 if (Utente::getInstance()->textureAttiva() == 1) cout << "la texture 1 è in uso" << endl;
                 else if(Utente::getInstance()->textureComprate(1)) cout << "la texture 1 è già acquistata" << endl;
                 else
@@ -137,11 +161,19 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
                     else
                         cout << "sei povero! la texture 1 non te la compri!" << endl;
                 }
-
+                */
+                if (!Utente::getInstance()->textureComprate(1) && Utente::getInstance()->textureAttiva() != 1)
+                    if (Utente::getInstance()->compraTexture(1))
+                        // drawText(width / 2 - 20, 200, 0, (char*)"Texture acquistata!");
+                        acquistata = 1;
+                    else
+                        // drawText(width / 2 - 20, 200, 0, (char*)"Spiacenti, texture troppo cara");
+                        acquistata = 2;
             }
 
             if (checkButtonTexture_2(x, y))
             {
+                /*
                 if (Utente::getInstance()->textureAttiva() == 2) cout << "la texture 2 è in uso" << endl;
                 else if (Utente::getInstance()->textureComprate(2)) cout << "la texture 2 è già acquistata" << endl;
                 else
@@ -151,10 +183,14 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
                     else
                         cout << "sei povero! la texture 2 non te la compri!" << endl;
                 }
+                */
+                if (!Utente::getInstance()->textureComprate(2) && Utente::getInstance()->textureAttiva() != 2)
+                    (Utente::getInstance()->compraTexture(1)) ? acquistata = 1 : acquistata = 2;
             }
 
             if (checkButtonTexture_3(x, y))
             {
+                /*
                 if (Utente::getInstance()->textureAttiva() == 3) cout << "la texture 3 è in uso" << endl;
                 else if (Utente::getInstance()->textureComprate(3)) cout << "la texture 3 è già acquistata" << endl;
                 else
@@ -164,12 +200,16 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
                     else
                         cout << "sei povero! la texture 3 non te la compri!" << endl;
                 }
+                */
+                if (!Utente::getInstance()->textureComprate(3) && Utente::getInstance()->textureAttiva() != 3)
+                    (Utente::getInstance()->compraTexture(1)) ? acquistata = 1 : acquistata = 2;
             }
 
             if (checkOptionButton(x, y))
             {
                 cout << "tasto opzioni" << endl;
                 enable = 0;
+                acquistata = 0;
                 glutDisplayFunc(drawMenu);
 
             }
@@ -205,9 +245,22 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
 void MenuManager::drawText(float x, float y, float z, int text, char message[])
 {
     glColor3f(0.0, 0.0, 0.0);
+
     glRasterPos3f(x, y, z);
     char sl[20];
     sprintf_s(sl, " %s %d", message, text);
+
+    glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
+}
+
+void MenuManager::drawText(float x, float y, float z, char message[])
+{
+    glColor3f(0.0, 0.0, 0.0);
+    glRasterPos3f(x, y, z);
+    char sl[200];
+    sprintf_s(sl, " %s ", message);
+    cout << message << endl;
+    cout << x <<"  "<<y<<"  "<<z<<endl;
 
     glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
 }
