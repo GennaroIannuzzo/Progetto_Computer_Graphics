@@ -110,6 +110,8 @@ void MenuManager::drawOption(void)
         drawText(width / 2 - 20, 200, 0, (char*)"Texture acquistata!");
     else if (acquistata == 2)
         drawText(width / 2 - 20, 200, 0, (char*)"Spiacenti, texture troppo cara");
+    else if(acquistata == 3)
+        drawText(width / 2 - 20, 200, 0, (char*)"Texture impostata");
  
     glutSwapBuffers();
 }
@@ -185,7 +187,7 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
                 }
                 */
                 if (!Utente::getInstance()->textureComprate(2) && Utente::getInstance()->textureAttiva() != 2)
-                    (Utente::getInstance()->compraTexture(1)) ? acquistata = 1 : acquistata = 2;
+                    (Utente::getInstance()->compraTexture(2)) ? acquistata = 1 : acquistata = 2;
             }
 
             if (checkButtonTexture_3(x, y))
@@ -202,7 +204,7 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
                 }
                 */
                 if (!Utente::getInstance()->textureComprate(3) && Utente::getInstance()->textureAttiva() != 3)
-                    (Utente::getInstance()->compraTexture(1)) ? acquistata = 1 : acquistata = 2;
+                    (Utente::getInstance()->compraTexture(3)) ? acquistata = 1 : acquistata = 2;
             }
 
             if (checkOptionButton(x, y))
@@ -223,19 +225,22 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
         if (checkButtonTexture_1(x, y))
         {
             if (Utente::getInstance()->textureComprate(1) && Utente::getInstance()->scegliTexture(1))
-                cout << " texture impostata come predefinita" << endl;
+                // cout << " texture impostata come predefinita" << endl;
+                acquistata = 3;
         }
 
         if (checkButtonTexture_2(x, y))
         {
             if (Utente::getInstance()->textureComprate(2) && Utente::getInstance()->scegliTexture(2))
-                cout << " texture impostata come predefinita" << endl;
+                // cout << " texture impostata come predefinita" << endl;
+                acquistata = 3;
         }
 
         if (checkButtonTexture_3(x, y))
         {
             if (Utente::getInstance()->textureComprate(3) && Utente::getInstance()->scegliTexture(3))
-                cout << " texture impostata come predefinita" << endl;
+                // cout << " texture impostata come predefinita" << endl;
+                acquistata = 3;
         }
     }
     
@@ -259,9 +264,7 @@ void MenuManager::drawText(float x, float y, float z, char message[])
     glRasterPos3f(x, y, z);
     char sl[200];
     sprintf_s(sl, " %s ", message);
-    cout << message << endl;
-    cout << x <<"  "<<y<<"  "<<z<<endl;
-
+    
     glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
 }
 
