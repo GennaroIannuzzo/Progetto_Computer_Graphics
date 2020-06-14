@@ -59,6 +59,8 @@ static class MenuManager
     static int enable;
     static bool sound;
 
+    static int acquistata;
+
     // Initialization routine.
     static void setup(void);
 
