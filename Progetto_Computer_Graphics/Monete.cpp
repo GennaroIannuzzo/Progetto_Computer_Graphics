@@ -8,7 +8,7 @@ Monete::Monete()
 	this->R = 255.0;
 	this->G = 255.0;
 	this->B = 0.0;
-	this->dim = 2.0;
+	this->dim = 1.0;
 	this->angolo = 0;
 };
 
@@ -24,8 +24,7 @@ void Monete::drawObject(void)
 	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::GialloOcra);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Nero);
 
-	gluDisk(disk, 0, 1.0, 20.0, 20.0);
-	// glutSolidCube(dim);
+	gluDisk(disk, 0, dim, 20.0, 20.0);
 }
 
 void Monete::Trigger(void)
@@ -35,7 +34,6 @@ void Monete::Trigger(void)
 
 void Monete::drawObject(float x, float y, float z)
 {
-	this->dim = 1.0;
 	glTranslatef(x, y, z);
 	glRotatef(45, 1, 0, 0);
 	drawObject();

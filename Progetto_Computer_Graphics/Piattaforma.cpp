@@ -55,6 +55,7 @@ Piattaforma::Piattaforma()
 	case 1:
 		oggetto = new Ostacolo();
 		calcolaPosizione(x, y, z);
+		y -= 3;
 		oggetto->setPosizione(Punto(x, y, z));
 		break;
 

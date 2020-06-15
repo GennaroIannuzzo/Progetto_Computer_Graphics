@@ -203,14 +203,6 @@ void GameWindow::drawScene(void)
     light1_position[1] = Pallina::getInstance()->getPosizione().gety() + 15;
     light1_position[2] = Pallina::getInstance()->getPosizione().getZ();
 
-    glPointSize(10);
-    glEnable(GL_POINT_SMOOTH);
-    glBegin(GL_POINTS);
-        glColor3fv(Colors::Bianco);
-        glVertex4fv(light1_position);
-    glEnd();
-    glDisable(GL_POINT_SMOOTH);
-
     glPushMatrix();
         drawLight();
     glPopMatrix();
@@ -221,6 +213,9 @@ void GameWindow::drawScene(void)
     moneta->drawObject(Pallina::getInstance()->getPosizione().getX() - 7,
         Pallina::getInstance()->getPosizione().gety(),
         Pallina::getInstance()->getPosizione().getZ() + 30);
+
+    // glRotatef(45, 1.0, 0.0, 0.0);
+    // glRotatef(45, 0.0, 0.0, 1.0);
 
     glPopMatrix();
 
