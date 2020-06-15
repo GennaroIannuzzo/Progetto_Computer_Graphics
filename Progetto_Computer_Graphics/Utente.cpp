@@ -2,7 +2,9 @@
 
 Utente* Utente::instance = 0;
 
-
+/*
+	implementazione del pattern Singleton
+*/
 Utente* Utente::getInstance()
 {
 	if (instance == 0)
@@ -11,14 +13,23 @@ Utente* Utente::getInstance()
 	return instance;
 }
 
+/* 
+	costruttore: setta il parametro punteggio e carica dal file i dati per la dashboard
+*/
 Utente::Utente() 
 { 
 	punteggio = 0.0;  
+	prezzo_texture_1 = 10;
+	prezzo_texture_2 = 20;
+	prezzo_texture_3 = 30;
 	
 	caricaFile();
 	
 }
 
+/*
+	incrementaPunteggio: metodo utile per incrementare il punteggio durante il gioco e per settare in caso affermativo il nuovo high score.
+*/
 float Utente::incrementaPunteggio(void) 
 { 
 	punteggio += 0.1;
@@ -29,14 +40,14 @@ float Utente::incrementaPunteggio(void)
 	return (int)punteggio; 
 }
 
-float Utente::getPunteggioMassimo(void) { return punteggioMassimo; }
-
-int Utente::getMonete(void) { return monete; }
-int Utente::getVite(void) { return vite; }
-
+/*
+	caricaFile: metodo utile per caricare dal file i dati da mostrare all'utente.
+				I dati comprendono: punteggio massimo, monete e stato delle texture: 0 se da acquistare, 1 se acquistata 2 se in uso.
+				La texture in uso è passata alla pallina per poter essere applicata.
+				In caso di errore ritorna il codice 19.
+*/
 void Utente::caricaFile(void)
-{
-	// string texturePallina = "textureProva";
+{	
 	int TexturedaAttivare;
 
 	ifstream file("file.txt");
@@ -61,18 +72,18 @@ void Utente::caricaFile(void)
 		cout << "file inesistente" << endl;
 		exit(19);
 	}
-
-	// apportare le dovute modifiche
+	
 	TexturedaAttivare = textureAttiva();
 	Pallina::getInstance()->setTexture(TexturedaAttivare);
 
 }
 
-void Utente::incrementaMonete(void) { monete++; }
+/*
+	salvaFile: metodo utile per memorizzare i dati attuali su file
+*/
 
 void Utente::salvaFile(void)
-{
-	// scrivo su file i dati del punteggio
+{	
 	ofstream fileWrite("file.txt");
 	
 	fileWrite << texture_1 << endl;
@@ -86,12 +97,9 @@ void Utente::salvaFile(void)
 	
 }
 
-void Utente::setDifficolta(int diff) 
-{ 
-	vite = 5 - diff;
-	
-}
-
+/*
+	eliminaVita: il metodo decrementa il numero di vite attuali, quando finiscono salva su file i dati e restituisce il codice 69.
+*/
 void Utente::eliminaVita(void)
 {
 	vite--;
@@ -102,6 +110,10 @@ void Utente::eliminaVita(void)
 	}
 }
 
+/*
+	drawVite: il metodo prende come parametri le coordinate dove occorre disenare le vite e le disegna
+			  sotto forma di cubi e applicando dei material.
+*/
 void Utente::drawVite(float x, float y, float z)
 {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::RossoTenue);
@@ -119,6 +131,10 @@ void Utente::drawVite(float x, float y, float z)
 	}
 }
 
+/*
+	textureAttiva: il metodo ritorna il numero della texture attualmente in uso (1, 2 o 3), oppure 0 in caso di errore
+*/
+
 int Utente::textureAttiva(void)
 {
 	if (texture_1 == 2) return 1;
@@ -127,6 +143,11 @@ int Utente::textureAttiva(void)
 	
 	return 0;
 }
+
+/*
+	textureComprate: il metodo prende come parametro il numero della texture che si vuole controllare.
+					 Ritorna true se la texture è già stata acquistata, altrimenti ritorna false
+*/
 
 bool Utente::textureComprate(int texture)
 {
@@ -137,27 +158,33 @@ bool Utente::textureComprate(int texture)
 	return false;
 }
 
+/*
+	compraTexture: data una texture il metodo la acquista se il numero di monete in possesso è sufficiente:
+				   In caso positivo imposta a 1 la flag della texture, salva sul file e ritorna true. 
+				   In caso di errore ritorna false.
+*/
+
 bool Utente::compraTexture(int texture)
 {
-	if (texture == 1 && (monete - 10) >= 0) 
+	if (texture == 1 && (monete - prezzo_texture_1) >= 0) 
 	{ 
-		monete -= 10; 
+		monete -= prezzo_texture_1;
 		texture_1 = 1; 
 		salvaFile();
 		
 		return true; 
 	}
-	if (texture == 2 && (monete - 20) >= 0) 
+	if (texture == 2 && (monete - prezzo_texture_2) >= 0)
 	{ 
-		monete -= 20; 
+		monete -= prezzo_texture_2;
 		texture_2 = 1; 
 		salvaFile(); 
 		
 		return true;
 	}
-	if (texture == 3 && (monete - 30) >= 0) 
+	if (texture == 3 && (monete - prezzo_texture_3) >= 0)
 	{ 
-		monete -= 30; 
+		monete -= prezzo_texture_3;
 		texture_3 = 1; 
 		salvaFile(); 
 		
@@ -167,6 +194,12 @@ bool Utente::compraTexture(int texture)
 	return false;
 }
 
+/*
+	scegliTexture: il metodo prende in input una texture e la imposta come in uso (flag = 2).
+				   Se la texture è già stata acuistata completa l'operazione salvando su file, 
+				   settando la texture precedentemente in uso a acquistata (flag = 1) e ritornando true.
+				   In caso di errore ritorna false.
+*/
 bool Utente::scegliTexture(int texture)
 {
 	if (texture == 1 && texture_1 == 1) 
@@ -204,4 +237,23 @@ bool Utente::scegliTexture(int texture)
 	}
 
 	return false;
+}
+
+/*
+	incrementaMonete: il metodo incrementa il numero di monete disponibili nel gioco.
+*/
+void Utente::incrementaMonete(void) { monete++; }
+
+/*
+	metodi getter
+*/
+float Utente::getPunteggioMassimo(void) { return punteggioMassimo; }
+int Utente::getMonete(void) { return monete; }
+int Utente::getVite(void) { return vite; }
+
+// ##
+void Utente::setDifficolta(int diff)
+{
+	vite = 5 - diff;
+
 }
