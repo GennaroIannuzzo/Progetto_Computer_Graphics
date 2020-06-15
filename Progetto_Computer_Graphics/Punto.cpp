@@ -20,7 +20,7 @@ void Punto::setX(GLfloat valx) { x = valx; }
 void Punto::sety(GLfloat valy) { y = valy; }
 void Punto::setZ(GLfloat valz) { z = valz; }
 
-// Overload Operatori
+// Overload Operatore
 Punto Punto::operator+(const Punto& b) 
 {
 	Punto p;
@@ -32,8 +32,6 @@ Punto Punto::operator+(const Punto& b)
 	return p;
 }
 
-// Metodi
-void Punto::printPoint(void) { cout << "x: " << x << "y: " << y << "z: " << z << endl; }
 
-// Distruttori
+// Distruttore
 Punto::~Punto() {};

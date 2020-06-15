@@ -1,3 +1,7 @@
+/*
+	Classe punto: La classe Punto definisce un dipo di dato derivato 3d con metodi per settare e ritornare le varie coordinate.
+
+*/
 #pragma once
 #include <GL\freeglut.h>
 #include <iostream>
@@ -8,7 +12,6 @@ class Punto
 {
 private:
 
-	// Attributi
 	GLfloat x;
 	GLfloat y;
 	GLfloat z;
@@ -29,11 +32,8 @@ public:
 	void sety(GLfloat valy);
 	void setZ(GLfloat valz);
 
-	// Overload Operatori
+	// Overload Operatore + 
 	Punto operator+(const Punto&);
-
-	// Metodi
-	void printPoint(void);
 
 	// Distruttore
 	~Punto();
