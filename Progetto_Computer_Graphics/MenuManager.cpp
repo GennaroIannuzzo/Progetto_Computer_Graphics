@@ -34,7 +34,7 @@ float MenuManager::sound_y2 = 10 + sound_altezza;
 float MenuManager::sound_y1 = 10;
 
 float MenuManager::option_larghezza = 120;
-float MenuManager::option_altezza = 60;
+float MenuManager::option_altezza = 50;
 float MenuManager::option_x1 = 10;
 float MenuManager::option_x2 = 10 + option_larghezza;
 float MenuManager::option_y2 = 10 + option_altezza;
@@ -98,8 +98,8 @@ void MenuManager::drawMenu(void)
     int highScore = Utente::getInstance()->getPunteggioMassimo();
     int monete = Utente::getInstance()->getMonete();
 
-    drawText(width / 2, height / 2 + 10, 0, highScore, (char*)"High Score: ");
-    drawText(width / 2, (height / 2) - 20, 0, monete, (char*)"Monete: ");
+    drawText(width / 2, height / 2 - 10, 0, highScore, (char*)"High Score:");
+    drawText(width / 2, (height / 2) - 40, 0, monete, (char*)"Monete:");
 
     glutSwapBuffers();
 }
@@ -297,7 +297,7 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
 
 void MenuManager::drawText(float x, float y, float z, int text, char message[])
 {
-    glColor3f(0.0, 0.0, 0.0);
+    glColor3f(0.92, 0.92, 0.51);
 
     char sl[20];
     sprintf_s(sl, " %s %d", message, text);
