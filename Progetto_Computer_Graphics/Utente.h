@@ -1,6 +1,6 @@
 /*
 	classe Utente: contiene le principali funzionalità utili a gestire la dashboard del giocatore.
-	La classe è implementata come Singleton per avere un'unica istanza durante il gioco.
+				   La classe è implementata come Singleton per avere un'unica istanza durante il gioco.
 */
 #include <iostream>
 #include <fstream>
