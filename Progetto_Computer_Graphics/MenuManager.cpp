@@ -10,6 +10,14 @@ GLuint MenuManager::AudioTextureOff = 0;
 GLuint MenuManager::Background = 0;
 GLuint MenuManager::TitleTexture = 0;
 
+/* Shop Textures */
+GLuint MenuManager::BaseTexture = 0;
+GLuint MenuManager::BasketTexture = 0;
+GLuint MenuManager::BasketTexture_Blocked = 0;
+GLuint MenuManager::WorldTexture = 0;
+GLuint MenuManager::WorldTexture_Blocked = 0;
+GLuint MenuManager::back = 0;
+
 float MenuManager::titleLarghezza = 340;
 float MenuManager::titleAltezza = 100;
 float MenuManager::Title_x1 = (width / 2) - (titleLarghezza / 2);
@@ -40,10 +48,11 @@ float MenuManager::option_x2 = 10 + option_larghezza;
 float MenuManager::option_y2 = 10 + option_altezza;
 float MenuManager::option_y1 = 10;
 
-float MenuManager::altezza_bt_texture = 60;
+/* Bottoni Scelta texture */
+float MenuManager::altezza_bt_texture = 150;
 float MenuManager::larghezza_bt_texture = 150;
 
-float MenuManager::bt_y1 = height - altezza_bt_texture * 3;
+float MenuManager::bt_y1 = height - 200;
 float MenuManager::bt_y2 = bt_y1 + altezza_bt_texture;
 
 float MenuManager::bt1_x1 = (width / 3 - larghezza_bt_texture)/1.5;
@@ -98,6 +107,8 @@ void MenuManager::drawMenu(void)
     int highScore = Utente::getInstance()->getPunteggioMassimo();
     int monete = Utente::getInstance()->getMonete();
 
+    glColor3f(0.92, 0.92, 0.51);
+
     drawText(width / 2, height / 2 - 10, 0, highScore, (char*)"High Score:");
     drawText(width / 2, (height / 2) - 40, 0, monete, (char*)"Monete:");
 
@@ -107,41 +118,54 @@ void MenuManager::drawMenu(void)
 void MenuManager::drawOption(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(0.0, 0.0, 0.0);
+    // glColor3f(0.0, 0.0, 0.0);
 
-    glColor3f(0.8, 0.8, 0.8); // No highlight.
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-    glRectf(bt1_x1, bt_y1, bt1_x2, bt_y2);
-
-    glRectf(bt2_x1, bt_y1, bt2_x2, bt_y2);
+    // glColor3f(0.8, 0.8, 0.8); // No highlight.
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     
-    glRectf(bt3_x1, bt_y1, bt3_x2, bt_y2);
-    
-    glRectf(option_x1, option_y1, option_x2, option_y2);
+    if (Utente::getInstance()->textureAttiva() == 1) glRectf(bt1_x1 - 2, bt_y1 - 2, bt1_x2 + 2, bt_y2 + 2);
+    if (Utente::getInstance()->textureAttiva() == 2) glRectf(bt2_x1 - 2, bt_y1 - 2, bt2_x2 + 2, bt_y2 + 2);
+    if (Utente::getInstance()->textureAttiva() == 3) glRectf(bt3_x1 - 2, bt_y1 - 2, bt3_x2 + 2, bt_y2 + 2);
+
+    glBindTexture(GL_TEXTURE_2D, BaseTexture);
+    Rectangle(bt1_x1, bt_y1, bt1_x2, bt_y2);
+
+    glBindTexture(GL_TEXTURE_2D, back);
+    Rectangle(option_x1, option_y1, option_x2, option_y2);
 
     int monete = Utente::getInstance()->getMonete();
 
-    drawText(width / 2, height - 80, 0, monete, (char*)"Monete");
+    glColor3f(0.0, 0.0, 0.0);
+    drawText(width / 2, height - 20, 0, monete, (char*)"Monete:");
 
-    drawText(bt1_x1, bt_y1 - 25, 0, (char*)"Pallina di fuoco");
-    if (!Utente::getInstance()->textureComprate(1) && Utente::getInstance()->textureAttiva() != 1)
-        drawText(bt1_x1, bt_y1 - 60, 0, prezzo_texture_1, (char*)"Costo:");
+    drawText(bt1_x1 + larghezza_bt_texture/2, bt_y1 - 25, 0, (char*)"Pallina Base");
 
-    drawText(bt2_x1, bt_y1 - 25, 0, (char*)"Pallina di figa");
-    if (!Utente::getInstance()->textureComprate(2) && Utente::getInstance()->textureAttiva()!=2)
-        drawText(bt2_x1, bt_y1 - 60, 0, prezzo_texture_2, (char*)"Costo:");
+    drawText(bt2_x1 + larghezza_bt_texture / 2, bt_y1 - 25, 0, (char*)"Pallina Basket");
+    if (!Utente::getInstance()->textureComprate(2) && Utente::getInstance()->textureAttiva() != 2)
+    {
+        glBindTexture(GL_TEXTURE_2D, BasketTexture_Blocked);
+        drawText(bt2_x1 + larghezza_bt_texture / 2, bt_y1 - 50, 0, prezzo_texture_2, (char*)"Costo:");
+    }
+    else glBindTexture(GL_TEXTURE_2D, BasketTexture);
 
-    drawText(bt3_x1, bt_y1 - 25, 0, (char*)"Pallina di pussy");
+    Rectangle(bt2_x1, bt_y1, bt2_x2, bt_y2);
+
+    drawText(bt3_x1 + larghezza_bt_texture / 2, bt_y1 - 25, 0, (char*)"Pallina Mondo");
     if (!Utente::getInstance()->textureComprate(3) && Utente::getInstance()->textureAttiva() != 3)
-        drawText(bt3_x1, bt_y1 - 60, 0, prezzo_texture_3, (char*)"Costo:");
+    {
+        glBindTexture(GL_TEXTURE_2D, WorldTexture_Blocked);
+        drawText(bt3_x1 + larghezza_bt_texture / 2, bt_y1 - 50, 0, prezzo_texture_3, (char*)"Costo:");
+    }
+    else glBindTexture(GL_TEXTURE_2D, WorldTexture);
+
+    Rectangle(bt3_x1, bt_y1, bt3_x2, bt_y2);
 
     if (acquistata == 1)
-        drawText(width / 2 - 20, 200, 0, (char*)"Texture acquistata!");
+        drawText(width / 2, height / 2 - 50, 0, (char*)"Texture acquistata!");
     else if (acquistata == 2)
-        drawText(width / 2 - 20, 200, 0, (char*)"Spiacenti, texture troppo cara");
+        drawText(width / 2, height / 2 - 50, 0, (char*)"Spiacenti, texture troppo cara");
     else if(acquistata == 3)
-        drawText(width / 2 - 20, 200, 0, (char*)"Texture impostata");
+        drawText(width / 2, height / 2 - 50, 0, (char*)"Texture impostata");
  
     glutSwapBuffers();
 }
@@ -297,7 +321,7 @@ void MenuManager::mouseControl1(int button, int state, int x, int y)
 
 void MenuManager::drawText(float x, float y, float z, int text, char message[])
 {
-    glColor3f(0.92, 0.92, 0.51);
+    
 
     char sl[20];
     sprintf_s(sl, " %s %d", message, text);
@@ -312,11 +336,14 @@ void MenuManager::drawText(float x, float y, float z, int text, char message[])
 
 void MenuManager::drawText(float x, float y, float z, char message[])
 {
-    glColor3f(0.0, 0.0, 0.0);
-    glRasterPos3f(x, y, z);
     char sl[200];
     sprintf_s(sl, " %s ", message);
     
+    int widthString = glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
+    x -= widthString / 2;
+
+    glRasterPos3f(x, y, z);
+
     glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
 }
 
@@ -363,6 +390,50 @@ void MenuManager::loadExternalTextures(void)
 
     AudioTextureOff = SOIL_load_OGL_texture(
         "Textures/MenuTexture/AudioOff.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    /* Shop Textures */
+
+    BaseTexture = SOIL_load_OGL_texture(
+        "Textures/ShopTexture/BlackTexture.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    BasketTexture = SOIL_load_OGL_texture(
+        "Textures/ShopTexture/BasketTexture.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    BasketTexture_Blocked = SOIL_load_OGL_texture(
+        "Textures/ShopTexture/BasketTexture_Blocked.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    WorldTexture = SOIL_load_OGL_texture(
+        "Textures/ShopTexture/MondoTexture.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    WorldTexture_Blocked = SOIL_load_OGL_texture(
+        "Textures/ShopTexture/MondoTexture_Blocked.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+    
+    back = SOIL_load_OGL_texture(
+        "Textures/ShopTexture/back.png",
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
@@ -463,5 +534,6 @@ void MenuManager::start(void)
 
     setup();
 
+    // cout << "bt altezza -> " << bt_y1 << endl;
 }
 

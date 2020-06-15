@@ -16,7 +16,13 @@ static class MenuManager
         AudioTextureOn,
         AudioTextureOff,
         Background,
-        TitleTexture;
+        TitleTexture,
+        BaseTexture,
+        BasketTexture,
+        BasketTexture_Blocked,
+        WorldTexture,
+        WorldTexture_Blocked,
+        back;
 
     /* tasto GIOCA */
     static float play_larghezza;
