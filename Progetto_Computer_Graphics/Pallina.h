@@ -1,3 +1,7 @@
+/*
+	classe Pallina:	La classe Singleton disegna la pallina. 
+					La classe eredita dalla classe Oggetto
+*/
 #include "Punto.h"
 #include "Oggetto.h"
 #include "Colors.h"
@@ -21,21 +25,24 @@ private:
 	int indiceTexture;
 	GLUquadric* sphere;
 
-	// Costruttori
+	// Costruttore
 	Pallina();
 
 public:
 
-	// Metodi
 	static Pallina* getInstance();
-
+	
+	// Metodi
+	void moveBall(void); 
 	void moveLeft(void);
 	void moveRight(void);
 	void incrementSpeed(void);
-	void moveBall(void);
+	
+	void setTexture(int textureAttiva); 
+	void setDifficolta(int diff); // ##
+	
 	void drawObject(void) override;
-	void setTexture(int textureAttiva);
-	void setDifficolta(int diff);
+	
 	vector<GLuint>& getBallTextures(void);
 	GLUquadric* getSphere(void);
 };

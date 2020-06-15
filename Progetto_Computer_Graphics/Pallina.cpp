@@ -32,13 +32,37 @@ Pallina* Pallina::getInstance()
 	return instance;
 }
 
+/*
+	drawObject: disegna la pallina applicando texture e material.
+				La rotazione consente di implementare il rotolamento.
+*/
+void Pallina::drawObject(void)
+{
+	glTranslatef(posizione.getX(), posizione.gety(), posizione.getZ());
+
+	angolo = (angolo + 1) % 360;
+	(movimento == 0) ? glRotatef(-angolo, 1, 0, 0) : glRotatef(-angolo, 0, 0, 1);
+
+	glBindTexture(GL_TEXTURE_2D, ballTextures[indiceTexture]);
+
+	// MATERIAL SU OGGETTO
+	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::GrigioScuro);
+	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::GrigioChiaro);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Bianco);
+	glMaterialf(GL_FRONT, GL_SHININESS, 100.0);
+
+	gluSphere(sphere, 2.0, 32, 16);
+
+}
+
+// ##
 void Pallina::setDifficolta(int diff)
 {
 	speed = 0.1;
 	difficolta = diff;
 }
 
-// Metodi
+// Metodi per il movimento della pallina
 void Pallina::moveBall(void)
 {
 	if (movimento == 0)
@@ -51,34 +75,17 @@ void Pallina::moveLeft(void) { movimento = 0; }
 
 void Pallina::moveRight(void) { movimento = 1; }
 
+/*
+	incrementSpeed: aumenta la velocità della palla entro una soglia limite
+*/
 void Pallina::incrementSpeed(void) { if(speed < 0.4) speed += 0.1; }
 
+/*
+	setTexture: imposta la texture alla pallina
+*/
 void Pallina::setTexture(int textureAttiva)
 {
 	indiceTexture = textureAttiva;
-	cout << "la texture scelta e' " << textureAttiva << endl;
-}
-
-void Pallina::drawObject(void) 
-{
-	// glColor3f(R, G, B);
-	glTranslatef(posizione.getX(), posizione.gety(), posizione.getZ());
-
-	angolo = (angolo + 1) % 360;
-	(movimento == 0) ? glRotatef(-angolo, 1, 0, 0) : glRotatef(-angolo, 0, 0, 1);
-	
-	// glutSolidSphere(dim, (int)dim*6, (int)dim*6);
-	// glutSolidCube(dim);
-	glBindTexture(GL_TEXTURE_2D, ballTextures[indiceTexture]);
-
-	// MATERIAL SU OGGETTO
-	glMaterialfv(GL_FRONT, GL_AMBIENT,  Colors::GrigioScuro);
-	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::GrigioChiaro);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Bianco);
-	glMaterialf(GL_FRONT, GL_SHININESS, 100.0);
-
-	gluSphere(sphere, 2.0, 32, 16);
-	
 }
 
 vector<GLuint>& Pallina::getBallTextures(void) { return this->ballTextures; }

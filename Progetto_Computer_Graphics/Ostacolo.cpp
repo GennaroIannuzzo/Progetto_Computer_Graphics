@@ -8,6 +8,9 @@ Ostacolo::Ostacolo()
 	this->dim = 4.0;
 }
 
+/*
+	drawObject: il metodo disegna l'ostacolo come cubo e vi applica il material
+*/
 void Ostacolo::drawObject(void)
 {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::Nero);
@@ -17,6 +20,9 @@ void Ostacolo::drawObject(void)
 	glutSolidCube(dim);
 }
 
+/*
+	Trigger: il metodo decrementa il numero di vite dell'utente e genera un feedback audio
+*/
 void Ostacolo::Trigger(void)
 {
 	cout << "Ho toccato un ostacolo!" << endl;

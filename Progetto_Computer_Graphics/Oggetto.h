@@ -1,7 +1,7 @@
 /*
 	Oggetto: La classe oggetto è una primitiva generica che definisce la struttura e i metodi di base utili alle classi figlie.
 			 I metodi che dovranno essere implementati dalle classi figlie sono drawObject per disegnare l'oggetto custom 
-			 e Trigger per effettuare i controlli del bounding box.
+			 e Trigger per gestire l'evento dovuto alla collisione.
 */
 #pragma once
 #include <iostream>
@@ -31,6 +31,7 @@ public:
 	// metodo di drawing virtual 
 	virtual void drawObject(void) = 0;
 	
+	// evento dell'oggetto. Metodo virtuale
 	virtual void Trigger(void);
 };
 
