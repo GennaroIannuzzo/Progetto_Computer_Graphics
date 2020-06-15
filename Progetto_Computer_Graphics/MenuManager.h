@@ -11,6 +11,13 @@ static class MenuManager
 {
     static GLint width, height;
 
+    static GLuint PlayButtonTexture,
+        ShopButtonTexture,
+        AudioTextureOn,
+        AudioTextureOff,
+        Background,
+        TitleTexture;
+
     /* tasto GIOCA */
     static float play_larghezza;
     static float play_altezza;
@@ -43,6 +50,14 @@ static class MenuManager
     static float bt_y1;
     static float bt_y2;
 
+    /* Titolo */
+    static float titleLarghezza;
+    static float titleAltezza;
+    static float Title_x1;
+    static float Title_x2;
+    static float Title_y1;
+    static float Title_y2;
+
     static float bt1_x1;
     static float bt1_x2;
     static int prezzo_texture_1;
@@ -66,6 +81,9 @@ static class MenuManager
 
     // OpenGL window reshape routine.
     static void resize(int w, int h);
+
+    static void loadExternalTextures(void);
+    static void Rectangle(float x1, float y1, float x2, float y2);
 
     static void drawMenu(void);
     static void drawOption(void);

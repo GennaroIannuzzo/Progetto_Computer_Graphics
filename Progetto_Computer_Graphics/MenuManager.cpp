@@ -3,28 +3,42 @@
 GLint MenuManager::width = 500;
 GLint MenuManager::height = 500;
 
-float MenuManager::play_larghezza = 100;
-float MenuManager::play_altezza = 30;
+GLuint MenuManager::PlayButtonTexture = 0;
+GLuint MenuManager::ShopButtonTexture = 0;
+GLuint MenuManager::AudioTextureOn = 0;
+GLuint MenuManager::AudioTextureOff = 0;
+GLuint MenuManager::Background = 0;
+GLuint MenuManager::TitleTexture = 0;
+
+float MenuManager::titleLarghezza = 340;
+float MenuManager::titleAltezza = 100;
+float MenuManager::Title_x1 = (width / 2) - (titleLarghezza / 2);
+float MenuManager::Title_x2 = (width / 2) + (titleLarghezza / 2);
+float MenuManager::Title_y2 = height - 10;
+float MenuManager::Title_y1 = height - titleAltezza;
+
+float MenuManager::play_larghezza = 250;
+float MenuManager::play_altezza = 60;
 float MenuManager::play_centro_x = width / 2;
 float MenuManager::play_centro_y = height / 2;
 float MenuManager::play_x1 = play_centro_x - play_larghezza / 2;
 float MenuManager::play_x2 = play_centro_x + play_larghezza / 2;
-float MenuManager::play_y1 = play_centro_y - play_altezza / 2;
-float MenuManager::play_y2 = play_centro_y + play_altezza / 2;
+float MenuManager::play_y1 = (play_centro_y - play_altezza / 2) - 90;
+float MenuManager::play_y2 = (play_centro_y + play_altezza / 2) - 90;
 
-float MenuManager::sound_larghezza = 50;
-float MenuManager::sound_altezza = 30;
+float MenuManager::sound_larghezza = 80;
+float MenuManager::sound_altezza = 80;
 float MenuManager::sound_x1 = width - sound_larghezza - 10;
-float MenuManager::sound_x2 = sound_x1 + sound_larghezza;
-float MenuManager::sound_y1 = height - (height - sound_altezza);
-float MenuManager::sound_y2 = sound_y1 + sound_altezza;
+float MenuManager::sound_x2 = width - 10;
+float MenuManager::sound_y2 = 10 + sound_altezza;
+float MenuManager::sound_y1 = 10;
 
-float MenuManager::option_larghezza = 50;
-float MenuManager::option_altezza = 30;
-float MenuManager::option_x1 = width - option_larghezza - 10;
-float MenuManager::option_x2 = sound_x1 + option_larghezza;
-float MenuManager::option_y1 = height - option_altezza * 2;
-float MenuManager::option_y2 = height - option_altezza;
+float MenuManager::option_larghezza = 120;
+float MenuManager::option_altezza = 60;
+float MenuManager::option_x1 = 10;
+float MenuManager::option_x2 = 10 + option_larghezza;
+float MenuManager::option_y2 = 10 + option_altezza;
+float MenuManager::option_y1 = 10;
 
 float MenuManager::altezza_bt_texture = 60;
 float MenuManager::larghezza_bt_texture = 150;
@@ -54,22 +68,38 @@ int MenuManager::acquistata = 0;
 void MenuManager::drawMenu(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(0.0, 0.0, 0.0);
+    // glColor3f(0.0, 0.0, 0.0);
 
-    glColor3f(0.8, 0.8, 0.8); // No highlight.
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    // glColor3f(0.8, 0.8, 0.8); // No highlight.
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    glRectf(play_x1, play_y1, play_x2, play_y2);
+    // glRectf(play_x1, play_y1, play_x2, play_y2);
 
-    glRectf(sound_x1, sound_y1, sound_x2, sound_y2);
+    // glRectf(sound_x1, sound_y1, sound_x2, sound_y2);
 
-    glRectf(option_x1, option_y1, option_x2, option_y2);
+    // glRectf(option_x1, option_y1, option_x2, option_y2);
+
+    glBindTexture(GL_TEXTURE_2D, Background);
+    Rectangle(0.0, 0.0, 500, 500);
+    
+    glBindTexture(GL_TEXTURE_2D, TitleTexture);
+    Rectangle(Title_x1, Title_y1, Title_x2, Title_y2);
+
+    glBindTexture(GL_TEXTURE_2D, PlayButtonTexture);
+    Rectangle(play_x1, play_y1, play_x2, play_y2);
+
+    glBindTexture(GL_TEXTURE_2D, ShopButtonTexture);
+    Rectangle(option_x1, option_y1, option_x2, option_y2);
+
+    if(sound) glBindTexture(GL_TEXTURE_2D, AudioTextureOn);
+    else glBindTexture(GL_TEXTURE_2D, AudioTextureOff);
+    Rectangle(sound_x1, sound_y1, sound_x2, sound_y2);
 
     int highScore = Utente::getInstance()->getPunteggioMassimo();
     int monete = Utente::getInstance()->getMonete();
-    
-    drawText(width / 2, height - 40, 0, highScore, (char*)"High Score");
-    drawText(width / 2, height - 80, 0, monete, (char*)"Monete");
+
+    drawText(width / 2, height / 2 + 10, 0, highScore, (char*)"High Score: ");
+    drawText(width / 2, (height / 2) - 20, 0, monete, (char*)"Monete: ");
 
     glutSwapBuffers();
 }
@@ -114,6 +144,24 @@ void MenuManager::drawOption(void)
         drawText(width / 2 - 20, 200, 0, (char*)"Texture impostata");
  
     glutSwapBuffers();
+}
+
+void MenuManager::Rectangle(float x1, float y1, float x2, float y2)
+/*specifies a side of a cube*/
+{
+    glBegin(GL_POLYGON);
+        glTexCoord2f(0.0, 0.0);
+        glVertex3d(x1, y2, 0.0);
+
+        glTexCoord2f(0.0, 1.0);
+        glVertex3d(x1, y1, 0.0);
+
+        glTexCoord2f(1.0, 1.0);
+        glVertex3d(x2, y1, 0.0);
+
+        glTexCoord2f(1.0, 0.0);
+        glVertex3d(x2, y2, 0.0);
+    glEnd();
 }
 
 void MenuManager::mouseControl1(int button, int state, int x, int y)
@@ -251,9 +299,13 @@ void MenuManager::drawText(float x, float y, float z, int text, char message[])
 {
     glColor3f(0.0, 0.0, 0.0);
 
-    glRasterPos3f(x, y, z);
     char sl[20];
     sprintf_s(sl, " %s %d", message, text);
+
+    int widthString = glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
+    x -= widthString / 2;
+
+    glRasterPos3f(x, y, z);
 
     glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
 }
@@ -268,10 +320,71 @@ void MenuManager::drawText(float x, float y, float z, char message[])
     glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
 }
 
+void MenuManager::loadExternalTextures(void)
+{
+    Background = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+    (
+        "Textures/MenuTexture/ScreenGioco.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    TitleTexture = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+    (
+        "Textures/MenuTexture/ZIGZAG.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    PlayButtonTexture = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+    (
+        "Textures/MenuTexture/PlayGame.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+    
+    ShopButtonTexture = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+    (
+        "Textures/MenuTexture/Shop.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    AudioTextureOn = SOIL_load_OGL_texture(
+        "Textures/MenuTexture/AudioOn.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    AudioTextureOff = SOIL_load_OGL_texture(
+        "Textures/MenuTexture/AudioOff.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+}
+
 void MenuManager::setup(void)
 {
     glClearColor(1.0, 1.0, 1.0, 0.0);
 
+    loadExternalTextures();
+
+    // Specify how texture values combine with current surface color values.
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+    // Turn on OpenGL texturing.
+    glEnable(GL_TEXTURE_2D);
 }
 
 void MenuManager::resize(int w, int h)
