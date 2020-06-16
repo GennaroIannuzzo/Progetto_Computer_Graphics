@@ -9,6 +9,9 @@ using namespace std;
 #pragma once
 static class MenuManager 
 {
+    static HANDLE hThread;
+    static DWORD ThreadID;
+    
     static GLint width, height;
 
     static GLuint PlayButtonTexture,
@@ -105,6 +108,9 @@ static class MenuManager
     static bool checkButtonTexture_1(int x, int y);
     static bool checkButtonTexture_2(int x, int y);
     static bool checkButtonTexture_3(int x, int y);
+
+    static DWORD WINAPI ThreadFun(LPVOID lpParam);
+    static void executeThread(void);
 
 public:
     static void start(void);

@@ -1,5 +1,8 @@
 #include "MenuManager.h"
 
+HANDLE MenuManager::hThread = 0;
+DWORD MenuManager::ThreadID = 0;
+
 GLint MenuManager::width = 500;
 GLint MenuManager::height = 500;
 
@@ -115,6 +118,38 @@ void MenuManager::drawMenu(void)
     glutSwapBuffers();
 }
 
+DWORD WINAPI MenuManager::ThreadFun(LPVOID lpParam)
+{
+    Sleep(1500);
+    acquistata = 0;
+    ThreadID = 0;
+    glutPostRedisplay();
+    return 0;
+}
+
+void MenuManager::executeThread(void)
+{
+    if (ThreadID == 0) {
+        hThread = CreateThread(
+            NULL,
+            0,
+            ThreadFun,
+            NULL,
+            0,
+            &ThreadID
+        );
+
+        if (hThread == NULL)
+            cout << "There was an error thread -> " << GetLastError() << endl;
+
+        cout << "Thread Creation Success" << endl;
+
+        cout << "ThreadID -> " << ThreadID << endl;
+
+        CloseHandle(hThread);
+    }
+}
+
 void MenuManager::drawOption(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -167,6 +202,8 @@ void MenuManager::drawOption(void)
     else if (acquistata == 3)
         drawText(width / 2, height / 2 - 50, 0, (char*)"Texture impostata");
     
+    if (acquistata != 0) executeThread();
+
     glutSwapBuffers();
 }
 
