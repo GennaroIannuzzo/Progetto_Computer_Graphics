@@ -164,9 +164,9 @@ void MenuManager::drawOption(void)
         drawText(width / 2, height / 2 - 50, 0, (char*)"Texture acquistata!");
     else if (acquistata == 2)
         drawText(width / 2, height / 2 - 50, 0, (char*)"Spiacenti, texture troppo cara");
-    else if(acquistata == 3)
+    else if (acquistata == 3)
         drawText(width / 2, height / 2 - 50, 0, (char*)"Texture impostata");
- 
+    
     glutSwapBuffers();
 }
 
