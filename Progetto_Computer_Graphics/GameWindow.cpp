@@ -35,6 +35,7 @@ wstring GameWindow::s2ws(const std::string& s)
 
 void GameWindow::initializeTextures(void)
 {
+    /*
     WIN32_FIND_DATA fd;
     HANDLE hFind;
     LPCWSTR wild_name;
@@ -69,7 +70,7 @@ void GameWindow::initializeTextures(void)
     string dirtexture = "Textures/Palla/";
 
     string pathnamefile;
-    /*
+    
     for (auto it = vettore.begin(); it != vettore.end(); ++it)
     {
         pathnamefile = dirtexture + *it;
@@ -80,13 +81,21 @@ void GameWindow::initializeTextures(void)
             SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT));
     }
     */
+
+    string stringa;
+
+    if (Utente::getInstance()->textureAttiva() == 1) stringa = "0_Black.png";
+    if (Utente::getInstance()->textureAttiva() == 2) stringa = "1_Basket_Ball_Texture.png";
+    if (Utente::getInstance()->textureAttiva() == 3) stringa = "2_World_Map_Texture.png";
+    
+    Pallina::getInstance()->setTexture(stringa);
+
     Monete::setTextureMoneta();
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
 }
 
 void GameWindow::initializeDrawingObjects(void)

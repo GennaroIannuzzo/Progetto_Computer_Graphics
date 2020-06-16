@@ -53,8 +53,6 @@ float Utente::incrementaPunteggio(void)
 */
 void Utente::caricaFile(void)
 {	
-	int TexturedaAttivare;
-
 	ifstream file("file.txt");
 	if (file)
 	{
@@ -77,10 +75,6 @@ void Utente::caricaFile(void)
 		cout << "file inesistente" << endl;
 		exit(19);
 	}
-	
-	TexturedaAttivare = textureAttiva();
-	Pallina::getInstance()->setTexture(TexturedaAttivare);
-
 }
 
 /*
@@ -211,8 +205,6 @@ bool Utente::scegliTexture(int texture)
 		if (texture_3 == 2) texture_3 = 1;
 		salvaFile();
 
-		Pallina::getInstance()->setTexture(textureAttiva());
-
 		return true; 
 	}
 	if (texture == 2 && texture_2 == 1) 
@@ -222,8 +214,6 @@ bool Utente::scegliTexture(int texture)
 		if (texture_3 == 2) texture_3 = 1;
 		salvaFile(); 
 		
-		Pallina::getInstance()->setTexture(textureAttiva());
-
 		return true; 
 	}
 	if (texture == 3 && texture_3 == 1) 
@@ -233,8 +223,6 @@ bool Utente::scegliTexture(int texture)
 		if (texture_2 == 2) texture_2 = 1;
 		salvaFile(); 
 		
-		Pallina::getInstance()->setTexture(textureAttiva());
-
 		return true; 
 	}
 

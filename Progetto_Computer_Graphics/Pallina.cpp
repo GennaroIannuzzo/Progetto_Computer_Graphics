@@ -15,9 +15,7 @@ Pallina::Pallina()
 	posizione = Punto(0.0, 20.0, 0.0);
 	movimento = 0;
 	punteggio = 0;
-	
-	indiceTexture = 0;
-
+	ballTextures = 0;
 	speed = 0.2;
 	difficolta = 1;
 	angolo = 0;
@@ -44,7 +42,7 @@ void Pallina::drawObject(void)
 	angolo = (angolo + 1) % 360;
 	(movimento == 0) ? glRotatef(-angolo, 1, 0, 0) : glRotatef(-angolo, 0, 0, 1);
 
-	// glBindTexture(GL_TEXTURE_2D, ballTextures[indiceTexture - 1]);
+	glBindTexture(GL_TEXTURE_2D, ballTextures);
 
 	// MATERIAL SU OGGETTO
 	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::GrigioScuro);
@@ -84,9 +82,20 @@ void Pallina::incrementSpeed(void) { if(speed < 1.1) speed += 0.1; }
 /*
 	setTexture: imposta la texture alla pallina
 */
-void Pallina::setTexture(int textureAttiva)
+void Pallina::setTexture(string stringa)
 {
-	indiceTexture = textureAttiva;
+	string dirname = "Textures/Palla/";
+
+	dirname = dirname + stringa;
+	
+	cout << dirname << endl;
+
+	ballTextures = SOIL_load_OGL_texture(
+		dirname.c_str(),
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+	);
 }
 
 // vector<GLuint>& Pallina::getBallTextures(void) { return this->ballTextures; }
@@ -96,7 +105,5 @@ GLUquadric* Pallina::getSphere(void) { return this->sphere; }
 void Pallina::resetInstance()
 {
 	delete instance;
-	instance = NULL; 
-
-	
+	instance = NULL;
 }
