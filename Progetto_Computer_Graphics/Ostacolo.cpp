@@ -25,7 +25,6 @@ void Ostacolo::drawObject(void)
 */
 void Ostacolo::Trigger(void)
 {
-	cout << "Ho toccato un ostacolo!" << endl;
 	SoundManager::getInstance()->hurdleMusic();
 	Utente::getInstance()->eliminaVita();
 }

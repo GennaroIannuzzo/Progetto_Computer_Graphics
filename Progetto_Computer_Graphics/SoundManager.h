@@ -23,5 +23,6 @@ public:
 
 	void gameMusic(void);			// musica di gioco
 	void hurdleMusic(void);			// musica quando si tocca un ostacolo
+	void coinMusic(void);			// musica quando si tocca una moneta
 };
 
