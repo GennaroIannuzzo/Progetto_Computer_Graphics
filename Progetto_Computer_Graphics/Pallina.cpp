@@ -43,7 +43,7 @@ void Pallina::drawObject(void)
 	angolo = (angolo + 1) % 360;
 	(movimento == 0) ? glRotatef(-angolo, 1, 0, 0) : glRotatef(-angolo, 0, 0, 1);
 
-	glBindTexture(GL_TEXTURE_2D, ballTextures[indiceTexture]);
+	glBindTexture(GL_TEXTURE_2D, ballTextures[indiceTexture - 1]);
 
 	// MATERIAL SU OGGETTO
 	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::GrigioScuro);
