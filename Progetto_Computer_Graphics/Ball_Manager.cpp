@@ -1,13 +1,15 @@
 #include "Ball_Manager.h"
 
 int Ball_Manager::eseguo = 0;
+int Ball_Manager::limitPlatforms = 2;
 
 void Ball_Manager::incrementaVelocità(void)
 {
-    if (Platforms::getInstance()->getFallenPlatforms() > 2) 
+    if (Platforms::getInstance()->getFallenPlatforms() > limitPlatforms)
     {
         Pallina::getInstance()->incrementSpeed();
         Platforms::getInstance()->setFallenPlatforms(0);
+        limitPlatforms *= 2;
     }
 }
 
@@ -18,7 +20,7 @@ void Ball_Manager::triggerObject(Piattaforma& p)
     // Continua se l'oggetto è stato instanziato
     if (tipo <= 1) 
     {
-        GLfloat bounding_box = (p.getOggetto()->getDim() / 2) + 1; // Bounding box per l'oggetto        
+        GLfloat bounding_box = (p.getOggetto()->getDim() / 2) + 1.5; // Bounding box per l'oggetto        
         GLfloat x_ball =  Pallina::getInstance()->getPosizione().getX();
         GLfloat z_ball =  Pallina::getInstance()->getPosizione().getZ();
         GLfloat x_obj = p.getOggetto()->getPosizione().getX();

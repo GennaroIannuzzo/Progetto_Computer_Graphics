@@ -9,6 +9,7 @@ class Ball_Manager
 private:
 	
 	static int eseguo;
+	static int limitPlatforms;
 
 	static void initialMovement(void); 
 	static void incrementaVelocità(void);

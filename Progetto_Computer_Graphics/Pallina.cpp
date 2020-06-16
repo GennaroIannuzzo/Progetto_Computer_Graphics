@@ -17,7 +17,7 @@ Pallina::Pallina()
 	
 	indiceTexture = 0;
 
-	speed = 0.1;
+	speed = 0.2;
 	difficolta = 1;
 	angolo = 0;
 
@@ -78,7 +78,7 @@ void Pallina::moveRight(void) { movimento = 1; }
 /*
 	incrementSpeed: aumenta la velocità della palla entro una soglia limite
 */
-void Pallina::incrementSpeed(void) { if(speed < 0.4) speed += 0.1; }
+void Pallina::incrementSpeed(void) { if(speed < 1.1) speed += 0.1; }
 
 /*
 	setTexture: imposta la texture alla pallina
