@@ -37,6 +37,5 @@ public:
 	void drawPlatforms(void);
 	void triggerPlatform(void);
 	
-	// Distruttore
-	~Platforms();
+	static void resetInstance(void);
 };

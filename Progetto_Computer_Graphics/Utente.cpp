@@ -1,3 +1,5 @@
+#include "GameWindow.h"
+#include "MenuManager.h"
 #include "Utente.h"
 
 Utente* Utente::instance = 0;
@@ -22,6 +24,9 @@ Utente::Utente()
 	prezzo_texture_1 = 10;
 	prezzo_texture_2 = 20;
 	prezzo_texture_3 = 30;
+
+	gameOver = 0;
+	vite = 4;
 	
 	caricaFile();
 	
@@ -104,10 +109,7 @@ void Utente::eliminaVita(void)
 {
 	vite--;
 	if (vite == 0)
-	{
-		salvaFile();
-		exit(69);
-	}
+		GameOver();
 }
 
 /*
@@ -250,10 +252,24 @@ void Utente::incrementaMonete(void) { monete++; }
 float Utente::getPunteggioMassimo(void) { return punteggioMassimo; }
 int Utente::getMonete(void) { return monete; }
 int Utente::getVite(void) { return vite; }
+int Utente::getGameOver(void) { return gameOver; }
 
-// ##
-void Utente::setDifficolta(int diff)
+void Utente::resetGame(void)
+{ 
+	delete instance;
+	instance = NULL;
+}
+
+void Utente::GameOver(void)
 {
-	vite = 5 - diff;
+	salvaFile();
+	gameOver = 1;
+	SoundManager::getInstance()->resetMusic();
+	glutDestroyWindow(GameWindow::getWindowId());
+	
+	Platforms::resetInstance();
+	Pallina::resetInstance();
 
+	MenuManager::start();
+	
 }

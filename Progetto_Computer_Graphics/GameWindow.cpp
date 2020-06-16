@@ -1,6 +1,8 @@
 #include "GameWindow.h"
 
 int GameWindow::interval = 1000 / 60;
+int GameWindow::window = 0;
+
 Monete* GameWindow::moneta = new Monete();
 
 // Colore della luce (ponendo tutti i valori ad 1 si ottiene una luce bianca)
@@ -67,7 +69,7 @@ void GameWindow::initializeTextures(void)
     string dirtexture = "Textures/Palla/";
 
     string pathnamefile;
-
+    /*
     for (auto it = vettore.begin(); it != vettore.end(); ++it)
     {
         pathnamefile = dirtexture + *it;
@@ -77,7 +79,7 @@ void GameWindow::initializeTextures(void)
             SOIL_CREATE_NEW_ID,
             SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT));
     }
-
+    */
     Monete::setTextureMoneta();
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -111,6 +113,7 @@ void GameWindow::setup(void)
     glEnable(GL_LIGHT1);
     glEnable(GL_NORMALIZE);
     initializeTextures();
+    
     initializeDrawingObjects();
 }
 
@@ -127,14 +130,17 @@ void GameWindow::resize(int w, int h)
 
 void GameWindow::update(int value)
 {
-    Keyboard_Manager::keyboard();
+    if (Utente::getInstance()->getGameOver() == 0)
+    {
+        Keyboard_Manager::keyboard();
 
-    Ball_Manager::ballMovement();
+        Ball_Manager::ballMovement();
 
-    glutTimerFunc(interval, update, 0);
+        glutTimerFunc(interval, update, 0);
 
-    glutPostRedisplay();
-
+        glutPostRedisplay();
+    }
+    
 }
 
 void GameWindow::drawText(float x, float y, float z, int text)
@@ -239,6 +245,8 @@ void GameWindow::drawScene(void)
 
 }
 
+int GameWindow::getWindowId(void) { return window; }
+
 void GameWindow::start(bool sound)
 {
     glutInitContextVersion(4, 3);
@@ -247,12 +255,14 @@ void GameWindow::start(bool sound)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowSize(500, 500);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("Progetto.cpp");
+    window = glutCreateWindow("Progetto.cpp");
+
+    Utente::getInstance()->resetGame();
+    
 
     if(sound)
         SoundManager::getInstance()->gameMusic();
 
-    Utente::getInstance()->setDifficolta(1);
     Pallina::getInstance()->setDifficolta(1);
 
     glutDisplayFunc(drawScene);

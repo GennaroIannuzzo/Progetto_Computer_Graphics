@@ -12,9 +12,9 @@ using namespace irrklang;
 class SoundManager
 {
 	static SoundManager* instance;
-	
+
 	ISoundEngine* engine;
-	
+
 	// costruttore
 	SoundManager();
 
@@ -24,5 +24,7 @@ public:
 	void gameMusic(void);			// musica di gioco
 	void hurdleMusic(void);			// musica quando si tocca un ostacolo
 	void coinMusic(void);			// musica quando si tocca una moneta
+
+	void resetMusic(void);			// reset della musica
 };
 

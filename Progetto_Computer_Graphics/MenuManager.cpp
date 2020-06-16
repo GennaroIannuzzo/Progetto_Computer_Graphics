@@ -515,7 +515,6 @@ bool MenuManager::checkButtonTexture_3(int x, int y)
     return false;
 }
 
-
 void MenuManager::start(void)
 {
     glutInitContextVersion(4, 3);

@@ -91,5 +91,8 @@ void Platforms::drawPlatforms(void)
 	}
 }
 
-// Distruttore
-Platforms::~Platforms() {};
+void Platforms::resetInstance()
+{
+	delete instance;
+	instance = NULL;
+}

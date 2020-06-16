@@ -13,7 +13,7 @@ private:
 
     static int interval;
     static int window;  // finestra da chiudere 
-
+    
     // Colore della luce (ponendo tutti i valori ad 1 si ottiene una luce bianca)
     static GLfloat light1_ambient[];
     static GLfloat light1_diffuse[];
@@ -55,4 +55,7 @@ private:
 public:
     
     static void start(bool sound);
+
+    static int getWindowId(void);
+
 };

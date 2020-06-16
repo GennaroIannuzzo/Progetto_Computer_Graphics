@@ -78,16 +78,14 @@ void Ball_Manager::cadutaPallina(void)
         if ((posx_Pallina) >= (x_Piattaforma_1 - dimDiviso2) &&
             (posx_Pallina) <= (x_Piattaforma_1 + dimDiviso2) &&
             (posz_Pallina) >= (z_Piattaforma_1 - dimDiviso2) &&
-            (posz_Pallina) <= (z_Piattaforma_1 + dimDiviso2)) 
+            (posz_Pallina) <= (z_Piattaforma_1 + dimDiviso2))
         {
 
             Platforms::getInstance()->triggerPlatform();
         }
-        else 
-        { 
-            Utente::getInstance()->salvaFile();
-            exit(69);
-        }
+        else
+            Utente::getInstance()->GameOver();
+        
     }
 
 }

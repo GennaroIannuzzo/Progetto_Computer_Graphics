@@ -5,7 +5,9 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+
 #include "Pallina.h"
+
 
 using namespace std;
 
@@ -19,6 +21,7 @@ class Utente
 
 	int monete;					// monete totali disponibili
 	int vite;					// vite disponibili
+	int gameOver;				// gioco terminato
 	
 	// stato delle texture: 0 se non acquistata, 1 se acquistata, 2 se in uso
 	int texture_1;				
@@ -42,8 +45,9 @@ public:
 	int   getMonete(void);
 	int   getVite(void);
 	float getPunteggioMassimo(void);
+	int   getGameOver(void);
 
-	void  setDifficolta(int diff);	// ##
+	void  resetGame(void);
 
 	void  eliminaVita(void);			// metodo per eliminare una vita
 
@@ -57,8 +61,11 @@ public:
 	bool  textureComprate(int texture); // ritorna true se la texture è stata già acquistata
 	bool  compraTexture(int texture);	// setta come acquistata una texture
 	bool  scegliTexture(int texture);	// setta come attiva una texture
+	void  GameOver(void);				// metodo per uscire dal gioco
 
 	void  drawVite(float x, float y, float z);	// metodo per disegnare le vite 
+
+	
 
 };
 

@@ -109,7 +109,5 @@ static class MenuManager
 public:
     static void start(void);
 
-    
-
 };
 
