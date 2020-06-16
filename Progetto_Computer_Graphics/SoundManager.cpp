@@ -18,9 +18,14 @@ SoundManager* SoundManager::getInstance()
 /*
 	gameMusic: play musica di sottofondo con ripetizione continua
 */
-void SoundManager::gameMusic(void) { engine->play2D("sound/getout6db.wav", true); }
+void SoundManager::gameMusic(void) { engine->play2D("sound/bipwave.wav", true); }
 
 /*
 	hurdleMusic: play musica collisione con ostacolo senza ripetizione continua
 */
 void SoundManager::hurdleMusic(void) { engine->play2D("sound/solid.wav", false); }
+
+/*
+	coinMusic: play musica collisione con moneta senza ripetizione continua
+*/
+void SoundManager::coinMusic(void) { engine->play2D("sound/coin.wav", false); }

@@ -45,6 +45,7 @@ void Monete::drawObject(float x, float y, float z)
 */
 void Monete::Trigger(void)
 {
+	SoundManager::getInstance()->coinMusic();
 	Utente::getInstance()->incrementaMonete();
 }
 
