@@ -1,15 +1,13 @@
 #include "Ball_Manager.h"
 
 int Ball_Manager::eseguo = 0;
-int Ball_Manager::limitPlatforms = 2;
 
 void Ball_Manager::incrementaVelocità(void)
 {
-    if (Platforms::getInstance()->getFallenPlatforms() > limitPlatforms)
+    if (Platforms::getInstance()->getFallenPlatforms())
     {
         Pallina::getInstance()->incrementSpeed();
         Platforms::getInstance()->setFallenPlatforms(0);
-        limitPlatforms *= 2;
     }
 }
 

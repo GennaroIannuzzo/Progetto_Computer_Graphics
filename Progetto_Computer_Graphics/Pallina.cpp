@@ -39,7 +39,7 @@ void Pallina::drawObject(void)
 {
 	glTranslatef(posizione.getX(), posizione.gety(), posizione.getZ());
 
-	angolo = (angolo + 1) % 360;
+	angolo = (angolo + (int)(speed * 10)) % 360;
 	(movimento == 0) ? glRotatef(-angolo, 1, 0, 0) : glRotatef(-angolo, 0, 0, 1);
 
 	glBindTexture(GL_TEXTURE_2D, ballTextures);
@@ -88,8 +88,6 @@ void Pallina::setTexture(string stringa)
 
 	dirname = dirname + stringa;
 	
-	cout << dirname << endl;
-
 	ballTextures = SOIL_load_OGL_texture(
 		dirname.c_str(),
 		SOIL_LOAD_AUTO,
@@ -97,8 +95,6 @@ void Pallina::setTexture(string stringa)
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
 	);
 }
-
-// vector<GLuint>& Pallina::getBallTextures(void) { return this->ballTextures; }
 
 GLUquadric* Pallina::getSphere(void) { return this->sphere; }
 

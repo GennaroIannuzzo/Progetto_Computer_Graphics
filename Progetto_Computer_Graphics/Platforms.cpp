@@ -10,6 +10,7 @@ Platforms::Platforms()
 	// Attributi
 	lastPoint = Punto(0.0, 0.0, 0.0);
 	fallenPlatforms = 0;
+	limitPlatforms = 2;
 
 	platforms.push_back(Piattaforma(Punto(0.0, 0.0, 0.0)));
 	srand((unsigned)time(NULL));
@@ -42,9 +43,15 @@ Punto Platforms::getLastPoint(void)
 	return app;
 }
 
-GLint Platforms::getFallenPlatforms(void) 
+bool Platforms::getFallenPlatforms(void) 
 {
-	return fallenPlatforms;
+	if (fallenPlatforms > limitPlatforms)
+	{
+		cout << limitPlatforms << endl;
+		limitPlatforms *= 2;
+		return true;
+	}
+	return false;
 }
 
 // Setter

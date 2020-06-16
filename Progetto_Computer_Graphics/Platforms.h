@@ -19,7 +19,8 @@ private:
 	vector<Piattaforma> platforms;
 	Punto lastPoint;
 	GLint fallenPlatforms;
-	
+	int limitPlatforms;
+
 	void generaNuovaPiattaforma(void);
 
 public:
@@ -28,7 +29,7 @@ public:
 	static Platforms* getInstance();
 	vector<Piattaforma>& getPlatforms(void);
 	Punto getLastPoint(void);
-	GLint getFallenPlatforms(void);
+	bool getFallenPlatforms(void);
 	
 	// Setter
 	void setFallenPlatforms(GLint);
