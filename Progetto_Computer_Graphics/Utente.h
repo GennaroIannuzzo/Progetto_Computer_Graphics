@@ -1,6 +1,6 @@
 /*
-	classe Utente: contiene le principali funzionalità utili a gestire la dashboard del giocatore.
-				   La classe è implementata come Singleton per avere un'unica istanza durante il gioco.
+ *	classe Utente: contiene le principali funzionalità utili a gestire la dashboard del giocatore.
+ *		La classe è implementata come Singleton per avere un'unica istanza durante il gioco.
 */
 #include <iostream>
 #include <fstream>
@@ -64,8 +64,5 @@ public:
 	void  GameOver(void);				// metodo per uscire dal gioco
 
 	void  drawVite(float x, float y, float z);	// metodo per disegnare le vite 
-
-	
-
 };
 

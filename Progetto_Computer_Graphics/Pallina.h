@@ -1,8 +1,4 @@
-/*
-	classe Pallina:	La classe Singleton disegna la pallina. 
-					La classe eredita dalla classe Oggetto
-*/
-
+/*	classe Pallina:	La classe Singleton disegna la pallina La classe eredita dalla classe Oggetto */
 #include <vector>
 #include <iostream>
 #include "Punto.h"
@@ -39,12 +35,10 @@ public:
 	void moveRight(void);
 	void incrementSpeed(void);
 	
-	void setTexture(string stringa); 
-	void setDifficolta(int diff); // ##
+	void setTexture(string stringa);
 	
 	void drawObject(void) override;
-	
-	// vector<GLuint>& getBallTextures(void);
+
 	GLUquadric* getSphere(void);
 
 	static void resetInstance(void);

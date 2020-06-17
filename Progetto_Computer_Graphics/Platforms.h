@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include <vector>
 #include <time.h>
@@ -6,6 +5,8 @@
 
 using namespace std;
 
+#pragma once
+/* Classe per gestire le piattaforme nel gioco */
 class Platforms
 {
 private:

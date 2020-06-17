@@ -7,13 +7,17 @@
 using namespace std;
 
 #pragma once
+/* Classe per la gestione della finestra principale e dello shop */
 static class MenuManager 
 {
+    /* Thread */
     static HANDLE hThread;
     static DWORD ThreadID;
     
+    /* Altezza e Larghezza della finestra */
     static GLint width, height;
 
+    /* Texture */
     static GLuint PlayButtonTexture,
         ShopButtonTexture,
         AudioTextureOn,
@@ -27,7 +31,7 @@ static class MenuManager
         WorldTexture_Blocked,
         back;
 
-    /* tasto GIOCA */
+    /* Tasto GIOCA */
     static float play_larghezza;
     static float play_altezza;
     static float play_centro_x;
@@ -37,7 +41,7 @@ static class MenuManager
     static float play_y1;
     static float play_y2;
 
-    /* tasto disattiva Audio */
+    /* Tasto disattiva Audio */
     static float sound_larghezza;
     static float sound_altezza;
     static float sound_x1;
@@ -45,7 +49,7 @@ static class MenuManager
     static float sound_y1;
     static float sound_y2;
 
-    /* tasto opzioni */
+    /* Tasto opzioni */
     static float option_larghezza;
     static float option_altezza;
     static float option_x1;
@@ -53,7 +57,7 @@ static class MenuManager
     static float option_y1;
     static float option_y2;
 
-    /* bottoni per attivazione texture*/
+    /* Bottoni per attivazione texture*/
     static float larghezza_bt_texture;
     static float altezza_bt_texture;
     static float bt_y1;
@@ -67,22 +71,31 @@ static class MenuManager
     static float Title_y1;
     static float Title_y2;
 
+    /* Opzione 1 (Texture) */
     static float bt1_x1;
     static float bt1_x2;
     static int prezzo_texture_1;
     
+    /* Opzione 2 (Texture) */
     static float bt2_x1;
     static float bt2_x2;
     static int prezzo_texture_2;
 
+    /* Opzione 3 (Texture) */
     static float bt3_x1;
     static float bt3_x2;
     static int prezzo_texture_3;
 
-    static int window;  // finestra da chiudere 
+    /* Finestra da chiudere */
+    static int window;
+    
+    /* Finestra di disegno da disegnare */
     static int enable;
+    
+    /* Attivazione del suono */
     static bool sound;
 
+    /* Texture Acquistata */
     static int acquistata;
 
     // Initialization routine.

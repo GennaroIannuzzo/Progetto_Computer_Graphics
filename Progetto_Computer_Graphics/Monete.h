@@ -1,8 +1,7 @@
-/*
-	classe Monete: La classe eredita dalla classe Oggetto. 
-				   La classe ha il compito di disegnare le monete nel gioco e 
-				   digestire l'evento con la collisione.
-*/
+/*	classe Monete: La classe eredita dalla classe Oggetto. 
+ *		La classe ha il compito di disegnare le monete nel gioco e 
+ *		digestire l'evento con la collisione.
+ */
 #pragma once
 #include "Oggetto.h"
 #include "Utente.h"

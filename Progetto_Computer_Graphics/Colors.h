@@ -1,9 +1,9 @@
-#pragma once
-
 #include <GL/glut.h> 
 #include <GL/freeglut.h>
 #include <iostream>
 
+#pragma once
+/*	Classe che contiene i colori dei material. */
 class Colors
 {
 public:

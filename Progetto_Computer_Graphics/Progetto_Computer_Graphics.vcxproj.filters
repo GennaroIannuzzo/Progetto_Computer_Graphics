@@ -30,9 +30,6 @@
     <ClInclude Include="Keyboard_Manager.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="Window_Manager.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
     <ClInclude Include="Ball_Manager.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
@@ -75,9 +72,6 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Pallina.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
-    <ClCompile Include="Window_Manager.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Ball_Manager.cpp">

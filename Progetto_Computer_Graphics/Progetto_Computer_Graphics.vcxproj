@@ -157,7 +157,6 @@
     <ClInclude Include="Punto.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Utente.h" />
-    <ClInclude Include="Window_Manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ball_Manager.cpp" />
@@ -174,7 +173,6 @@
     <ClCompile Include="Punto.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Utente.cpp" />
-    <ClCompile Include="Window_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

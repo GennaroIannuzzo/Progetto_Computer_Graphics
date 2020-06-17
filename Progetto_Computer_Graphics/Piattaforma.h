@@ -1,13 +1,15 @@
-#pragma once
 #include "Oggetto.h"
 #include "Monete.h"
 #include "Ostacolo.h"
 #include <iostream>
 #include <cstdlib>
 
-class Piattaforma : public Oggetto 
+#pragma once
+/*	Classe Piattaforma indica la singola piattaforma percorsa dalla pallina
+ *	@Eredita: Oggetto
+ */
+class Piattaforma : public Oggetto
 {
-
 public:
 
 	// Costruttori

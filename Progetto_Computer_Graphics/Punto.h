@@ -1,6 +1,6 @@
 /*
-	Classe punto: La classe Punto definisce un dipo di dato derivato 3d con metodi per settare e ritornare le varie coordinate.
-
+ *	Classe punto: La classe Punto definisce un dipo di dato derivato 3d con metodi per
+ *	settare e ritornare le varie coordinate.
 */
 #pragma once
 #include <GL\freeglut.h>

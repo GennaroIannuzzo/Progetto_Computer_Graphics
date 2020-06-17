@@ -1,6 +1,6 @@
 #include "Oggetto.h"
 
-Oggetto::Oggetto() { Oggetto::R = Oggetto::G = Oggetto::B = Oggetto::dim = 0; };
+Oggetto::Oggetto() { Oggetto::dim = 0; };
 
 GLfloat Oggetto::getDim(void) { return dim; }
 

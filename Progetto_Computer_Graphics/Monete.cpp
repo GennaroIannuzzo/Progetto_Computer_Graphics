@@ -5,16 +5,13 @@ GLuint Monete::textureMoneta = 0;
 
 Monete::Monete()
 {
-	this->R = 255.0;
-	this->G = 255.0;
-	this->B = 0.0;
 	this->dim = 1.0;
 	this->angolo = 0;
 };
-/*
-	drawObject: Il metodo disegna l'oggetto e vi applica i material e la texture.
-				La moneta ruoterà durante il gioco.
-*/
+
+/*	drawObject: Il metodo disegna l'oggetto e vi applica i material e la texture.
+ *		La moneta ruoterà durante il gioco.
+ */
 void Monete::drawObject(void)
 {
 	angolo = (angolo + 1) % 360;
@@ -29,10 +26,10 @@ void Monete::drawObject(void)
 	gluDisk(disk, 0, dim, 20.0, 20.0);
 }
 
-/*
-	drawObject: il metodo consente di disegnare un oggetto richiamando il metodo drawObject ma effettuando una traslazione dell'oggetto.
-				Tale soluzione risulta necessaria per disegnare la moneta simbolo del punteggio e di permettere che essa segua il giocatore durante la partita.
-*/
+/*	drawObject: il metodo consente di disegnare un oggetto richiamando il metodo drawObject ma
+ *	effettuando una traslazione dell'oggetto. Tale soluzione risulta necessaria per disegnare la
+ *	moneta simbolo del punteggio e di permettere che essa segua il giocatore durante la partita.
+ */
 void Monete::drawObject(float x, float y, float z)
 {
 	glTranslatef(x, y, z);
@@ -40,19 +37,14 @@ void Monete::drawObject(float x, float y, float z)
 	drawObject();
 }
 
-/*
-	Trigger: la gestione dell'evento prevede di incrementare il numero delle monete nella dashboard dell'utente.
-*/
+/* Trigger: la gestione dell'evento prevede di incrementare il numero delle monete nella dashboard dell'utente. */
 void Monete::Trigger(void)
 {
 	SoundManager::getInstance()->coinMusic();
 	Utente::getInstance()->incrementaMonete();
 }
 
-/*
-	setTextureMoneta: Il metodo consente di applicare la texture alla moneta utilizzando la libreira SOIL.
-*/
-
+/* setTextureMoneta: Il metodo consente di applicare la texture alla moneta utilizzando la libreira SOIL. */
 void Monete::setTextureMoneta(void)
 {
 	textureMoneta = SOIL_load_OGL_texture(

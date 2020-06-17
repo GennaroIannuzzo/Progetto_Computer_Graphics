@@ -3,6 +3,7 @@
 int GameWindow::interval = 1000 / 60;
 int GameWindow::window = 0;
 
+// Simbolo moneta in basso a destra
 Monete* GameWindow::moneta = new Monete();
 
 // Colore della luce (ponendo tutti i valori ad 1 si ottiene una luce bianca)
@@ -18,70 +19,13 @@ GLfloat GameWindow::light1_position[] = {
     1.0
 };
 
+// L'asse secondo il quale la luce punta
 GLfloat GameWindow::spot_direction[] = { 0.0, -1.0, 0.0 };
 
-// Metodo che permette di convertire da string a LPCWSTR (Formato particolare di Windows)
-wstring GameWindow::s2ws(const std::string& s)
-{
-    int len;
-    int slength = (int)s.length() + 1;
-    len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
-    wchar_t* buf = new wchar_t[len];
-    MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
-    std::wstring r(buf);
-    delete[] buf;
-    return r;
-}
-
+/* Inizializza le texture della pallina e della monetina */
 void GameWindow::initializeTextures(void)
 {
-    /*
-    WIN32_FIND_DATA fd;
-    HANDLE hFind;
-    LPCWSTR wild_name;
-    vector<wstring> names;
-    PTSTR tempFileName;
-
-    string dirpath = "Textures/Palla/*.*";
-
-    wstring stemp = s2ws(dirpath.c_str());
-    wild_name = stemp.c_str();
-
-    hFind = FindFirstFile(wild_name, &fd);
-    if (hFind != INVALID_HANDLE_VALUE)
-    {
-        do {
-            if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-                names.push_back(fd.cFileName);
-            }
-        } while (FindNextFile(hFind, &fd));
-        FindClose(hFind);
-    }
-
-    vector<string> vettore;
-
-    for (auto it = names.begin(); it != names.end(); ++it)
-    {
-        string s((const char*)&(*it)[0], sizeof(wchar_t) / sizeof(char) * (*it).size());
-        s.erase(std::remove(s.begin(), s.end(), '\0'), s.end());
-        vettore.push_back(s);
-    }
-
-    string dirtexture = "Textures/Palla/";
-
-    string pathnamefile;
-    
-    for (auto it = vettore.begin(); it != vettore.end(); ++it)
-    {
-        pathnamefile = dirtexture + *it;
-        Pallina::getInstance()->getBallTextures().push_back(SOIL_load_OGL_texture(
-            pathnamefile.c_str(),
-            SOIL_LOAD_AUTO,
-            SOIL_CREATE_NEW_ID,
-            SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT));
-    }
-    */
-
+    // Stringa per indicare la texture da inizializzare
     string stringa;
 
     if (Utente::getInstance()->textureAttiva() == 1) stringa = "0_Black.png";
@@ -92,27 +36,28 @@ void GameWindow::initializeTextures(void)
 
     Monete::setTextureMoneta();
 
+    // Imposta i parametri per le texture
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 }
 
+/* Inizializza le quadriche da disegnare */
 void GameWindow::initializeDrawingObjects(void)
 {
-    // Oggetto Pallina
+    // Oggetto Pallina (Sfera)
     gluQuadricDrawStyle(Pallina::getInstance()->getSphere(), GLU_FILL);
     gluQuadricTexture(Pallina::getInstance()->getSphere(), GL_TRUE);
     gluQuadricNormals(Pallina::getInstance()->getSphere(), GLU_SMOOTH);
 
-    // Oggetto Moneta
+    // Oggetto Moneta (Disco)
     gluQuadricDrawStyle(Monete::getDisk(), GLU_FILL);
     gluQuadricTexture(Monete::getDisk(), GL_TRUE);
     gluQuadricNormals(Monete::getDisk(), GLU_SMOOTH);
-
 }
 
-// Initialization routine.
+/* Routine di inizializzazione */
 void GameWindow::setup(void)
 {
     glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -121,12 +66,13 @@ void GameWindow::setup(void)
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_LIGHT1);
     glEnable(GL_NORMALIZE);
+    
     initializeTextures();
     
     initializeDrawingObjects();
 }
 
-// OpenGL window reshape routine.
+/* Metodo di ridimensionamento di OpenGL */
 void GameWindow::resize(int w, int h)
 {
     glViewport(0, 0, w, h);
@@ -137,8 +83,10 @@ void GameWindow::resize(int w, int h)
     glLoadIdentity();
 }
 
+/* Callback per il metodo glutTimerFunc */
 void GameWindow::update(int value)
 {
+    // Quando l'utente perde il gioco si ferma
     if (Utente::getInstance()->getGameOver() == 0)
     {
         Keyboard_Manager::keyboard();
@@ -152,9 +100,13 @@ void GameWindow::update(int value)
     
 }
 
+/* Disegna un intero sullo schermo sotto forma di testo */
 void GameWindow::drawText(float x, float y, float z, int text)
 {
+    // Specifica il colore del testo
     glColor3f(0.0, 0.0, 0.0);
+
+    // Specifica la posizione del testo
     glRasterPos3f(x, y, z);
 
     char sl[20];
@@ -163,34 +115,44 @@ void GameWindow::drawText(float x, float y, float z, int text)
     glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)sl);
 }
 
-// Getter
+/* Recupera l'intervallo della frequenza di aggiornamento */
 int& GameWindow::getInterval(void) { return interval; }
 
+/* Specifica i parametri di disegno della luce nella scena */
 void GameWindow::drawLight(void)
 {
-    // Luce
+    // Colore della luce
     glLightfv(GL_LIGHT1, GL_AMBIENT,  light1_ambient);
     glLightfv(GL_LIGHT1, GL_DIFFUSE,  light1_diffuse);
     glLightfv(GL_LIGHT1, GL_SPECULAR, light1_specular);
+    
+    // Posizione della luce
     glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
 
+    // Angolo della luce
     glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 90.0);
+
+    // Specifica la distribuzione dell'intensità della luce
     glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0.5);
-    // glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.5);
+
+    // Specifica il verso di illuminazione della luce
     glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
 }                                           
 
-// Drawing routine.
+/* Metodo per disegnare la scena */
 void GameWindow::drawScene(void)
 {
     srand((unsigned)time(NULL));
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    // Disabilita la luce per dare il colore ai testi
     glDisable(GL_LIGHTING);
 
+    // Carica la matrice d'identità nella pila di matrici di trasformazione
     glLoadIdentity();
 
+    // Specifica la posizione della telecamera
     gluLookAt(Pallina::getInstance()->getPosizione().getX() - 15.0,
         Pallina::getInstance()->getPosizione().gety() + 20.0,
         Pallina::getInstance()->getPosizione().getZ() + 15.0,
@@ -199,9 +161,11 @@ void GameWindow::drawScene(void)
         Pallina::getInstance()->getPosizione().getZ(),
         1.0, 0.0, -1.0);
 
+    // Recupera il punteggio e il quantitativo di monete attuale
     int punteggio = Utente::getInstance()->incrementaPunteggio();
     int monete = Utente::getInstance()->getMonete();
     
+    // Disegna il punteggio e il numero di monete nella scena
     GameWindow::drawText(Pallina::getInstance()->getPosizione().getX() + 50,
         Pallina::getInstance()->getPosizione().gety(),
         Pallina::getInstance()->getPosizione().getZ() - 30,
@@ -212,30 +176,31 @@ void GameWindow::drawScene(void)
         Pallina::getInstance()->getPosizione().getZ() + 30,
         monete);
 
+    // Abilita la luce
     glEnable(GL_LIGHTING);
 
+    // Posiziona la luce sopra la pallina da gioco
     light1_position[0] = Pallina::getInstance()->getPosizione().getX();
     light1_position[1] = Pallina::getInstance()->getPosizione().gety() + 15;
     light1_position[2] = Pallina::getInstance()->getPosizione().getZ();
 
+    // Disegna le varie luci
     glPushMatrix();
         drawLight();
     glPopMatrix();
 
     glPushMatrix();
 
-    // TODO: Ruotare la monetina per vederla dritta
+    // Disegna la monetina simbolo
     moneta->drawObject(Pallina::getInstance()->getPosizione().getX() - 7,
         Pallina::getInstance()->getPosizione().gety(),
         Pallina::getInstance()->getPosizione().getZ() + 30);
-
-    // glRotatef(45, 1.0, 0.0, 0.0);
-    // glRotatef(45, 0.0, 0.0, 1.0);
 
     glPopMatrix();
 
     glPushMatrix();
 
+    // Disegna le vite a dispozione per l'utente
     Utente::getInstance()->drawVite(Pallina::getInstance()->getPosizione().getX() - 30,
         Pallina::getInstance()->getPosizione().gety(),
         Pallina::getInstance()->getPosizione().getZ() + 9);
@@ -244,18 +209,22 @@ void GameWindow::drawScene(void)
 
     glPushMatrix();
 
+    // Disegna le piattaforme
     Platforms::getInstance()->drawPlatforms();
 
     glPopMatrix();
 
+    // Disegna la pallina
     Pallina::getInstance()->drawObject();
 
     glutSwapBuffers();
 
 }
 
+// Ottiene l'ID della finestra attuale
 int GameWindow::getWindowId(void) { return window; }
 
+/* Metodo principale della finestra di gioco */
 void GameWindow::start(bool sound)
 {
     glutInitContextVersion(4, 3);
@@ -266,13 +235,12 @@ void GameWindow::start(bool sound)
     glutInitWindowPosition(100, 100);
     window = glutCreateWindow("Progetto.cpp");
 
+    // Effettua un reset del gioco nel caso l'utente perda e voglia effettuare una nuova partita
     Utente::getInstance()->resetGame();
-    
 
+    // Abilita o disabilita il suono in base a sound
     if(sound)
         SoundManager::getInstance()->gameMusic();
-
-    Pallina::getInstance()->setDifficolta(1);
 
     glutDisplayFunc(drawScene);
     glutReshapeFunc(resize);

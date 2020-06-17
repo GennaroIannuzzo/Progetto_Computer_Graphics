@@ -4,6 +4,7 @@
 #include <time.h>
 
 #pragma once
+/* Classe che gestisce gli eventi della pallina da gioco. */
 class Ball_Manager
 {
 private:

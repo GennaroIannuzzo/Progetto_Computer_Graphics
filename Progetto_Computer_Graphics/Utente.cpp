@@ -4,9 +4,7 @@
 
 Utente* Utente::instance = 0;
 
-/*
-	implementazione del pattern Singleton
-*/
+/* Implementazione del pattern Singleton */
 Utente* Utente::getInstance()
 {
 	if (instance == 0)
@@ -15,9 +13,7 @@ Utente* Utente::getInstance()
 	return instance;
 }
 
-/* 
-	costruttore: setta il parametro punteggio e carica dal file i dati per la dashboard
-*/
+/* Costruttore: setta il parametro punteggio e carica dal file i dati per la dashboard */
 Utente::Utente() 
 { 
 	punteggio = 0.0;  
@@ -32,9 +28,9 @@ Utente::Utente()
 	
 }
 
-/*
-	incrementaPunteggio: metodo utile per incrementare il punteggio durante il gioco e per settare in caso affermativo il nuovo high score.
-*/
+/*	incrementaPunteggio: metodo utile per incrementare il punteggio durante il gioco e per
+ *	settare in caso affermativo il nuovo high score.
+ */
 float Utente::incrementaPunteggio(void) 
 { 
 	punteggio += 0.1;
@@ -45,12 +41,11 @@ float Utente::incrementaPunteggio(void)
 	return (int)punteggio; 
 }
 
-/*
-	caricaFile: metodo utile per caricare dal file i dati da mostrare all'utente.
-				I dati comprendono: punteggio massimo, monete e stato delle texture: 0 se da acquistare, 1 se acquistata 2 se in uso.
-				La texture in uso è passata alla pallina per poter essere applicata.
-				In caso di errore ritorna il codice 19.
-*/
+/*	caricaFile: metodo utile per caricare dal file i dati da mostrare all'utente.
+ *		I dati comprendono: punteggio massimo, monete e stato delle texture: 0 se da acquistare, 1 se
+ *		acquistata 2 se in uso. La texture in uso è passata alla pallina per poter essere applicata.
+ *		In caso di errore ritorna il codice 19.
+ */
 void Utente::caricaFile(void)
 {	
 	ifstream file("file.txt");
@@ -77,10 +72,7 @@ void Utente::caricaFile(void)
 	}
 }
 
-/*
-	salvaFile: metodo utile per memorizzare i dati attuali su file
-*/
-
+/* salvaFile: metodo utile per memorizzare i dati attuali su file */
 void Utente::salvaFile(void)
 {	
 	ofstream fileWrite("file.txt");
@@ -96,9 +88,9 @@ void Utente::salvaFile(void)
 	
 }
 
-/*
-	eliminaVita: il metodo decrementa il numero di vite attuali, quando finiscono salva su file i dati e restituisce il codice 69.
-*/
+/*	eliminaVita: il metodo decrementa il numero di vite attuali, quando finiscono salva su
+ *	file i dati e restituisce il codice 69.
+ */
 void Utente::eliminaVita(void)
 {
 	vite--;
@@ -106,17 +98,15 @@ void Utente::eliminaVita(void)
 		GameOver();
 }
 
-/*
-	drawVite: il metodo prende come parametri le coordinate dove occorre disenare le vite e le disegna
-			  sotto forma di cubi e applicando dei material.
-*/
+/*	drawVite: il metodo prende come parametri le coordinate dove occorre disenare le vite e le disegna
+ *		sotto forma di cubi e applicando dei material.
+ */
 void Utente::drawVite(float x, float y, float z)
 {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, Colors::RossoTenue);
 	glMaterialfv(GL_FRONT, GL_EMISSION, Colors::Rosso);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, Colors::Nero);
 
-	// TODO: Ruotare le vite, altrimenti non sono dritte
 	for (int i = 0; i < vite; i++)
 	{
 		glPushMatrix();
@@ -127,10 +117,9 @@ void Utente::drawVite(float x, float y, float z)
 	}
 }
 
-/*
-	textureAttiva: il metodo ritorna il numero della texture attualmente in uso (1, 2 o 3), oppure 0 in caso di errore
-*/
-
+/*	textureAttiva: il metodo ritorna il numero della texture attualmente
+ *	in uso (1, 2 o 3), oppure 0 in caso di errore.
+ */
 int Utente::textureAttiva(void)
 {
 	if (texture_1 == 2) return 1;
@@ -140,11 +129,9 @@ int Utente::textureAttiva(void)
 	return 0;
 }
 
-/*
-	textureComprate: il metodo prende come parametro il numero della texture che si vuole controllare.
-					 Ritorna true se la texture è già stata acquistata, altrimenti ritorna false
-*/
-
+/*	textureComprate: il metodo prende come parametro il numero della texture che si vuole controllare.
+ *		Ritorna true se la texture è già stata acquistata, altrimenti ritorna false
+ */
 bool Utente::textureComprate(int texture)
 {
 	if (texture == 1 && texture_1 == 1) return true;
@@ -154,12 +141,10 @@ bool Utente::textureComprate(int texture)
 	return false;
 }
 
-/*
-	compraTexture: data una texture il metodo la acquista se il numero di monete in possesso è sufficiente:
-				   In caso positivo imposta a 1 la flag della texture, salva sul file e ritorna true. 
-				   In caso di errore ritorna false.
-*/
-
+/*	compraTexture: data una texture il metodo la acquista se il numero di monete in possesso è sufficiente:
+ *		In caso positivo imposta a 1 la flag della texture, salva sul file e ritorna true. 
+ *		In caso di errore ritorna false.
+ */
 bool Utente::compraTexture(int texture)
 {
 	if (texture == 1 && (monete - prezzo_texture_1) >= 0) 
@@ -190,12 +175,11 @@ bool Utente::compraTexture(int texture)
 	return false;
 }
 
-/*
-	scegliTexture: il metodo prende in input una texture e la imposta come in uso (flag = 2).
-				   Se la texture è già stata acuistata completa l'operazione salvando su file, 
-				   settando la texture precedentemente in uso a acquistata (flag = 1) e ritornando true.
-				   In caso di errore ritorna false.
-*/
+/*	scegliTexture: il metodo prende in input una texture e la imposta come in uso (flag = 2).
+ *		Se la texture è già stata acuistata completa l'operazione salvando su file, 
+ *		settando la texture precedentemente in uso a acquistata (flag = 1) e ritornando true.
+ *		In caso di errore ritorna false.
+ */
 bool Utente::scegliTexture(int texture)
 {
 	if (texture == 1 && texture_1 == 1) 
@@ -229,14 +213,10 @@ bool Utente::scegliTexture(int texture)
 	return false;
 }
 
-/*
-	incrementaMonete: il metodo incrementa il numero di monete disponibili nel gioco.
-*/
+/* IncrementaMonete: il metodo incrementa il numero di monete disponibili nel gioco. */
 void Utente::incrementaMonete(void) { monete++; }
 
-/*
-	metodi getter
-*/
+/* Metodi getter */
 float Utente::getPunteggioMassimo(void) { return punteggioMassimo; }
 int Utente::getMonete(void) { return monete; }
 int Utente::getVite(void) { return vite; }
@@ -248,6 +228,7 @@ void Utente::resetGame(void)
 	instance = NULL;
 }
 
+/* Distrugge la finestra attuale torna alla finestra di inizio ed effettua il reset di tutto */
 void Utente::GameOver(void)
 {
 	salvaFile();
@@ -259,5 +240,4 @@ void Utente::GameOver(void)
 	Pallina::resetInstance();
 
 	MenuManager::start();
-	
 }

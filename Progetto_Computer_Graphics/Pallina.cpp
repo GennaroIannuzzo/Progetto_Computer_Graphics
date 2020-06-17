@@ -1,6 +1,5 @@
 #include "Pallina.h"
 
-
 using namespace std;
 
 Pallina* Pallina::instance = 0;
@@ -9,9 +8,6 @@ Pallina* Pallina::instance = 0;
 Pallina::Pallina()
 {
 	dim = 2;
-	R = 0.0;
-	G = 0.0;
-	B = 255.0;
 	posizione = Punto(0.0, 20.0, 0.0);
 	movimento = 0;
 	punteggio = 0;
@@ -31,10 +27,9 @@ Pallina* Pallina::getInstance()
 	return instance;
 }
 
-/*
-	drawObject: disegna la pallina applicando texture e material.
-				La rotazione consente di implementare il rotolamento.
-*/
+/*	drawObject: disegna la pallina applicando texture e material.
+ *		La rotazione consente di implementare il rotolamento.
+ */
 void Pallina::drawObject(void)
 {
 	glTranslatef(posizione.getX(), posizione.gety(), posizione.getZ());
@@ -54,14 +49,7 @@ void Pallina::drawObject(void)
 
 }
 
-// ##
-void Pallina::setDifficolta(int diff)
-{
-	speed = 0.1;
-	difficolta = diff;
-}
-
-// Metodi per il movimento della pallina
+/* Metodi per il movimento della pallina */
 void Pallina::moveBall(void)
 {
 	if (movimento == 0)
@@ -74,14 +62,10 @@ void Pallina::moveLeft(void) { movimento = 0; }
 
 void Pallina::moveRight(void) { movimento = 1; }
 
-/*
-	incrementSpeed: aumenta la velocità della palla entro una soglia limite
-*/
+/* IncrementSpeed: aumenta la velocità della palla entro una soglia limite */
 void Pallina::incrementSpeed(void) { if(speed < 1.1) speed += 0.1; }
 
-/*
-	setTexture: imposta la texture alla pallina
-*/
+/* setTexture: imposta la texture alla pallina */
 void Pallina::setTexture(string stringa)
 {
 	string dirname = "Textures/Palla/";

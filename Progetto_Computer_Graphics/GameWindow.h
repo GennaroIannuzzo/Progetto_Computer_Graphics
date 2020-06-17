@@ -1,18 +1,21 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-#include "Window_Manager.h"
 #include "Keyboard_Manager.h"
 #include "Monete.h"
 #include "soil.h"
 
 #pragma once
-static class GameWindow : public Window_Manager
+/* Classe che gestisce la finestra di gioco */
+static class GameWindow
 {
 private:
 
+    // Frequenza di aggiornamento
     static int interval;
-    static int window;  // finestra da chiudere 
+    
+    // Finestra da chiudere 
+    static int window;
     
     // Colore della luce (ponendo tutti i valori ad 1 si ottiene una luce bianca)
     static GLfloat light1_ambient[];
@@ -38,8 +41,6 @@ private:
 
     // Update score
     static void drawText(float x, float y, float z, int text);
-
-    static wstring s2ws(const string& s);
 
     // Initializes the textures for the ball and coins
     static void initializeTextures(void);

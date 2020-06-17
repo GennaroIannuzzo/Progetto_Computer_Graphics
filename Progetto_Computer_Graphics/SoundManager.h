@@ -1,6 +1,6 @@
 /*
-	classe SoundManager: La classe fornisce la possibilità di inserire la musica nel gioco.
-						 La classe è implementata come Singleton per avere un'unica istanza durante tutta la partita.
+ *	classe SoundManager: La classe fornisce la possibilità di inserire la musica nel gioco.
+ *		La classe è implementata come Singleton per avere un'unica istanza durante tutta la partita.
 */
 
 #pragma once

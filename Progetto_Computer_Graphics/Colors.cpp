@@ -1,5 +1,6 @@
 #include "Colors.h"
 
+/* I vettori in RGB normalizzati che rappresentano i colori per i material. */
 const GLfloat Colors::Rosso[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 const GLfloat Colors::Verde[] = { 0.0f, 1.0f, 0.0f, 1.0f };
 const GLfloat Colors::Blu[] = { 0.0f, 0.0f, 1.0f, 1.0f };
