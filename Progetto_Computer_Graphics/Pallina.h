@@ -17,7 +17,6 @@ private:
 	GLfloat speed;
 	GLuint ballTextures;
 	int movimento;
-	int difficolta;
 	int punteggio;
 	int angolo;
 	GLUquadric* sphere;

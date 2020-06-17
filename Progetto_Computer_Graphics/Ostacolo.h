@@ -15,7 +15,7 @@ public:
 	// costruttore
 	Ostacolo();
 
-	// Override metodo drowing
+	// Override metodo drawing
 	void drawObject(void) override;
 	
 };
