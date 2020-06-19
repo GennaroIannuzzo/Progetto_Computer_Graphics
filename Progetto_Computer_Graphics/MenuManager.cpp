@@ -89,9 +89,18 @@ int MenuManager::prezzo_texture_3 = 30;
 
 int MenuManager::acquistata = 0;
 
+void printInteractionMenu(void)
+{
+    system("CLS");
+    cout << "------------------------------ INTERAZIONE ------------------------------" << endl;
+    cout << "Click sinistro mouse per interagire con i pulsanti" << endl;
+    cout << "-------------------------------------------------------------------------" << endl << endl;
+}
+
 /* Disegna gli elementi della finestra principale */
 void MenuManager::drawMenu(void)
 {
+    printInteractionMenu();
     glClear(GL_COLOR_BUFFER_BIT);
     
     // Disegna il background
@@ -169,9 +178,19 @@ void MenuManager::executeThread(void)
     }
 }
 
+void printInteractionShop(void)
+{
+    system("CLS");
+    cout << "------------------------------ INTERAZIONE ------------------------------" << endl;
+    cout << "Click sinistro mouse per interagire con i pulsanti e acquistare Texture" << endl << endl;
+    cout << "Click destro mouse per impostare Texture" << endl;
+    cout << "-------------------------------------------------------------------------" << endl << endl;
+}
+
 /* Disegna la finestra per lo shop */
 void MenuManager::drawOption(void)
 {
+    printInteractionShop();
     glClear(GL_COLOR_BUFFER_BIT);
     
     // Disegna un rettangolo attorno alla texture attiva

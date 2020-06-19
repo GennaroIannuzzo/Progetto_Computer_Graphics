@@ -224,9 +224,19 @@ void GameWindow::drawScene(void)
 // Ottiene l'ID della finestra attuale
 int GameWindow::getWindowId(void) { return window; }
 
+void printInteraction(void)
+{
+    system("CLS");
+    cout << "------------------------------ INTERAZIONE ------------------------------" << endl;
+    cout << "Premi le frecce direzionali sinistra/destra per muovere la pallina" << endl << endl;
+    cout << "Premi ESC per terminare l'applicazione" << endl;
+    cout << "-------------------------------------------------------------------------" << endl << endl;
+}
+
 /* Metodo principale della finestra di gioco */
 void GameWindow::start(bool sound)
 {
+    printInteraction();
     glutInitContextVersion(4, 3);
     glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
 
