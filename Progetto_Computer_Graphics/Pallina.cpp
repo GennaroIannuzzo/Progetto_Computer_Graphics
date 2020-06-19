@@ -13,7 +13,6 @@ Pallina::Pallina()
 	punteggio = 0;
 	ballTextures = 0;
 	speed = 0.2;
-	difficolta = 1;
 	angolo = 0;
 
 	sphere = gluNewQuadric();
